@@ -13,7 +13,12 @@ public class InputManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    public int IsGetHorizontalMovement()
+    public bool IsPlayerMovement()
+    {
+        return GetHorizontalMovement() != 0 || GetVerticalMovement() != 0;
+    }
+
+    public int GetHorizontalMovement()
     {
         if (Input.GetKey(KeyCode.RightArrow))
         {
@@ -27,7 +32,7 @@ public class InputManager : MonoBehaviour
         return 0;
     }
 
-    public int IsGetVerticalMovement()
+    public int GetVerticalMovement()
     {
         if (Input.GetKey(KeyCode.UpArrow))
         {

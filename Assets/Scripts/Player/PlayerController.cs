@@ -1,23 +1,53 @@
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
+[RequireComponent(typeof(StateManager))]
+[RequireComponent(typeof (PlayerAnimationManager))]
 public class PlayerController : MonoBehaviour
 {
     private PlayerMovement movement;
+    public StateManager stateManager {get; private set;}
+    public PlayerAnimationManager animationManager {get; private set;}
 
     private void Awake() {
         movement = GetComponent<PlayerMovement>();
+        stateManager = GetComponent<StateManager>();
+        animationManager = GetComponent<PlayerAnimationManager>();
+    }
+
+    private void Start() {
+        stateManager.ChangeState(new PlayerIdleState(this));
     }
 
     private void Update() {
-        if (InputManager.Instance.IsGetHorizontalMovement() != 0)
+        if (InputManager.Instance.IsPlayerMovement())
         {
-            movement.Moving(new Vector2(InputManager.Instance.IsGetHorizontalMovement(), 0));
-            return;
+            stateManager.ChangeState(new PlayerMovingState(this));
         }
-        if (InputManager.Instance.IsGetVerticalMovement() != 0)
+        else
         {
-            movement.Moving(new Vector2(0, InputManager.Instance.IsGetVerticalMovement()));
+            stateManager.ChangeState(new PlayerIdleState(this));
         }
+    }
+
+    public void Moving(Vector2 _movement)
+    {
+        movement.Moving(_movement);
+    }
+
+    public void ChangeHorizontalDirection(int _direction)
+    {
+        Vector3 direction = transform.localScale;
+
+        if (_direction == 1)
+        {
+            direction = new Vector3(1, transform.localScale.y, transform.localScale.z);
+        }
+        else if (_direction == -1)
+        {
+            direction = new Vector3(-1, transform.localScale.y, transform.localScale.z);
+        }
+
+        transform.localScale = direction;
     }
 }
