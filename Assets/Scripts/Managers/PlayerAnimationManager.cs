@@ -13,21 +13,31 @@ public class PlayerAnimationManager : MonoBehaviour
 
     public void PlayIdleAnimation()
     {
-        animator.Play("player_idle");
+        animator.Play(PlayerAnimation.PlayerIdle);
     }
 
     public void PlayHorizontalAnimation()
     {
-        animator.Play("player_moving");
+        animator.Play(PlayerAnimation.PlayerMoving);
     }
 
     public void PlayMovingDownAnimation()
     {
-        animator.Play("player_moving_down");
+        animator.Play(PlayerAnimation.PlayerMovingDown);
     }
 
     public void PlayMovingUpAnimation()
     {
-        animator.Play("player_moving_up");
+        animator.Play(PlayerAnimation.PlayerMovingUp);
+    }
+
+    public void PlayIdleDownAnimation()
+    {
+        animator.Play(PlayerAnimation.PlayerIdleDown);
+    }
+
+    public void PlayIdleUpAnimation()
+    {
+        animator.Play(PlayerAnimation.PlayerIdleUp);
     }
 }

@@ -8,11 +8,14 @@ public class PlayerController : MonoBehaviour
     private PlayerMovement movement;
     public StateManager stateManager {get; private set;}
     public PlayerAnimationManager animationManager {get; private set;}
+    public PlayerDirection currentDirection {get; private set;}
 
     private void Awake() {
         movement = GetComponent<PlayerMovement>();
         stateManager = GetComponent<StateManager>();
         animationManager = GetComponent<PlayerAnimationManager>();
+
+        currentDirection = PlayerDirection.DOWN;
     }
 
     private void Start() {
@@ -35,15 +38,21 @@ public class PlayerController : MonoBehaviour
         movement.Moving(_movement);
     }
 
-    public void ChangeHorizontalDirection(int _direction)
+    public void UpdateDirection(PlayerDirection _direction)
     {
+        if (currentDirection == _direction)
+        {
+            return;
+        }
+
+        currentDirection = _direction;
         Vector3 direction = transform.localScale;
 
-        if (_direction == 1)
+        if (_direction == PlayerDirection.RIGHT)
         {
             direction = new Vector3(1, transform.localScale.y, transform.localScale.z);
         }
-        else if (_direction == -1)
+        else if (_direction == PlayerDirection.LEFT)
         {
             direction = new Vector3(-1, transform.localScale.y, transform.localScale.z);
         }

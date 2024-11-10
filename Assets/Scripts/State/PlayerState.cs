@@ -15,7 +15,18 @@ public class PlayerIdleState : IState
 
     public void Execute()
     {
-        controller.animationManager.PlayIdleAnimation();
+        switch(controller.currentDirection)
+        {
+            case PlayerDirection.DOWN:
+                controller.animationManager.PlayIdleDownAnimation();
+                break;
+            case PlayerDirection.UP:
+                controller.animationManager.PlayIdleUpAnimation();
+                break;
+            default:
+                controller.animationManager.PlayIdleAnimation();
+                break;
+        }
     }
 
     public void Exit()
@@ -44,11 +55,11 @@ public class PlayerMovingState : IState
         {
             if (InputManager.Instance.GetHorizontalMovement() < 0)
             {
-                controller.ChangeHorizontalDirection(-1);
+                controller.UpdateDirection(PlayerDirection.LEFT);
             }
             else
             {
-                controller.ChangeHorizontalDirection(1);
+                controller.UpdateDirection(PlayerDirection.RIGHT);
             }
 
             controller.animationManager.PlayHorizontalAnimation();
@@ -60,29 +71,17 @@ public class PlayerMovingState : IState
         if (InputManager.Instance.GetVerticalMovement() < 0)
         {
             controller.animationManager.PlayMovingDownAnimation();
+            controller.UpdateDirection(PlayerDirection.DOWN);
         }
         else if (InputManager.Instance.GetVerticalMovement() > 0)
         {
             controller.animationManager.PlayMovingUpAnimation();
+            controller.UpdateDirection(PlayerDirection.UP);
         }
+
         movement = new Vector2(0, InputManager.Instance.GetVerticalMovement());
         controller.Moving(movement);
 
-    }
-
-    public void Exit()
-    {
-    }
-}
-
-public class PlayerVerticalMovingState : IState
-{
-    public void Enter()
-    {
-    }
-
-    public void Execute()
-    {
     }
 
     public void Exit()
