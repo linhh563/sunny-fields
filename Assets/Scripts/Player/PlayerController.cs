@@ -25,6 +25,11 @@ public class PlayerController : MonoBehaviour
     private void Update() {
         if (InputManager.Instance.IsPlayerMovement())
         {
+            if (InputManager.Instance.IsPlayerRun())
+            {
+                stateManager.ChangeState(new PlayerRunningState(this));
+                return;
+            }
             stateManager.ChangeState(new PlayerMovingState(this));
         }
         else
@@ -35,6 +40,13 @@ public class PlayerController : MonoBehaviour
 
     public void Moving(Vector2 _movement)
     {
+        movement.ChangeSpeed(movement.defaultSpeed);
+        movement.Moving(_movement);
+    }
+
+    public void Running(Vector2 _movement)
+    {
+        movement.ChangeSpeed(movement.defaultSpeed * 1.3f);
         movement.Moving(_movement);
     }
 

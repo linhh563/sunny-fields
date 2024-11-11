@@ -45,4 +45,9 @@ public class InputManager : MonoBehaviour
 
         return 0;
     }
+
+    public bool IsPlayerRun()
+    {
+        return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+    }
 }

@@ -2,11 +2,17 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float defaultSpeed = 5f;
+    public float defaultSpeed  {get; private set;}
     private float speed;
 
     private void Awake() {
+        defaultSpeed = 5f;
         speed = defaultSpeed;
+    }
+
+    public void ChangeSpeed(float _speed)
+    {
+        speed = _speed;
     }
 
     public void Moving(Vector2 movement)

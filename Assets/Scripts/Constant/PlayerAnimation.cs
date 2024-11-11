@@ -6,4 +6,7 @@ public static class PlayerAnimation
     public static string PlayerMoving = "player_moving";
     public static string PlayerMovingUp = "player_moving_up";
     public static string PlayerMovingDown = "player_moving_down";
+    public static string PlayerRun = "player_run";
+    public static string PlayerRunDown = "player_run_down";
+    public static string PlayerRunUp = "player_run_up";
 }

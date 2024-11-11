@@ -81,7 +81,60 @@ public class PlayerMovingState : IState
 
         movement = new Vector2(0, InputManager.Instance.GetVerticalMovement());
         controller.Moving(movement);
+    }
 
+    public void Exit()
+    {
+    }
+}
+
+public class PlayerRunningState : IState
+{
+    private PlayerController controller;
+
+    public PlayerRunningState(PlayerController _controller)
+    {
+        controller = _controller;
+    }
+
+    public void Enter()
+    {
+    }
+
+    public void Execute()
+    {
+        Vector2 movement;
+
+        if (InputManager.Instance.GetHorizontalMovement() != 0)
+        {
+            if (InputManager.Instance.GetHorizontalMovement() < 0)
+            {
+                controller.UpdateDirection(PlayerDirection.LEFT);
+            }
+            else
+            {
+                controller.UpdateDirection(PlayerDirection.RIGHT);
+            }
+
+            controller.animationManager.PlayRunAnimation();
+            movement = new Vector2(InputManager.Instance.GetHorizontalMovement(), 0);
+            controller.Running(movement);
+            return;
+        }
+
+        if (InputManager.Instance.GetVerticalMovement() < 0)
+        {
+            controller.animationManager.PlayRunDownAnimation();
+            controller.UpdateDirection(PlayerDirection.DOWN);
+        }
+        else if (InputManager.Instance.GetVerticalMovement() > 0)
+        {
+            controller.animationManager.PlayRunUpAnimation();
+            controller.UpdateDirection(PlayerDirection.UP);
+        }
+
+        movement = new Vector2(0, InputManager.Instance.GetVerticalMovement());
+        controller.Running(movement);
     }
 
     public void Exit()

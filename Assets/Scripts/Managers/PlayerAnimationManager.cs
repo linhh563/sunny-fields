@@ -40,4 +40,19 @@ public class PlayerAnimationManager : MonoBehaviour
     {
         animator.Play(PlayerAnimation.PlayerIdleUp);
     }
+
+    public void PlayRunAnimation()
+    {
+        animator.Play(PlayerAnimation.PlayerRun);
+    }
+
+    public void PlayRunDownAnimation()
+    {
+        animator.Play(PlayerAnimation.PlayerRunDown);
+    }
+
+    public void PlayRunUpAnimation()
+    {
+        animator.Play(PlayerAnimation.PlayerRunUp);
+    }
 }
