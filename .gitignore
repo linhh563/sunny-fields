@@ -50,3 +50,5 @@ sysinfo.txt
 crashlytics-build.properties
 
 # End of https://github.com/github/gitignore/blob/main/Unity.gitignore
+
+.fake

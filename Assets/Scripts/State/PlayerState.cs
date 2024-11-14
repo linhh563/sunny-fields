@@ -15,7 +15,7 @@ public class PlayerIdleState : IState
 
     public void Execute()
     {
-        switch(controller.currentDirection)
+        switch (controller.currentDirection)
         {
             case PlayerDirection.DOWN:
                 controller.animationManager.PlayIdleDownAnimation();
@@ -135,6 +135,40 @@ public class PlayerRunningState : IState
 
         movement = new Vector2(0, InputManager.Instance.GetVerticalMovement());
         controller.Running(movement);
+    }
+
+    public void Exit()
+    {
+    }
+}
+
+public class PlayerTillingState : IState
+{
+    private PlayerController controller;
+
+    public PlayerTillingState(PlayerController _controller)
+    {
+        controller = _controller;
+    }
+
+    public void Enter()
+    {
+        switch (controller.currentDirection)
+        {
+            case PlayerDirection.DOWN:
+                // play tilling down animation
+            case PlayerDirection.UP:
+                // play tilling up animation
+            default:
+                // play tilling animation
+                break;
+        }
+        
+        controller.TillingGround();
+    }
+
+    public void Execute()
+    {
     }
 
     public void Exit()

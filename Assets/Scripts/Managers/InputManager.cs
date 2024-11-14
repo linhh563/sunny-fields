@@ -50,4 +50,9 @@ public class InputManager : MonoBehaviour
     {
         return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
     }
+
+    public bool IsPlayerTilling()
+    {
+        return Input.GetKeyDown(KeyCode.F);
+    }
 }

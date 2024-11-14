@@ -2,15 +2,16 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(StateManager))]
-[RequireComponent(typeof (PlayerAnimationManager))]
+[RequireComponent(typeof(PlayerAnimationManager))]
 public class PlayerController : MonoBehaviour
 {
     private PlayerMovement movement;
-    public StateManager stateManager {get; private set;}
-    public PlayerAnimationManager animationManager {get; private set;}
-    public PlayerDirection currentDirection {get; private set;}
+    public StateManager stateManager { get; private set; }
+    public PlayerAnimationManager animationManager { get; private set; }
+    public PlayerDirection currentDirection { get; private set; }
 
-    private void Awake() {
+    private void Awake()
+    {
         movement = GetComponent<PlayerMovement>();
         stateManager = GetComponent<StateManager>();
         animationManager = GetComponent<PlayerAnimationManager>();
@@ -18,11 +19,19 @@ public class PlayerController : MonoBehaviour
         currentDirection = PlayerDirection.DOWN;
     }
 
-    private void Start() {
+    private void Start()
+    {
         stateManager.ChangeState(new PlayerIdleState(this));
     }
 
-    private void Update() {
+    private void Update()
+    {
+        if (InputManager.Instance.IsPlayerTilling())
+        {
+            stateManager.ChangeState(new PlayerTillingState(this));
+            return;
+        }
+
         if (InputManager.Instance.IsPlayerMovement())
         {
             if (InputManager.Instance.IsPlayerRun())
@@ -31,11 +40,10 @@ public class PlayerController : MonoBehaviour
                 return;
             }
             stateManager.ChangeState(new PlayerMovingState(this));
+            return;
         }
-        else
-        {
-            stateManager.ChangeState(new PlayerIdleState(this));
-        }
+
+        stateManager.ChangeState(new PlayerIdleState(this));
     }
 
     public void Moving(Vector2 _movement)
@@ -70,5 +78,10 @@ public class PlayerController : MonoBehaviour
         }
 
         transform.localScale = direction;
+    }
+
+    public void TillingGround()
+    {
+        TilesManager.Instance.TillingGroundNextToPlayer(transform.position, currentDirection);
     }
 }
