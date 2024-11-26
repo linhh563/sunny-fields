@@ -84,4 +84,25 @@ public class PlayerController : MonoBehaviour
     {
         TilesManager.Instance.TillingGroundNextToPlayer(transform.position, currentDirection);
     }
+
+    public void Cultivating()
+    {
+        var groundState = TilesManager.Instance.GetGroundStateNextToPlayer(transform.position, currentDirection);
+        var nextPosition = TilesManager.Instance.GetPositionNextToPlayer(transform.position, currentDirection);
+
+        switch (groundState)
+        {
+            case GroundState.TILLABLE:
+                // TODO: 
+                break;
+            case GroundState.TILLED:
+                // TODO:
+                break; 
+            case GroundState.WATERED:
+                // TODO:
+                break; 
+            default:
+                break;
+        }
+    }
 }
