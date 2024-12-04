@@ -1,0 +1,4 @@
+Id use case
+- Player: PL-XXX
+- Character: MC-XXX
+- Game manager: GM-XXX
