@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0" version="25.0.1" pages="4">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0" version="25.0.3" pages="4">
   <diagram name="Player_Use_cases" id="KYgG7S94ImW_HjY9Mxvs">
     <mxGraphModel dx="2485" dy="710" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -46,7 +46,7 @@
           <mxGeometry x="560" y="150" width="120" height="80" as="geometry" />
         </mxCell>
         <mxCell id="ccnFRz29D70Llg_9E328-6" value="Save Farm" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="280" y="680" width="120" height="80" as="geometry" />
+          <mxGeometry x="280" y="610" width="120" height="80" as="geometry" />
         </mxCell>
         <mxCell id="kJad0uzxzb_l9B76j914-4" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;startArrow=block;startFill=0;startSize=16;" parent="1" source="ccnFRz29D70Llg_9E328-7" target="kJad0uzxzb_l9B76j914-3" edge="1">
           <mxGeometry relative="1" as="geometry" />
@@ -57,10 +57,18 @@
         <mxCell id="ccnFRz29D70Llg_9E328-7" value="Customize App Configuration" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="280" y="970" width="120" height="80" as="geometry" />
         </mxCell>
+        <mxCell id="hx1RGBtK5m_UgNeKS6P0-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1" source="ccnFRz29D70Llg_9E328-8" target="ccnFRz29D70Llg_9E328-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="hx1RGBtK5m_UgNeKS6P0-2" value="&amp;lt;&amp;lt; include &amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="hx1RGBtK5m_UgNeKS6P0-1">
+          <mxGeometry x="0.0308" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
         <mxCell id="ccnFRz29D70Llg_9E328-8" value="Exit Farm" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="280" y="820" width="120" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="ccnFRz29D70Llg_9E328-9" value="Delete Saved Farm" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="ccnFRz29D70Llg_9E328-9" value="Delete Farm" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="560" y="254" width="120" height="80" as="geometry" />
         </mxCell>
         <mxCell id="ccnFRz29D70Llg_9E328-15" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;jumpSize=10;endSize=16;" parent="1" source="ccnFRz29D70Llg_9E328-13" target="ccnFRz29D70Llg_9E328-5" edge="1">
@@ -376,25 +384,28 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="dri6CUtXOrScBMIyeIQ8-1" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" edge="1" parent="1" source="dri6CUtXOrScBMIyeIQ8-2" target="dri6CUtXOrScBMIyeIQ8-5">
+        <mxCell id="ab6dibREOSoV7JVWZ45d-1" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" edge="1" parent="1" source="ab6dibREOSoV7JVWZ45d-3" target="ab6dibREOSoV7JVWZ45d-4">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="dri6CUtXOrScBMIyeIQ8-2" value="Player" style="shape=umlActor;verticalLabelPosition=top;verticalAlign=bottom;html=1;outlineConnect=0;labelPosition=left;align=right;" vertex="1" parent="1">
-          <mxGeometry x="100" y="290" width="30" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="dri6CUtXOrScBMIyeIQ8-3" value="Customize Character" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="515" y="280" width="140" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="dri6CUtXOrScBMIyeIQ8-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1" source="dri6CUtXOrScBMIyeIQ8-5" target="dri6CUtXOrScBMIyeIQ8-3">
+        <mxCell id="ab6dibREOSoV7JVWZ45d-2" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" edge="1" parent="1" source="ab6dibREOSoV7JVWZ45d-3" target="ab6dibREOSoV7JVWZ45d-7">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="dri6CUtXOrScBMIyeIQ8-7" value="&amp;nbsp;&amp;lt;&amp;lt; include &amp;gt;&amp;gt;&amp;nbsp;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="dri6CUtXOrScBMIyeIQ8-6">
-          <mxGeometry x="-0.1125" y="-2" relative="1" as="geometry">
-            <mxPoint y="-2" as="offset" />
+        <mxCell id="ab6dibREOSoV7JVWZ45d-3" value="Player" style="shape=umlActor;verticalLabelPosition=top;verticalAlign=bottom;html=1;outlineConnect=0;labelPosition=left;align=right;" vertex="1" parent="1">
+          <mxGeometry x="80" y="720" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ab6dibREOSoV7JVWZ45d-4" value="Save Farm" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="610" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ab6dibREOSoV7JVWZ45d-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1" source="ab6dibREOSoV7JVWZ45d-7" target="ab6dibREOSoV7JVWZ45d-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ab6dibREOSoV7JVWZ45d-6" value="&amp;lt;&amp;lt; include &amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="ab6dibREOSoV7JVWZ45d-5">
+          <mxGeometry x="0.0308" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="dri6CUtXOrScBMIyeIQ8-5" value="Create New Farm" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="240" y="280" width="120" height="80" as="geometry" />
+        <mxCell id="ab6dibREOSoV7JVWZ45d-7" value="Exit Farm" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="820" width="120" height="80" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
