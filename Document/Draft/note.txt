@@ -1,0 +1,9 @@
+Id use case
+- Player: PL-XXX
+- Character: MC-XXX
+- Game manager: GM-XXX
+
+Trong game sẽ có một npc có thể dùng máy cuốc để tạo ruộng lúa.
+
+Thời gian cooldown của chức năng thay đổi nghề là 1 tháng trong game.
+
