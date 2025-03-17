@@ -36,11 +36,13 @@ public class PlayerIdleState : IState
 
 public class PlayerMovingState : IState
 {
-    private PlayerController controller;
+    private PlayerController _controller;
+    private float _speed;
 
-    public PlayerMovingState(PlayerController _controller)
+    public PlayerMovingState(PlayerController controller, float speed)
     {
-        controller = _controller;
+        _controller = controller;
+        _speed = speed;
     }
 
     public void Enter()
@@ -54,33 +56,34 @@ public class PlayerMovingState : IState
         if (InputManager.Instance.GetHorizontalMovement() != 0)
         {
             if (InputManager.Instance.GetHorizontalMovement() < 0)
-            {
-                controller.UpdateDirection(PlayerDirection.LEFT);
-            }
+                _controller.UpdatePlayerCurrentDirection(PlayerDirection.LEFT);
             else
-            {
-                controller.UpdateDirection(PlayerDirection.RIGHT);
-            }
+                _controller.UpdatePlayerCurrentDirection(PlayerDirection.RIGHT);
 
-            controller.animationManager.PlayHorizontalAnimation();
+            _controller.animationManager.PlayHorizontalAnimation();
             movement = new Vector2(InputManager.Instance.GetHorizontalMovement(), 0);
-            controller.Moving(movement);
+            _controller.Moving(movement, _speed);
             return;
         }
 
         if (InputManager.Instance.GetVerticalMovement() < 0)
         {
-            controller.animationManager.PlayMovingDownAnimation();
-            controller.UpdateDirection(PlayerDirection.DOWN);
+            _controller.animationManager.PlayMovingDownAnimation();
+            _controller.UpdatePlayerCurrentDirection(PlayerDirection.DOWN);
         }
         else if (InputManager.Instance.GetVerticalMovement() > 0)
         {
-            controller.animationManager.PlayMovingUpAnimation();
-            controller.UpdateDirection(PlayerDirection.UP);
+            _controller.animationManager.PlayMovingUpAnimation();
+            _controller.UpdatePlayerCurrentDirection(PlayerDirection.UP);
         }
 
         movement = new Vector2(0, InputManager.Instance.GetVerticalMovement());
-        controller.Moving(movement);
+        _controller.Moving(movement, _speed);
+    }
+
+    public void ChangeSpeed(float speed)
+    {
+        _speed = speed;
     }
 
     public void Exit()
@@ -88,59 +91,55 @@ public class PlayerMovingState : IState
     }
 }
 
-public class PlayerRunningState : IState
-{
-    private PlayerController controller;
+// public class PlayerRunningState : IState
+// {
+//     private PlayerController _controller;
 
-    public PlayerRunningState(PlayerController _controller)
-    {
-        controller = _controller;
-    }
+//     public PlayerRunningState(PlayerController controller)
+//     {
+//         _controller = controller;
+//     }
 
-    public void Enter()
-    {
-    }
+//     public void Enter()
+//     {
+//     }
 
-    public void Execute()
-    {
-        Vector2 movement;
+//     public void Execute()
+//     {
+//         Vector2 movement;
 
-        if (InputManager.Instance.GetHorizontalMovement() != 0)
-        {
-            if (InputManager.Instance.GetHorizontalMovement() < 0)
-            {
-                controller.UpdateDirection(PlayerDirection.LEFT);
-            }
-            else
-            {
-                controller.UpdateDirection(PlayerDirection.RIGHT);
-            }
+//         if (InputManager.Instance.GetHorizontalMovement() != 0)
+//         {
+//             if (InputManager.Instance.GetHorizontalMovement() < 0)
+//                 _controller.UpdateDirection(PlayerDirection.LEFT);
+//             else
+//                 _controller.UpdateDirection(PlayerDirection.RIGHT);
 
-            controller.animationManager.PlayRunAnimation();
-            movement = new Vector2(InputManager.Instance.GetHorizontalMovement(), 0);
-            controller.Running(movement);
-            return;
-        }
+//             _controller.animationManager.PlayRunAnimation();
+//             movement = new Vector2(InputManager.Instance.GetHorizontalMovement(), 0);
+//             _controller.Running(movement);
+//             return;
+//         }
 
-        if (InputManager.Instance.GetVerticalMovement() < 0)
-        {
-            controller.animationManager.PlayRunDownAnimation();
-            controller.UpdateDirection(PlayerDirection.DOWN);
-        }
-        else if (InputManager.Instance.GetVerticalMovement() > 0)
-        {
-            controller.animationManager.PlayRunUpAnimation();
-            controller.UpdateDirection(PlayerDirection.UP);
-        }
+//         if (InputManager.Instance.GetVerticalMovement() < 0)
+//         {
+//             _controller.animationManager.PlayRunDownAnimation();
+//             _controller.UpdateDirection(PlayerDirection.DOWN);
+//         }
+//         else if (InputManager.Instance.GetVerticalMovement() > 0)
+//         {
+//             _controller.animationManager.PlayRunUpAnimation();
+//             _controller.UpdateDirection(PlayerDirection.UP);
+//         }
 
-        movement = new Vector2(0, InputManager.Instance.GetVerticalMovement());
-        controller.Running(movement);
-    }
+//         movement = new Vector2(0, InputManager.Instance.GetVerticalMovement());
+//         _controller.Running(movement);
+//     }
 
-    public void Exit()
-    {
-    }
-}
+//     public void Exit()
+//     {
+//     }
+// }
 
 public class PlayerTillingState : IState
 {
@@ -164,6 +163,7 @@ public class PlayerTillingState : IState
                 break;
         }
         
+        controller.movement.ChangeSpeed(PlayerMovement.defaultSpeed * 0.7f);
         controller.TillingGround();
     }
 
@@ -173,5 +173,6 @@ public class PlayerTillingState : IState
 
     public void Exit()
     {
+        controller.movement.ChangeSpeed(PlayerMovement.defaultSpeed);
     }
 }

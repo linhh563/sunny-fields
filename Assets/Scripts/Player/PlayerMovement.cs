@@ -1,8 +1,9 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float defaultSpeed  {get; private set;}
+    public static float defaultSpeed  {get; private set;}
     private float speed;
 
     private void Awake() {

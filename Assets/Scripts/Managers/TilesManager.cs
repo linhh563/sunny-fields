@@ -83,7 +83,7 @@ public class TilesManager : MonoBehaviour
 
     public Vector3Int GetPositionNextToPlayer(Vector3 _playerPosition, PlayerDirection _direction)
     {
-         var playerPosition = ground.WorldToCell(_playerPosition);
+        var playerPosition = ground.WorldToCell(_playerPosition);
         Vector3Int nextPosition;
 
         switch (_direction)

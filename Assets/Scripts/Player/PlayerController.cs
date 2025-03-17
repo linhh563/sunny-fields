@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerAnimationManager))]
 public class PlayerController : MonoBehaviour
 {
-    private PlayerMovement movement;
+    public PlayerMovement movement {get; private set;}
     public StateManager stateManager { get; private set; }
     public PlayerAnimationManager animationManager { get; private set; }
     public PlayerDirection currentDirection { get; private set; }
@@ -26,6 +26,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        PlayerStatesHandle();
+    }
+
+    private void PlayerStatesHandle()
+    {
         if (InputManager.Instance.IsPlayerTilling())
         {
             stateManager.ChangeState(new PlayerTillingState(this));
@@ -36,29 +41,29 @@ public class PlayerController : MonoBehaviour
         {
             if (InputManager.Instance.IsPlayerRun())
             {
-                stateManager.ChangeState(new PlayerRunningState(this));
+                stateManager.ChangeState(new PlayerMovingState(this, PlayerMovement.defaultSpeed * 1.3f));
                 return;
             }
-            stateManager.ChangeState(new PlayerMovingState(this));
+            stateManager.ChangeState(new PlayerMovingState(this, PlayerMovement.defaultSpeed));
             return;
         }
 
         stateManager.ChangeState(new PlayerIdleState(this));
     }
 
-    public void Moving(Vector2 _movement)
+    public void Moving(Vector2 movement, float speed)
     {
-        movement.ChangeSpeed(movement.defaultSpeed);
-        movement.Moving(_movement);
+        this.movement.ChangeSpeed(speed);
+        this.movement.Moving(movement);
     }
 
-    public void Running(Vector2 _movement)
+    public void Running(Vector2 movement)
     {
-        movement.ChangeSpeed(movement.defaultSpeed * 1.3f);
-        movement.Moving(_movement);
+        this.movement.ChangeSpeed(PlayerMovement.defaultSpeed * 1.3f);
+        this.movement.Moving(movement);
     }
 
-    public void UpdateDirection(PlayerDirection _direction)
+    public void UpdatePlayerCurrentDirection(PlayerDirection _direction)
     {
         if (currentDirection == _direction)
         {
