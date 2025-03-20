@@ -2,7 +2,15 @@ using UnityEngine;
 using Management;
 
 namespace Characters
-{
+{    
+    public enum CharacterMovementState
+    {
+        Idle,
+        Moving,
+        Running,
+        Strolling
+    }
+
     public class CharacterMovement : MonoBehaviour
     {
         public static float defaultSpeed = 5.0f;
@@ -111,5 +119,4 @@ namespace Characters
             }
         }
     }
-
 }

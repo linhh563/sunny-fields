@@ -18,6 +18,18 @@ namespace Characters
 
         public void Execute()
         {
+            switch (CharacterController.currentDirection)
+            {
+                case CharacterDirection.Down:
+                    _controller.animController.PlayAnimation(CharacterAnimationName.IdleDown);
+                    break;
+                case CharacterDirection.Up:
+                    _controller.animController.PlayAnimation(CharacterAnimationName.IdleUp);
+                    break;
+                default:
+                    _controller.animController.PlayAnimation(CharacterAnimationName.Idle);
+                    break;
+            }
         }
 
         public void Exit()
@@ -36,13 +48,25 @@ namespace Characters
 
         public void Enter()
         {
-            _controller.characterMovement.ChangeSpeed(CharacterMovement.defaultSpeed);
+            _controller.movementController.ChangeSpeed(CharacterMovement.defaultSpeed);
         }
 
         public void Execute()
         {
-            // update moving animation
-            _controller.characterMovement.Moving();
+            switch (CharacterController.currentDirection)
+            {
+                case CharacterDirection.Down:
+                    _controller.animController.PlayAnimation(CharacterAnimationName.MovingDown);
+                    break;
+                case CharacterDirection.Up:
+                    _controller.animController.PlayAnimation(CharacterAnimationName.MovingUp);
+                    break;
+                default:
+                    _controller.animController.PlayAnimation(CharacterAnimationName.Moving);
+                    break;
+            }
+            
+            _controller.movementController.Moving();
         }
 
         public void Exit()
@@ -62,13 +86,13 @@ namespace Characters
 
         public void Enter()
         {
-            _controller.characterMovement.ChangeSpeed(CharacterMovement.defaultSpeed * 0.65f);
+            _controller.movementController.ChangeSpeed(CharacterMovement.defaultSpeed * 0.65f);
         }
 
         public void Execute()
         {
             // update strolling animation
-            _controller.characterMovement.Moving();
+            _controller.movementController.Moving();
         }
 
         public void Exit()
@@ -87,13 +111,25 @@ namespace Characters
 
         public void Enter()
         {
-            _controller.characterMovement.ChangeSpeed(CharacterMovement.defaultSpeed * 1.5f);            
+            _controller.movementController.ChangeSpeed(CharacterMovement.defaultSpeed * 1.5f);            
         }
 
         public void Execute()
         {
-            // update walking animation
-            _controller.characterMovement.Moving();
+            switch (CharacterController.currentDirection)
+            {
+                case CharacterDirection.Down:
+                    _controller.animController.PlayAnimation(CharacterAnimationName.RunDown);
+                    break;
+                case CharacterDirection.Up:
+                    _controller.animController.PlayAnimation(CharacterAnimationName.RunUp);
+                    break;
+                default:
+                    _controller.animController.PlayAnimation(CharacterAnimationName.Run);
+                    break;
+            }
+
+            _controller.movementController.Moving();
         }
 
         public void Exit()
