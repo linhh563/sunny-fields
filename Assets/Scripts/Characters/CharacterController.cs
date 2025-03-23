@@ -77,5 +77,10 @@ namespace Characters
                     break;
             }
         }
+
+        private void FarmingHandle()
+        {
+            // TODO: check character's farming state and change character's state
+        }
     }    
 }

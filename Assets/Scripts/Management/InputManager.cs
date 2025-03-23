@@ -8,8 +8,10 @@ namespace Management
     {
         public static InputManager Instance;
 
-        private void Awake() {
-            if (Instance == null) {
+        private void Awake()
+        {
+            if (Instance == null)
+            {
                 Instance = this;
             }
 
@@ -17,31 +19,36 @@ namespace Management
         }
 
         public CharacterCommand GetCharacterMoveDirection()
-            {
-                if (Input.GetKey(KeyCode.W))
-                    return CharacterCommand.MoveUp;
+        {
+            if (Input.GetKey(KeyCode.W))
+                return CharacterCommand.MoveUp;
 
-                if (Input.GetKey(KeyCode.S))
-                    return CharacterCommand.MoveDown;
+            if (Input.GetKey(KeyCode.S))
+                return CharacterCommand.MoveDown;
 
-                if (Input.GetKey(KeyCode.A))
-                    return CharacterCommand.MoveLeft;
+            if (Input.GetKey(KeyCode.A))
+                return CharacterCommand.MoveLeft;
 
-                if(Input.GetKey(KeyCode.D))
-                    return CharacterCommand.MoveRight;
+            if (Input.GetKey(KeyCode.D))
+                return CharacterCommand.MoveRight;
 
-                return CharacterCommand.DoNothing;
-            }
+            return CharacterCommand.DoNothing;
+        }
 
-            public bool IsCharacterStrolling()
-            {
-                return Input.GetKeyUp(KeyCode.LeftControl);
-            }
+        public bool IsCharacterStrolling()
+        {
+            return Input.GetKeyUp(KeyCode.LeftControl);
+        }
 
-            public bool IsCharacterRunning()
-            {
-                return Input.GetKey(KeyCode.LeftShift);
-            }
+        public bool IsCharacterRunning()
+        {
+            return Input.GetKey(KeyCode.LeftShift);
+        }
+
+        public bool IsCharacterFarming()
+        {
+            return Input.GetKeyUp(KeyCode.F);
+        }
     }
 }
 

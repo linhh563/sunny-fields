@@ -65,7 +65,7 @@ namespace Characters
                     _controller.animController.PlayAnimation(CharacterAnimationName.Moving);
                     break;
             }
-            
+
             _controller.movementController.Moving();
         }
 
@@ -111,7 +111,7 @@ namespace Characters
 
         public void Enter()
         {
-            _controller.movementController.ChangeSpeed(CharacterMovement.defaultSpeed * 1.5f);            
+            _controller.movementController.ChangeSpeed(CharacterMovement.defaultSpeed * 1.5f);
         }
 
         public void Execute()
@@ -130,6 +130,30 @@ namespace Characters
             }
 
             _controller.movementController.Moving();
+        }
+
+        public void Exit()
+        {
+        }
+    }
+
+    public class CharacterHoeingState : IState
+    {
+        CharacterController _controller;
+
+        public CharacterHoeingState(CharacterController controller)
+        {
+            _controller = controller;
+        }
+
+        public void Enter()
+        {
+            // TODO: update hoeing animation
+            // TODO: call hoeing method from farming controller
+        }
+
+        public void Execute()
+        {
         }
 
         public void Exit()
