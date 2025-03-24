@@ -1,23 +1,17 @@
 using UnityEngine;
 using Management;
+using Crafting;
 
 namespace Characters
 {    
-    public enum CharacterDirection 
-    {
-        Up,
-        Down,
-        Left,
-        Right
-    }
-
     [RequireComponent(typeof(CharacterMovement))]
     [RequireComponent(typeof(StateManager))]
     public class CharacterController : MonoBehaviour
     {
-        public static CharacterDirection currentDirection;
+        public static CharacterDirection currentDirection { get; private set; }
         public CharacterMovement movementController {get; private set;}
         public CharacterAnimation animController { get; private set; }
+        public static Item holdingItem { get; private set; }
         private StateManager _stateManager;
         
         private void Awake() {
@@ -83,4 +77,12 @@ namespace Characters
             // TODO: check character's farming state and change character's state
         }
     }    
+
+    public enum CharacterDirection 
+    {
+        Up,
+        Down,
+        Left,
+        Right
+    }
 }
