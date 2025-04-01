@@ -149,7 +149,7 @@ namespace Characters
         public void Enter()
         {
             // TODO: update hoeing animation
-            // TODO: call hoeing method from farming controller
+            _controller.farmingController.HoeGround();
         }
 
         public void Execute()

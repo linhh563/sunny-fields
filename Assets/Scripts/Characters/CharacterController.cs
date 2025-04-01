@@ -1,25 +1,32 @@
 using UnityEngine;
 using Management;
 using Crafting;
-using Unity.VisualScripting;
-using System.Xml.Serialization;
 
 namespace Characters
 {    
     [RequireComponent(typeof(CharacterMovement))]
     [RequireComponent(typeof(StateManager))]
+    [RequireComponent(typeof(CharacterFarmingController))]
     public class CharacterController : MonoBehaviour
     {
         public static CharacterDirection currentDirection { get; private set; }
         public static Vector3 characterPosition { get; private set; }
+
+        // Controllers
         public CharacterMovement movementController {get; private set;}
         public CharacterAnimation animController { get; private set; }
+        public CharacterFarmingController farmingController { get; private set; }
+
+
         public static Item holdingItem { get; private set; }
         private StateManager _stateManager;
         
         private void Awake() {
-            movementController = GetComponent<CharacterMovement>();
             _stateManager = GetComponent<StateManager>();
+
+            // set controllers
+            movementController = GetComponent<CharacterMovement>();
+            farmingController = GetComponent<CharacterFarmingController>();
             animController = GetComponentInChildren<CharacterAnimation>();
 
             currentDirection = CharacterDirection.Down;
@@ -36,6 +43,7 @@ namespace Characters
         {
             UpdateCurrentDirection();
             UpdateCharacterPosition();
+            FarmingHandle();
             MovingHandle();
         }
 
@@ -84,6 +92,12 @@ namespace Characters
         private void FarmingHandle()
         {
             // TODO: check character's farming state and change character's state
+            switch (farmingController.farmingState)
+            {
+                case CharacterFarmingState.Hoeing:
+                    _stateManager.ChangeState(new CharacterHoeingState(this));
+                    break;
+            }
         }
 
         private void UpdateCharacterPosition()

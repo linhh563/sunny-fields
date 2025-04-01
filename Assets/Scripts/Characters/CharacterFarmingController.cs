@@ -1,3 +1,4 @@
+using Environment;
 using Management;
 using UnityEngine;
 
@@ -7,19 +8,28 @@ namespace Characters
     {
         public CharacterFarmingState farmingState { get; private set; }
 
+        private TilemapManager _tilemapManager;
+
         private void Awake()
         {
             farmingState = CharacterFarmingState.Idle;
+
+            _tilemapManager = FindObjectOfType<TilemapManager>();
         }
 
         private void Update() {
             UpdateFarmingState();
         }
 
-        public void Hoeing()
+        public void HoeGround()
         {
-            // TODO: get the tile in front of the character
-            // TODO: check if that tile can hoe and change state of that tile
+            var frontTile = _tilemapManager.GetTileInFrontCharacter();
+
+            // character can only hoe the default ground
+            // if (_tilemapManager.tilemap.GetTile(frontTile) != _tilemapManager.defaultGroundTile)
+            //     return;
+
+            _tilemapManager.hoedTilemap.SetTile(frontTile, _tilemapManager.hoedGroundTile);
         }
 
         public void Planting()
@@ -39,10 +49,16 @@ namespace Characters
 
         private void UpdateFarmingState()
         {
-            if (!InputManager.Instance.IsCharacterFarming()) 
+            if (!InputManager.Instance.IsCharacterFarming())
+            {
+                farmingState = CharacterFarmingState.Idle;
                 return;
+            } 
 
             // TODO: check character's holding item and update farming state
+
+            // test
+            farmingState = CharacterFarmingState.Hoeing;
         }
     }
 

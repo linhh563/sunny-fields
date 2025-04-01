@@ -1,53 +1,49 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Characters;
 
 namespace Environment
 {
     public class TilemapManager : MonoBehaviour
     {
-        [SerializeField] private Tilemap _tilemap;
-        private string _farmName;
-        private Vector3Int _characterPosition;
+        [Header("Tilemaps")]
+        [SerializeField] private Tilemap _groundTilemap;
+        // TODO: delete ground rule tile, and delete this tilemap
+        [SerializeField] private Tilemap _hoedTilemap; 
 
-        private void Update() {
-            UpdateCharacterPosition();
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Debug.Log(GetTileName(GetTileInFrontCharacter()));
-            }
-        }
+        [Header("Tile Bases")]
+        [SerializeField] private TileBase _defaultGroundTile;
+        [SerializeField] private TileBase _hoedGroundTile;
+        [SerializeField] private TileBase _wateredGroundTile;
+
+        public Tilemap groundTilemap => _groundTilemap;
+        public Tilemap hoedTilemap => _hoedTilemap;
+        public TileBase defaultGroundTile => _defaultGroundTile;
+        public TileBase hoedGroundTile => _hoedGroundTile;
+        public TileBase wateredGroundTile => _wateredGroundTile;
+
+
+        private string _farmName;
+
 
         public Vector3Int GetTileInFrontCharacter()
         {
+            var _characterPosition = _groundTilemap.WorldToCell(Characters.CharacterController.characterPosition);
+
             switch (Characters.CharacterController.currentDirection)
             {
-                case Characters.CharacterDirection.Up:
-                    return _characterPosition + new Vector3Int(0, 1, 0);
+                case CharacterDirection.Up:
+                    return _characterPosition + Vector3Int.up;
 
-                case Characters.CharacterDirection.Down:
-                    return _characterPosition + new Vector3Int(0, -1, 0);
+                case CharacterDirection.Down:   
+                    return _characterPosition + Vector3Int.down;
 
-                case Characters.CharacterDirection.Right:
-                    return _characterPosition + new Vector3Int(1, 0, 0);
+                case CharacterDirection.Right:
+                    return _characterPosition + Vector3Int.right;
 
                 default:
-                    return _characterPosition + new Vector3Int(-1, 0, 0);
+                    return _characterPosition + Vector3Int.left;
             }
-        }
-
-        public string GetTileName(Vector3Int position)
-        {
-            var tile = _tilemap.GetSprite(position);
-            if (tile != null)
-            {
-                return tile.name;
-            }
-            return "";
-        }
-
-        private void UpdateCharacterPosition()
-        {
-            _characterPosition = _tilemap.WorldToCell(Characters.CharacterController.characterPosition);
         }
     }    
 }
