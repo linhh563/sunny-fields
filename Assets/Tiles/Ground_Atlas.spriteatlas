@@ -38,10 +38,6 @@ SpriteAtlas:
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 181640450, guid: fb0c0902fced8244c95efac1b0c10737, type: 3}
-  - {fileID: -532663460, guid: fb0c0902fced8244c95efac1b0c10737, type: 3}
-  - {fileID: -78810643, guid: fb0c0902fced8244c95efac1b0c10737, type: 3}
-  - {fileID: -1746422888, guid: fb0c0902fced8244c95efac1b0c10737, type: 3}
   - {fileID: 917636493, guid: fb0c0902fced8244c95efac1b0c10737, type: 3}
   - {fileID: -1460872983, guid: fb0c0902fced8244c95efac1b0c10737, type: 3}
   - {fileID: 615036583, guid: fb0c0902fced8244c95efac1b0c10737, type: 3}
@@ -49,9 +45,7 @@ SpriteAtlas:
   - {fileID: -803004097, guid: fb0c0902fced8244c95efac1b0c10737, type: 3}
   - {fileID: -1992259025, guid: fb0c0902fced8244c95efac1b0c10737, type: 3}
   - {fileID: -1542814429, guid: fb0c0902fced8244c95efac1b0c10737, type: 3}
-  - {fileID: -1724419182, guid: fb0c0902fced8244c95efac1b0c10737, type: 3}
   - {fileID: -527106311, guid: fb0c0902fced8244c95efac1b0c10737, type: 3}
-  - {fileID: -1384186665, guid: fb0c0902fced8244c95efac1b0c10737, type: 3}
   - {fileID: 1016920170, guid: fb0c0902fced8244c95efac1b0c10737, type: 3}
   - {fileID: 1990474033, guid: fb0c0902fced8244c95efac1b0c10737, type: 3}
   - {fileID: -845463845, guid: fb0c0902fced8244c95efac1b0c10737, type: 3}
@@ -60,11 +54,13 @@ SpriteAtlas:
   - {fileID: 294958007, guid: fb0c0902fced8244c95efac1b0c10737, type: 3}
   - {fileID: 1380401708, guid: fb0c0902fced8244c95efac1b0c10737, type: 3}
   - {fileID: 2124059726, guid: fb0c0902fced8244c95efac1b0c10737, type: 3}
+  - {fileID: -532663460, guid: fb0c0902fced8244c95efac1b0c10737, type: 3}
+  - {fileID: 181640450, guid: fb0c0902fced8244c95efac1b0c10737, type: 3}
+  - {fileID: -1384186665, guid: fb0c0902fced8244c95efac1b0c10737, type: 3}
+  - {fileID: -1724419182, guid: fb0c0902fced8244c95efac1b0c10737, type: 3}
+  - {fileID: -1746422888, guid: fb0c0902fced8244c95efac1b0c10737, type: 3}
+  - {fileID: -78810643, guid: fb0c0902fced8244c95efac1b0c10737, type: 3}
   m_PackedSpriteNamesToIndex:
-  - ground_21
-  - ground_20
-  - ground_16
-  - ground_17
   - ground_14
   - ground_15
   - ground_12
@@ -72,9 +68,7 @@ SpriteAtlas:
   - ground_10
   - ground_11
   - ground_3
-  - ground_18
   - ground_2
-  - ground_19
   - ground_1
   - ground_0
   - ground_7
@@ -83,6 +77,12 @@ SpriteAtlas:
   - ground_4
   - ground_9
   - ground_8
+  - default_ground_1
+  - default_ground_2
+  - grass_2
+  - grass_1
+  - watered_ground
+  - hoed_ground
   m_RenderDataMap: {}
   m_Tag: Ground_Atlas
   m_IsVariant: 0

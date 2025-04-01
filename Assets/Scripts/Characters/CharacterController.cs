@@ -1,6 +1,8 @@
 using UnityEngine;
 using Management;
 using Crafting;
+using Unity.VisualScripting;
+using System.Xml.Serialization;
 
 namespace Characters
 {    
@@ -9,6 +11,7 @@ namespace Characters
     public class CharacterController : MonoBehaviour
     {
         public static CharacterDirection currentDirection { get; private set; }
+        public static Vector3 characterPosition { get; private set; }
         public CharacterMovement movementController {get; private set;}
         public CharacterAnimation animController { get; private set; }
         public static Item holdingItem { get; private set; }
@@ -24,9 +27,15 @@ namespace Characters
             _stateManager.ChangeState(new CharacterIdleState(this));
         }
 
+        private void OnDisable() {
+            characterPosition = Vector3.zero;
+            currentDirection = CharacterDirection.Down;
+        }
+
         private void Update()
         {
             UpdateCurrentDirection();
+            UpdateCharacterPosition();
             MovingHandle();
         }
 
@@ -75,6 +84,11 @@ namespace Characters
         private void FarmingHandle()
         {
             // TODO: check character's farming state and change character's state
+        }
+
+        private void UpdateCharacterPosition()
+        {
+            characterPosition = transform.position;
         }
     }    
 

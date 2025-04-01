@@ -5,15 +5,49 @@ namespace Environment
 {
     public class TilemapManager : MonoBehaviour
     {
-        private Tilemap _tilemap;
+        [SerializeField] private Tilemap _tilemap;
         private string _farmName;
+        private Vector3Int _characterPosition;
 
-        public TileBase GetTileInFrontCharacter()
+        private void Update() {
+            UpdateCharacterPosition();
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Debug.Log(GetTileName(GetTileInFrontCharacter()));
+            }
+        }
+
+        public Vector3Int GetTileInFrontCharacter()
         {
-            // TODO: get character's position
-            // TODO: get character's current direction
-            // TODO: return the tile in front of the character
-            return null;
+            switch (Characters.CharacterController.currentDirection)
+            {
+                case Characters.CharacterDirection.Up:
+                    return _characterPosition + new Vector3Int(0, 1, 0);
+
+                case Characters.CharacterDirection.Down:
+                    return _characterPosition + new Vector3Int(0, -1, 0);
+
+                case Characters.CharacterDirection.Right:
+                    return _characterPosition + new Vector3Int(1, 0, 0);
+
+                default:
+                    return _characterPosition + new Vector3Int(-1, 0, 0);
+            }
+        }
+
+        public string GetTileName(Vector3Int position)
+        {
+            var tile = _tilemap.GetSprite(position);
+            if (tile != null)
+            {
+                return tile.name;
+            }
+            return "";
+        }
+
+        private void UpdateCharacterPosition()
+        {
+            _characterPosition = _tilemap.WorldToCell(Characters.CharacterController.characterPosition);
         }
     }    
 }
