@@ -8,8 +8,7 @@ namespace Environment
     {
         [Header("Tilemaps")]
         [SerializeField] private Tilemap _groundTilemap;
-        // TODO: delete ground rule tile, and delete this tilemap
-        [SerializeField] private Tilemap _hoedTilemap; 
+        
 
         [Header("Tile Bases")]
         [SerializeField] private TileBase _defaultGroundTile;
@@ -17,7 +16,6 @@ namespace Environment
         [SerializeField] private TileBase _wateredGroundTile;
 
         public Tilemap groundTilemap => _groundTilemap;
-        public Tilemap hoedTilemap => _hoedTilemap;
         public TileBase defaultGroundTile => _defaultGroundTile;
         public TileBase hoedGroundTile => _hoedGroundTile;
         public TileBase wateredGroundTile => _wateredGroundTile;

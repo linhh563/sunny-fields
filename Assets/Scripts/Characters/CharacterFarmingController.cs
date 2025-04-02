@@ -29,7 +29,7 @@ namespace Characters
             // if (_tilemapManager.tilemap.GetTile(frontTile) != _tilemapManager.defaultGroundTile)
             //     return;
 
-            _tilemapManager.hoedTilemap.SetTile(frontTile, _tilemapManager.hoedGroundTile);
+            _tilemapManager.groundTilemap.SetTile(frontTile, _tilemapManager.hoedGroundTile);
         }
 
         public void Planting()
