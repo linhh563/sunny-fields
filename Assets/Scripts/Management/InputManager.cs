@@ -18,6 +18,7 @@ namespace Management
             DontDestroyOnLoad(this);
         }
 
+        // TODO: Delete CharacterCommand enum and modify this method
         public CharacterCommand GetCharacterMoveDirection()
         {
             if (Input.GetKey(KeyCode.W))
@@ -33,6 +34,29 @@ namespace Management
                 return CharacterCommand.MoveRight;
 
             return CharacterCommand.DoNothing;
+        }
+
+        public int GetItemSelection()
+        {
+            switch (Input.inputString)
+            {
+                case "1":
+                    return 1;
+                case "2":
+                    return 2;
+                case "3":
+                    return 3;
+                case "4":
+                    return 4;
+                case "5":
+                    return 5;
+                case "6":
+                    return 6;
+                case "7":
+                    return 7;
+                default:
+                    return -1;
+            }
         }
 
         public bool IsCharacterStrolling()

@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Crafting
 {
+    [CreateAssetMenu(menuName = "ScriptableObjects/Item")]
     public class ItemScriptableObject : ScriptableObject
     {
         public string itemName;
