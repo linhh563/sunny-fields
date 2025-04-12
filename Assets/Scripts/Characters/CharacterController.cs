@@ -6,7 +6,6 @@ namespace Characters
     [RequireComponent(typeof(CharacterMovement))]
     [RequireComponent(typeof(StateManager))]
     [RequireComponent(typeof(CharacterFarmingController))]
-    [RequireComponent(typeof(CharacterInventory))]
     public class CharacterController : MonoBehaviour
     {
         public static CharacterDirection currentDirection { get; private set; }
@@ -28,7 +27,7 @@ namespace Characters
             movementController = GetComponent<CharacterMovement>();
             farmingController = GetComponent<CharacterFarmingController>();
             animController = GetComponentInChildren<CharacterAnimation>();
-            inventoryController = GetComponent<CharacterInventory>();
+            inventoryController = GetComponentInChildren<CharacterInventory>();
 
             currentDirection = CharacterDirection.Down;
 

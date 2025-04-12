@@ -8,6 +8,8 @@ namespace Management
     {
         public static InputManager Instance;
 
+        public static int noItemSelected = -1;
+
         private void Awake()
         {
             if (Instance == null)
@@ -55,7 +57,7 @@ namespace Management
                 case "7":
                     return 7;
                 default:
-                    return -1;
+                    return noItemSelected;
             }
         }
 

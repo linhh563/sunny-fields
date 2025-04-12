@@ -2,14 +2,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using Crafting;
 using Management;
+using GameUI;
 
 namespace Characters
 {
     public class CharacterInventory : MonoBehaviour
     {
-        private Item _holdingItem;
-        private List<Item> _itemsCanUse = new List<Item>();
-        private List<Item> _itemsInBag = new List<Item>();
+        // TODO: delete SerializeField
+        [SerializeField] private ItemScriptableObject _holdingItem;
+        // TODO: delete SerializeField
+        [SerializeField] private List<ItemScriptableObject> _itemsCanUse = new List<ItemScriptableObject>();
+        // private List<Item> _itemsInBag = new List<Item>();
+
+        void Awake()
+        {
+            GameplayUIManager.Instance.itemBar.UpdateItemBar(_holdingItem, _itemsCanUse);
+        }
 
         void Update()
         {
@@ -20,7 +28,7 @@ namespace Characters
         {
             var itemIndex = InputManager.Instance.GetItemSelection();
 
-            if (itemIndex == -1)
+            if (itemIndex == InputManager.noItemSelected)
                 return;
 
             // TODO: swap the parameter item with the holding item
