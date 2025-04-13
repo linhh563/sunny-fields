@@ -10,8 +10,12 @@ namespace Management
 
         public static int noItemSelected = -1;
 
+        private Dictionary<string, KeyCode> _keyBindings = new Dictionary<string, KeyCode>();
+
         private void Awake()
         {
+            InitializeKeyBindings();
+
             if (Instance == null)
             {
                 Instance = this;
@@ -20,19 +24,38 @@ namespace Management
             DontDestroyOnLoad(this);
         }
 
+        private void InitializeKeyBindings()
+        {
+            // Initialize key bindings for character movement
+            _keyBindings.Add("MoveUp", KeyCode.UpArrow);
+            _keyBindings.Add("MoveDown", KeyCode.DownArrow);
+            _keyBindings.Add("MoveLeft", KeyCode.LeftArrow);
+            _keyBindings.Add("MoveRight", KeyCode.RightArrow);
+
+            _keyBindings.Add("Strolling", KeyCode.LeftControl);
+            _keyBindings.Add("Running", KeyCode.LeftShift);
+
+            // Initialize key bindings for character farming
+            _keyBindings.Add("Farming", KeyCode.F);
+
+            _keyBindings.Add("Interact", KeyCode.E);
+            _keyBindings.Add("Inventory", KeyCode.I);
+            _keyBindings.Add("Pause", KeyCode.Escape);
+        }
+
         // TODO: Delete CharacterCommand enum and modify this method
         public CharacterCommand GetCharacterMoveDirection()
         {
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(_keyBindings["MoveUp"]))
                 return CharacterCommand.MoveUp;
 
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKey(_keyBindings["MoveDown"]))
                 return CharacterCommand.MoveDown;
 
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(_keyBindings["MoveLeft"]))
                 return CharacterCommand.MoveLeft;
 
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(_keyBindings["MoveRight"]))
                 return CharacterCommand.MoveRight;
 
             return CharacterCommand.DoNothing;
@@ -63,17 +86,17 @@ namespace Management
 
         public bool IsCharacterStrolling()
         {
-            return Input.GetKeyUp(KeyCode.LeftControl);
+            return Input.GetKeyUp(_keyBindings["Strolling"]);
         }
 
         public bool IsCharacterRunning()
         {
-            return Input.GetKey(KeyCode.LeftShift);
+            return Input.GetKey(_keyBindings["Running"]);
         }
 
         public bool IsCharacterFarming()
         {
-            return Input.GetKeyUp(KeyCode.F);
+            return Input.GetKeyUp(_keyBindings["Farming"]);
         }
     }
 }

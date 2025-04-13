@@ -10,12 +10,12 @@ namespace GameUI
 
         void Awake()
         {
-            itemBar = GetComponentInChildren<ItemBar>();
-
             if (Instance == null)
             {
                 Instance = this;
             }
+
+            itemBar = GetComponentInChildren<ItemBar>();
         }
     }
 }

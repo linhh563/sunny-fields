@@ -11,27 +11,29 @@ namespace Characters
         // TODO: delete SerializeField
         [SerializeField] private ItemScriptableObject _holdingItem;
         // TODO: delete SerializeField
-        [SerializeField] private List<ItemScriptableObject> _itemsCanUse = new List<ItemScriptableObject>();
-        // private List<Item> _itemsInBag = new List<Item>();
+        [SerializeField] private List<ItemScriptableObject> _itemsInHotBar = new List<ItemScriptableObject>();
+        private List<ItemScriptableObject> _itemsInBag = new List<ItemScriptableObject>();
 
-        void Awake()
+        void Start()
         {
-            GameplayUIManager.Instance.itemBar.UpdateItemBar(_holdingItem, _itemsCanUse);
+            GameplayUIManager.Instance.itemBar.UpdateItemBar(_holdingItem, _itemsInHotBar);
         }
 
         void Update()
         {
-            
+            SelectItem();
         }
 
-        private void SelectItem(Item item)
+        private void SelectItem()
         {
             var itemIndex = InputManager.Instance.GetItemSelection();
 
             if (itemIndex == InputManager.noItemSelected)
                 return;
 
-            // TODO: swap the parameter item with the holding item
+            var temp = _holdingItem;
+            _holdingItem = _itemsInHotBar[itemIndex - 1];
+            _itemsInHotBar[itemIndex - 1] = temp;
         }
 
         private void GetItemInBag()
