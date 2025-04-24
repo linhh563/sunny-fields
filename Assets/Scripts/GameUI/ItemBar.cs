@@ -24,8 +24,8 @@ namespace GameUI
 
         public void HandleBarUI()
         {
-            var itemIndex = InputManager.Instance.GetItemSelection();
-            if (itemIndex != InputManager.noItemSelected)
+            var itemIndex = GameplayInputManager.Instance.GetItemSelection();
+            if (itemIndex != GameplayInputManager.noItemSelected)
             {
                 // TODO: swap item ui in item bar and holding item ui 
                 var temp = _holdingItemGameObj.GetComponent<Image>().sprite;

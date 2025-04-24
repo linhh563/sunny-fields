@@ -11,7 +11,7 @@ namespace Characters
         public static CharacterDirection currentDirection { get; private set; }
         public static Vector3 characterPosition { get; private set; }
 
-        // Controllers
+        // CONTROLLERS 
         public CharacterAnimation animController { get; private set; }
         public CharacterInventory inventoryController { get; private set; }
         public CharacterMovement movementController {get; private set;}
@@ -29,12 +29,13 @@ namespace Characters
             animController = GetComponentInChildren<CharacterAnimation>();
             inventoryController = GetComponentInChildren<CharacterInventory>();
 
+            // Set default values
             currentDirection = CharacterDirection.Down;
-
             _stateManager.ChangeState(new CharacterIdleState(this));
         }
 
         private void OnDisable() {
+            // Reset values
             characterPosition = Vector3.zero;
             currentDirection = CharacterDirection.Down;
         }
@@ -44,12 +45,12 @@ namespace Characters
             UpdateCurrentDirection();
             UpdateCharacterPosition();
             FarmingHandle();
-            MovingHandle();
+            HandleMovementState();
         }
 
         private void UpdateCurrentDirection()
         {
-            var _dir = InputManager.Instance.GetCharacterMoveDirection();
+            var _dir = GameplayInputManager.Instance.GetCharacterMoveDirection();
 
             switch (_dir)
             {
@@ -70,7 +71,7 @@ namespace Characters
             }
         }
 
-        private void MovingHandle()
+        private void HandleMovementState()
         {        
             switch (movementController.movementState)
             {

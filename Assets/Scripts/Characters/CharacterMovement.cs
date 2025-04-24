@@ -27,13 +27,35 @@ namespace Characters
             _isStrolling = false;
 
             movementState = CharacterMovementState.Idle;
+
+            // Subscribe to input events
+            GameplayInputManager.OnMovingButtonPress += EnableMovingState;
+            GameplayInputManager.OnMovingButtonPress += Moving;
+
+            GameplayInputManager.OnRunningButtonPress += EnableRunningState;
+            GameplayInputManager.OnRunningButtonRelease += DisableRunningState;
+
+            GameplayInputManager.OnStrollingButtonPress += ToggleStrollingState;
+
+            GameplayInputManager.OnNothingPress += DisableMovingState;
         }
 
         private void Update() {
-            UpdateMovingState();
-            UpdateStrollingState();
-            UpdateRunningState();
             UpdateMovementState();
+        }
+
+        void OnDisable()
+        {
+            // Unsubscribe from input events
+            GameplayInputManager.OnMovingButtonPress -= EnableMovingState;
+            GameplayInputManager.OnMovingButtonPress -= Moving;
+
+            GameplayInputManager.OnRunningButtonPress -= EnableRunningState;
+            GameplayInputManager.OnRunningButtonRelease -= DisableRunningState;
+
+            GameplayInputManager.OnStrollingButtonPress -= ToggleStrollingState;
+
+            GameplayInputManager.OnNothingPress -= DisableMovingState;
         }
 
         public void ChangeSpeed(float newSpeed)
@@ -64,36 +86,34 @@ namespace Characters
             transform.Translate(_movementDir * _speed * Time.deltaTime);
         }
 
-        private void UpdateMovingState()
+        public void Idling()
         {
-            if (InputManager.Instance.GetCharacterMoveDirection() != CharacterCommand.DoNothing)
-            {
-                _isMoving = true;
-            }
-            else
-            {
-                _isMoving = false;
-            }
+            transform.Translate(Vector2.zero);
         }
 
-        private void UpdateStrollingState()
+        private void EnableMovingState()
         {
-            if (InputManager.Instance.IsCharacterStrolling())
-            {
-                _isStrolling = !_isStrolling;
-            }
+            _isMoving = true;
         }
 
-        private void UpdateRunningState()
+        private void DisableMovingState()
         {
-            if (InputManager.Instance.IsCharacterRunning())
-            {
-                _isRunning = true;
-            }
-            else
-            {
-                _isRunning = false;
-            }
+            _isMoving = false;
+        }
+
+        private void EnableRunningState()
+        {
+            _isRunning = true;
+        }
+
+        private void DisableRunningState()
+        {
+            _isRunning = false;
+        }
+
+        private void ToggleStrollingState()
+        {
+            _isStrolling = !_isStrolling;
         }
 
         private void UpdateMovementState()
