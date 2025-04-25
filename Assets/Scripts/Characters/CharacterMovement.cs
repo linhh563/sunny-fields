@@ -2,7 +2,7 @@ using UnityEngine;
 using Management;
 
 namespace Characters
-{    
+{
     public enum CharacterMovementState
     {
         Idle,
@@ -18,16 +18,20 @@ namespace Characters
         private bool _isMoving;
         private bool _isRunning;
         private bool _isStrolling;
-        public CharacterMovementState movementState {get; private set;}
+        public CharacterMovementState movementState { get; private set; }
 
-        private void Awake() {
+        private void Awake()
+        {
             _speed = defaultSpeed;
             _isMoving = false;
             _isRunning = false;
             _isStrolling = false;
 
             movementState = CharacterMovementState.Idle;
+        }
 
+        void Start()
+        {
             // Subscribe to input events
             GameplayInputManager.OnMovingButtonPress += EnableMovingState;
             GameplayInputManager.OnMovingButtonPress += Moving;
@@ -40,7 +44,8 @@ namespace Characters
             GameplayInputManager.OnNothingPress += DisableMovingState;
         }
 
-        private void Update() {
+        private void Update()
+        {
             UpdateMovementState();
         }
 
