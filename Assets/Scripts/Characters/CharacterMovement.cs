@@ -2,7 +2,7 @@ using UnityEngine;
 using Management;
 
 namespace Characters
-{    
+{
     public enum CharacterMovementState
     {
         Idle,
@@ -18,9 +18,10 @@ namespace Characters
         private bool _isMoving;
         private bool _isRunning;
         private bool _isStrolling;
-        public CharacterMovementState movementState {get; private set;}
+        public CharacterMovementState movementState { get; private set; }
 
-        private void Awake() {
+        private void Awake()
+        {
             _speed = defaultSpeed;
             _isMoving = false;
             _isRunning = false;
@@ -29,11 +30,37 @@ namespace Characters
             movementState = CharacterMovementState.Idle;
         }
 
-        private void Update() {
-            UpdateMovingState();
-            UpdateStrollingState();
-            UpdateRunningState();
+        void Start()
+        {
+            // Subscribe to input events
+            GameplayInputManager.OnMovingButtonPress += EnableMovingState;
+            GameplayInputManager.OnMovingButtonPress += Moving;
+
+            GameplayInputManager.OnRunningButtonPress += EnableRunningState;
+            GameplayInputManager.OnRunningButtonRelease += DisableRunningState;
+
+            GameplayInputManager.OnStrollingButtonPress += ToggleStrollingState;
+
+            GameplayInputManager.OnNothingPress += DisableMovingState;
+        }
+
+        private void Update()
+        {
             UpdateMovementState();
+        }
+
+        void OnDisable()
+        {
+            // Unsubscribe from input events
+            GameplayInputManager.OnMovingButtonPress -= EnableMovingState;
+            GameplayInputManager.OnMovingButtonPress -= Moving;
+
+            GameplayInputManager.OnRunningButtonPress -= EnableRunningState;
+            GameplayInputManager.OnRunningButtonRelease -= DisableRunningState;
+
+            GameplayInputManager.OnStrollingButtonPress -= ToggleStrollingState;
+
+            GameplayInputManager.OnNothingPress -= DisableMovingState;
         }
 
         public void ChangeSpeed(float newSpeed)
@@ -64,36 +91,34 @@ namespace Characters
             transform.Translate(_movementDir * _speed * Time.deltaTime);
         }
 
-        private void UpdateMovingState()
+        public void Idling()
         {
-            if (InputManager.Instance.GetCharacterMoveDirection() != CharacterCommand.DoNothing)
-            {
-                _isMoving = true;
-            }
-            else
-            {
-                _isMoving = false;
-            }
+            transform.Translate(Vector2.zero);
         }
 
-        private void UpdateStrollingState()
+        private void EnableMovingState()
         {
-            if (InputManager.Instance.IsCharacterStrolling())
-            {
-                _isStrolling = !_isStrolling;
-            }
+            _isMoving = true;
         }
 
-        private void UpdateRunningState()
+        private void DisableMovingState()
         {
-            if (InputManager.Instance.IsCharacterRunning())
-            {
-                _isRunning = true;
-            }
-            else
-            {
-                _isRunning = false;
-            }
+            _isMoving = false;
+        }
+
+        private void EnableRunningState()
+        {
+            _isRunning = true;
+        }
+
+        private void DisableRunningState()
+        {
+            _isRunning = false;
+        }
+
+        private void ToggleStrollingState()
+        {
+            _isStrolling = !_isStrolling;
         }
 
         private void UpdateMovementState()

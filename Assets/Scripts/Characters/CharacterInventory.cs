@@ -16,19 +16,23 @@ namespace Characters
 
         void Start()
         {
-            GameplayUIManager.Instance.itemBar.UpdateItemBar(_holdingItem, _itemsInHotBar);
+            GameplayUIManager.Instance.itemBar.InitializeItemBarUI(_holdingItem, _itemsInHotBar);
+
+            // Subscribe input events
+            GameplayInputManager.OnItemSelected +=  SelectItem;
         }
 
-        void Update()
+        void OnDisable()
         {
-            SelectItem();
+            // Unsubscribe input events
+            GameplayInputManager.OnItemSelected -= SelectItem;
         }
 
         private void SelectItem()
         {
-            var itemIndex = InputManager.Instance.GetItemSelection();
+            var itemIndex = GameplayInputManager.Instance.GetItemSelection();
 
-            if (itemIndex == InputManager.noItemSelected)
+            if (itemIndex == GameplayInputManager.noItemSelected)
                 return;
 
             var temp = _holdingItem;

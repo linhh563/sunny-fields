@@ -17,15 +17,22 @@ namespace GameUI
             // TODO: Optimize game objects retrieval (automatically find all item game objects)
         }
 
-        void Update()
+        void Start()
         {
-            HandleBarUI();
+            // Subscribe input events
+            GameplayInputManager.OnItemSelected += RefreshItemBarUI;
         }
 
-        public void HandleBarUI()
+        void OnDisable()
         {
-            var itemIndex = InputManager.Instance.GetItemSelection();
-            if (itemIndex != InputManager.noItemSelected)
+            // Unsubscribe input events
+            GameplayInputManager.OnItemSelected -= RefreshItemBarUI;
+        }
+
+        public void RefreshItemBarUI()
+        {
+            var itemIndex = GameplayInputManager.Instance.GetItemSelection();
+            if (itemIndex != GameplayInputManager.noItemSelected)
             {
                 // TODO: swap item ui in item bar and holding item ui 
                 var temp = _holdingItemGameObj.GetComponent<Image>().sprite;
@@ -34,7 +41,7 @@ namespace GameUI
             }
         }
 
-        public void UpdateItemBar(ItemScriptableObject holdingItem, List<ItemScriptableObject> items)
+        public void InitializeItemBarUI(ItemScriptableObject holdingItem, List<ItemScriptableObject> items)
         {
             var holdingItemImage = _holdingItemGameObj.GetComponent<Image>();
             if (holdingItem.sprite != holdingItemImage.sprite)

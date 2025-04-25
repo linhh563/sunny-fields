@@ -18,7 +18,7 @@ namespace Characters
         }
 
         private void Update() {
-            UpdateFarmingState();
+            // UpdateFarmingState();
         }
 
         public void HoeGround()
@@ -47,19 +47,19 @@ namespace Characters
             // TODO: harvesting logic
         }
 
-        private void UpdateFarmingState()
-        {
-            if (!InputManager.Instance.IsCharacterFarming())
-            {
-                farmingState = CharacterFarmingState.Idle;
-                return;
-            } 
+        // private void UpdateFarmingState()
+        // {
+        //     if (!InputManager.Instance.IsCharacterFarming())
+        //     {
+        //         farmingState = CharacterFarmingState.Idle;
+        //         return;
+        //     } 
 
-            // TODO: check character's holding item and update farming state
+        //     // TODO: check character's holding item and update farming state
 
-            // test
-            farmingState = CharacterFarmingState.Hoeing;
-        }
+        //     // test
+        //     farmingState = CharacterFarmingState.Hoeing;
+        // }
     }
 
     public enum CharacterFarmingState
