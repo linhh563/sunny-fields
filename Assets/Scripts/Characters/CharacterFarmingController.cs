@@ -1,6 +1,6 @@
+using UnityEngine;
 using Environment;
 using Management;
-using UnityEngine;
 
 namespace Characters
 {
@@ -10,24 +10,39 @@ namespace Characters
 
         private TilemapManager _tilemapManager;
 
+        private CharacterInventory _characterInventory;
+
         private void Awake()
         {
             farmingState = CharacterFarmingState.Idle;
 
             _tilemapManager = FindObjectOfType<TilemapManager>();
+
+            _characterInventory = GetComponentInChildren<CharacterInventory>();
+        }
+
+        void Start()
+        {
+            // Subscribe input events
+            GameplayInputManager.OnFarmingButtonPress += UpdateFarmingState;
+            GameplayInputManager.OnFarmingButtonRelease += SetIdleState;
         }
 
         private void Update() {
-            // UpdateFarmingState();
+        }
+
+        void OnDisable()
+        {
+            // Unsubscribe input events
+            GameplayInputManager.OnFarmingButtonPress -= UpdateFarmingState;
+            GameplayInputManager.OnFarmingButtonRelease -= SetIdleState;
         }
 
         public void HoeGround()
         {
             var frontTile = _tilemapManager.GetTileInFrontCharacter();
 
-            // character can only hoe the default ground
-            // if (_tilemapManager.tilemap.GetTile(frontTile) != _tilemapManager.defaultGroundTile)
-            //     return;
+            // TODO: character can only hoe the default ground
 
             _tilemapManager.groundTilemap.SetTile(frontTile, _tilemapManager.hoedGroundTile);
         }
@@ -47,19 +62,15 @@ namespace Characters
             // TODO: harvesting logic
         }
 
-        // private void UpdateFarmingState()
-        // {
-        //     if (!InputManager.Instance.IsCharacterFarming())
-        //     {
-        //         farmingState = CharacterFarmingState.Idle;
-        //         return;
-        //     } 
+        private void UpdateFarmingState()
+        {
+            farmingState = _characterInventory.CheckFarmingItem();
+        }
 
-        //     // TODO: check character's holding item and update farming state
-
-        //     // test
-        //     farmingState = CharacterFarmingState.Hoeing;
-        // }
+        private void SetIdleState()
+        {
+            farmingState = CharacterFarmingState.Idle;
+        }
     }
 
     public enum CharacterFarmingState

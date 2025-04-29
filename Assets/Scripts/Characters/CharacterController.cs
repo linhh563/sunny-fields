@@ -9,6 +9,8 @@ namespace Characters
     public class CharacterController : MonoBehaviour
     {
         public static CharacterDirection currentDirection { get; private set; }
+        
+        // character position use in tile map
         public static Vector3 characterPosition { get; private set; }
 
         // CONTROLLERS 
@@ -44,7 +46,7 @@ namespace Characters
         {
             UpdateCurrentDirection();
             UpdateCharacterPosition();
-            FarmingHandle();
+            HandleFarmingState();
             HandleMovementState();
         }
 
@@ -90,13 +92,27 @@ namespace Characters
             }
         }
 
-        private void FarmingHandle()
+        private void HandleFarmingState()
         {
-            // TODO: check character's farming state and change character's state
             switch (farmingController.farmingState)
             {
                 case CharacterFarmingState.Hoeing:
                     _stateManager.ChangeState(new CharacterHoeingState(this));
+                    break;
+
+                case CharacterFarmingState.Planting:
+                    // _stateManager.ChangeState(new CharacterPlantingState(this));
+                    break;
+
+                case CharacterFarmingState.Watering:
+                    // _stateManager.ChangeState(new CharacterWateringState(this));
+                    break;
+
+                case CharacterFarmingState.Harvesting:
+                    // _stateManager.ChangeState(new CharacterHarvestingState(this));
+                    break;
+
+                default:
                     break;
             }
         }

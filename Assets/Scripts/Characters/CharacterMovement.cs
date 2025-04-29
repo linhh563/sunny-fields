@@ -91,11 +91,6 @@ namespace Characters
             transform.Translate(_movementDir * _speed * Time.deltaTime);
         }
 
-        public void Idling()
-        {
-            transform.Translate(Vector2.zero);
-        }
-
         private void EnableMovingState()
         {
             _isMoving = true;

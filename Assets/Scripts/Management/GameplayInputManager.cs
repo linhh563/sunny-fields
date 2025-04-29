@@ -21,6 +21,9 @@ namespace Management
 
         public static event Action OnItemSelected;
 
+        public static event Action OnFarmingButtonPress;
+        public static event Action OnFarmingButtonRelease;
+
         void Awake()
         {
             if (Instance == null)
@@ -35,6 +38,7 @@ namespace Management
         {
             HandleMovementInput();
             HandleSelectItemInput();
+            HandleFarmingInput();
         }
 
         private void InitializeKeyBindings()
@@ -77,6 +81,19 @@ namespace Management
             else
             {
                 OnNothingPress?.Invoke();
+            }
+        }
+
+        private void HandleFarmingInput()
+        {
+            if (Input.GetKey(_keyBindings["Farming"]))
+            {
+                OnFarmingButtonPress?.Invoke();
+            }
+
+            if (Input.GetKeyUp(_keyBindings["Farming"]))
+            {
+                OnFarmingButtonRelease?.Invoke();
             }
         }
 

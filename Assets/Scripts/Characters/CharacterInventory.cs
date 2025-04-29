@@ -1,8 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+
 using Crafting;
 using Management;
 using GameUI;
+using UnityEngine.TextCore.Text;
 
 namespace Characters
 {
@@ -43,6 +46,23 @@ namespace Characters
         private void GetItemInBag()
         {
             
+        }
+
+        public CharacterFarmingState CheckFarmingItem()
+        {
+            // TODO: if holding item is seed, return Planting
+
+            switch (_holdingItem.itemName)
+            {
+                case "Hoe":
+                    return CharacterFarmingState.Hoeing;
+                case "WaterCan":
+                    return CharacterFarmingState.Watering;
+                case "Scythe":
+                    return CharacterFarmingState.Harvesting;
+                default:
+                    return CharacterFarmingState.Idle;
+            }
         }
     }
 }
