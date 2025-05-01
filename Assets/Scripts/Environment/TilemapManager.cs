@@ -7,10 +7,13 @@ namespace Environment
     public class TilemapManager : MonoBehaviour
     {
         [Header("Tilemaps")]
+        // TODO: Use Transform.Find to get tile map game object automatically
         [SerializeField] private Tilemap _groundTilemap;
+        private Tilemap _plantingTilemap;
         
 
         [Header("Tile Bases")]
+        // TODO: Use Resources to get tile base automatically
         [SerializeField] private TileBase _defaultGroundTile;
         [SerializeField] private TileBase _hoedGroundTile;
         [SerializeField] private TileBase _wateredGroundTile;
@@ -22,6 +25,16 @@ namespace Environment
 
 
         private string _farmName;
+
+        void Awake()
+        {
+            
+        }
+
+        void Start()
+        {
+            
+        }
 
 
         public Vector3Int GetTileInFrontCharacter()
