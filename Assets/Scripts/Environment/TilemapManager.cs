@@ -7,33 +7,34 @@ namespace Environment
     public class TilemapManager : MonoBehaviour
     {
         [Header("Tilemaps")]
-        // TODO: Use Transform.Find to get tile map game object automatically
         [SerializeField] private Tilemap _groundTilemap;
         private Tilemap _plantingTilemap;
         
 
-        [Header("Tile Bases")]
         // TODO: Use Resources to get tile base automatically
-        [SerializeField] private TileBase _defaultGroundTile;
-        [SerializeField] private TileBase _hoedGroundTile;
-        [SerializeField] private TileBase _wateredGroundTile;
-
-        public Tilemap groundTilemap => _groundTilemap;
-        public TileBase defaultGroundTile => _defaultGroundTile;
-        public TileBase hoedGroundTile => _hoedGroundTile;
-        public TileBase wateredGroundTile => _wateredGroundTile;
-
+        public TileBase defaultGroundTile {get; private set;}
+        public TileBase hoedGroundTile {get; private set;}
+        public TileBase wateredGroundTile {get; private set;}
 
         private string _farmName;
 
+        public Tilemap groundTilemap => _groundTilemap;
+
         void Awake()
         {
-            
+            defaultGroundTile = Resources.Load<TileBase>("Tiles/Ground/default_ground_1");
+            hoedGroundTile = Resources.Load<TileBase>("Tiles/Ground/hoed_ground");
+            wateredGroundTile = Resources.Load<TileBase>("Tiles/Ground/watered_ground");
+
+            if (defaultGroundTile == null || hoedGroundTile == null || wateredGroundTile == null)
+            {
+                Debug.LogError("Can't load ground tile base");
+            }
         }
 
         void Start()
         {
-            
+            // TODO: Use Transform.Find to get tile map game object automatically            
         }
 
 
