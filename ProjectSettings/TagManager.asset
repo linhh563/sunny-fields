@@ -45,6 +45,9 @@ TagManager:
   - name: Ground
     uniqueID: 1465165515
     locked: 0
+  - name: Plant
+    uniqueID: 3320834185
+    locked: 0
   - name: Player
     uniqueID: 1543162535
     locked: 0

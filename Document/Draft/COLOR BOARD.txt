@@ -1,0 +1,4 @@
+COLOR BOARD
+
+Hoed ground: 		cead78
+Watered ground:		c59a66
