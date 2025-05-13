@@ -33,11 +33,11 @@ namespace Characters
 
         private void SelectItem()
         {
-            var itemIndex = GameplayInputManager.Instance.GetItemSelection();
+            var itemIndex = GameplayInputManager.Instance.GetItemIndex();
 
             if (itemIndex == GameplayInputManager.noItemSelected)
                 return;
-
+                
             var temp = _holdingItem;
             _holdingItem = _itemsInHotBar[itemIndex - 1];
             _itemsInHotBar[itemIndex - 1] = temp;

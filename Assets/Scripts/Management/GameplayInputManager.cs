@@ -131,7 +131,7 @@ namespace Management
             return CharacterCommand.DoNothing;
         }
 
-        public int GetItemSelection()
+        public int GetItemIndex()
         {
             switch (Input.inputString)
             {

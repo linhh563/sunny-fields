@@ -257,6 +257,7 @@ MonoBehaviour:
   _holdingItem: {fileID: 11400000, guid: 856c8be47bba2fa4099e831924b6e6e8, type: 2}
   _itemsInHotBar:
   - {fileID: 11400000, guid: 1a4005853c298f34db08ce3085dee9a0, type: 2}
+  - {fileID: 11400000, guid: 07af23492b7ec86478e8498b48d6d863, type: 2}
 --- !u!1 &751238645
 GameObject:
   m_ObjectHideFlags: 0

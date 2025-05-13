@@ -31,7 +31,8 @@ namespace GameUI
 
         public void RefreshItemBarUI()
         {
-            var itemIndex = GameplayInputManager.Instance.GetItemSelection();
+            var itemIndex = GameplayInputManager.Instance.GetItemIndex();
+            
             if (itemIndex != GameplayInputManager.noItemSelected)
             {
                 // TODO: swap item ui in item bar and holding item ui 
