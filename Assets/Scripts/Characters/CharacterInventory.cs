@@ -51,6 +51,10 @@ namespace Characters
         public CharacterFarmingState CheckFarmingItem()
         {
             // TODO: if holding item is seed, return Planting
+            if (_holdingItem.GetType() == typeof(PlantScriptableObject))
+            {
+                return CharacterFarmingState.Planting;
+            }
 
             switch (_holdingItem.itemName)
             {

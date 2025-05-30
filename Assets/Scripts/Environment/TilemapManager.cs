@@ -22,9 +22,9 @@ namespace Environment
 
         void Awake()
         {
-            defaultGroundTile = Resources.Load<TileBase>("Tiles/Ground/default_ground_1");
-            hoedGroundTile = Resources.Load<TileBase>("Tiles/Ground/hoed_ground");
-            wateredGroundTile = Resources.Load<TileBase>("Tiles/Ground/watered_ground");
+            defaultGroundTile = Resources.Load<TileBase>("Tiles/Ground/Default_Ground");
+            hoedGroundTile = Resources.Load<TileBase>("Tiles/Ground/Hoed_Ground");
+            wateredGroundTile = Resources.Load<TileBase>("Tiles/Ground/Watered_Ground");
 
             if (defaultGroundTile == null || hoedGroundTile == null || wateredGroundTile == null)
             {
