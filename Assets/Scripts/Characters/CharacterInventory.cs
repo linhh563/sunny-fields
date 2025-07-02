@@ -22,7 +22,7 @@ namespace Characters
             GameplayUIManager.Instance.itemBar.InitializeItemBarUI(_holdingItem, _itemsInHotBar);
 
             // Subscribe input events
-            GameplayInputManager.OnItemSelected +=  SelectItem;
+            GameplayInputManager.OnItemSelected += SelectItem;
         }
 
         void OnDisable()
@@ -37,7 +37,7 @@ namespace Characters
 
             if (itemIndex == GameplayInputManager.noItemSelected)
                 return;
-                
+
             var temp = _holdingItem;
             _holdingItem = _itemsInHotBar[itemIndex - 1];
             _itemsInHotBar[itemIndex - 1] = temp;
@@ -45,28 +45,12 @@ namespace Characters
 
         private void GetItemInBag()
         {
-            
+
         }
 
-        public CharacterFarmingState CheckFarmingItem()
+        public ItemScriptableObject GetHoldingItem()
         {
-            // TODO: if holding item is seed, return Planting
-            if (_holdingItem.GetType() == typeof(PlantScriptableObject))
-            {
-                return CharacterFarmingState.Planting;
-            }
-
-            switch (_holdingItem.itemName)
-            {
-                case "Hoe":
-                    return CharacterFarmingState.Hoeing;
-                case "WaterCan":
-                    return CharacterFarmingState.Watering;
-                case "Scythe":
-                    return CharacterFarmingState.Harvesting;
-                default:
-                    return CharacterFarmingState.Idle;
-            }
+            return _holdingItem;
         }
     }
 }

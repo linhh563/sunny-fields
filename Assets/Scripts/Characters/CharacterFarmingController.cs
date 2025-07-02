@@ -1,6 +1,8 @@
 using UnityEngine;
 using Environment;
 using Management;
+using Crafting;
+
 
 namespace Characters
 {
@@ -64,7 +66,30 @@ namespace Characters
 
         private void UpdateFarmingState()
         {
-            farmingState = _characterInventory.CheckFarmingItem();
+            var _item = _characterInventory.GetHoldingItem();
+
+            // TODO: check if holding item is plant seed
+            if (_item.GetType() == typeof(PlantScriptableObject))
+            {
+                farmingState = CharacterFarmingState.Planting;
+                return;
+            }
+
+            switch (_item.itemName)
+                {
+                    case "Hoe":
+                        farmingState = CharacterFarmingState.Hoeing;
+                        break;
+                    case "WaterCan":
+                        farmingState = CharacterFarmingState.Watering;
+                        break;
+                    case "Scythe":
+                        farmingState = CharacterFarmingState.Harvesting;
+                        break;
+                    default:
+                        farmingState = CharacterFarmingState.Idle;
+                        break;
+                }            
         }
 
         private void SetIdleState()
