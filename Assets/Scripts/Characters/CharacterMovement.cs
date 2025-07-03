@@ -13,7 +13,6 @@ namespace Characters
 
     public class CharacterMovement : MonoBehaviour
     {
-        public static float defaultSpeed = 5.0f;
         private float _speed;
         private bool _isMoving;
         private bool _isRunning;
@@ -22,7 +21,7 @@ namespace Characters
 
         private void Awake()
         {
-            _speed = defaultSpeed;
+            _speed = CharacterDefaultStats.DefaultSpeed;
             _isMoving = false;
             _isRunning = false;
             _isStrolling = false;

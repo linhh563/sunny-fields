@@ -1,6 +1,6 @@
-namespace Characters
+namespace Management
 {
-    class CharacterAnimationName
+    public static class AnimationName
     {
         public const string Idle = "player_idle";
         public const string IdleDown = "player_idle_down";
@@ -11,5 +11,18 @@ namespace Characters
         public const string Run = "player_run";
         public const string RunDown = "player_run_down";
         public const string RunUp = "player_run_up";
+    }
+
+    public static class CharacterDefaultStats
+    {
+        public const float DefaultSpeed = 5.0f;
+    }
+
+    public static class EnvironmentConstants
+    {
+        // the duration in real life (second) corresponding to a day in game
+        public const float DayLength = 20;
+        public const int MinuteInDay = 1440;
+    
     }
 }
