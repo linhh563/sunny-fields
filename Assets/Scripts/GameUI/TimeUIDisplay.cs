@@ -26,6 +26,9 @@ namespace GameUI
 
         private void ChangeTimeDisplayText(object sender, TimeSpan newTime)
         {
+            if (newTime.Minutes % 30 != 0)
+                return;
+                
             _tmp_text.SetText("Day " + newTime.Days + "\n" + newTime.ToString(@"hh\:mm"));
         }
     }

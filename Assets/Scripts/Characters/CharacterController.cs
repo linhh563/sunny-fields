@@ -1,5 +1,6 @@
 using UnityEngine;
 using Management;
+using System;
 
 namespace Characters
 {    
@@ -18,7 +19,6 @@ namespace Characters
         public CharacterInventory inventoryController { get; private set; }
         public CharacterMovement movementController {get; private set;}
         public CharacterFarmingController farmingController { get; private set; }
-
 
         private StateManager _stateManager;
         

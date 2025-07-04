@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 452df9f754fc937449c5434a970ae824, type: 3}
+  m_Name: Test
+  m_EditorClassIdentifier: 
+  NPCName: Test
+  NPCAvatar: {fileID: 0}
+  npcTalkFirst: 1
+  NPCDialogues:
+  - Hello, Linh
+  - I'm good. How about you?
+  mainCharacterDialogues:
+  - Hi, Test. How are you?
+  - Recently, I'm feel so lazy.
