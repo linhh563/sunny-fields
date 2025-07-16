@@ -19,7 +19,7 @@ namespace Characters
 
         void Start()
         {
-            GameplayUIManager.Instance.itemBar.InitializeItemBarUI(_holdingItem, _itemsInHotBar);
+            GameplayUIManager.Instance._itemBar.InitializeItemBarUI(_holdingItem, _itemsInHotBar);
 
             // Subscribe input events
             GameplayInputManager.OnItemSelected += SelectItem;

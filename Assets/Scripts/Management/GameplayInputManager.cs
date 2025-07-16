@@ -24,6 +24,8 @@ namespace Management
         public static event Action OnFarmingButtonPress;
         public static event Action OnFarmingButtonRelease;
 
+        public static event Action OnInteractButtonPress;
+
         void Awake()
         {
             if (Instance == null)
@@ -39,6 +41,7 @@ namespace Management
             HandleMovementInput();
             HandleSelectItemInput();
             HandleFarmingInput();
+            HandleCharacterInteractInput();
         }
 
         private void InitializeKeyBindings()
@@ -112,6 +115,14 @@ namespace Management
                 || Input.GetKey(_keyBindings["MoveDown"])
                 || Input.GetKey(_keyBindings["MoveLeft"])
                 || Input.GetKey(_keyBindings["MoveRight"]));
+        }
+
+        private void HandleCharacterInteractInput()
+        {
+            if (Input.GetKeyDown(_keyBindings["Interact"]))
+            {
+                OnInteractButtonPress?.Invoke();
+            }
         }
 
         public CharacterCommand GetCharacterMoveDirection()

@@ -1,4 +1,5 @@
 using UnityEngine;
+using Management.ScriptableObjects;
 
 namespace GameUI
 {
@@ -6,8 +7,9 @@ namespace GameUI
     {
         public static GameplayUIManager Instance;
         private CharacterOptionsUIHandle _characterOptionsUI;
+        [SerializeField] private DialogueUIController _dialogueUI;
 
-        public ItemBar itemBar { get; private set; }
+        public ItemBar _itemBar { get; private set; }
 
         void Awake()
         {
@@ -16,8 +18,10 @@ namespace GameUI
                 Instance = this;
             }
 
-            itemBar = GetComponentInChildren<ItemBar>();
+            _itemBar = GetComponentInChildren<ItemBar>();
             _characterOptionsUI = GetComponentInChildren<CharacterOptionsUIHandle>();
+
+            // _dialogueUI.gameObject.SetActive(false);
         }
 
         public void EnableCharacterOptionsUI(bool enable, bool isLeft)
@@ -27,8 +31,24 @@ namespace GameUI
                 _characterOptionsUI.DisableOptionsUI();
                 return;
             }
-                
+
             _characterOptionsUI.EnableOptionsUI(isLeft);
+        }
+
+        public void PlayNextDialogue(ConversationScriptableObject conversation)
+        {
+            _dialogueUI.PlayNextDialogue(conversation);
+
+            // hide item bar when character is in conversation
+            if (_dialogueUI.gameObject.activeSelf)
+            {
+                _itemBar.gameObject.SetActive(false);
+                _characterOptionsUI.DisableOptionsUI();
+            }
+            else
+            {
+                _itemBar.gameObject.SetActive(true);
+            }
         }
     }
 }

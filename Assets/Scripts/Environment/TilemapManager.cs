@@ -13,7 +13,8 @@ namespace Environment
 
         // TODO: Use Resources to get tile base automatically
         public TileBase defaultGroundTile {get; private set;}
-        public TileBase hoedGroundTile {get; private set;}
+        public TileBase defaultGroundTile_2 { get; private set; }
+        public TileBase hoedGroundTile { get; private set; }
         public TileBase wateredGroundTile {get; private set;}
 
         private string _farmName;
@@ -23,10 +24,11 @@ namespace Environment
         void Awake()
         {
             defaultGroundTile = Resources.Load<TileBase>("Tiles/Ground/Default_Ground");
+            defaultGroundTile_2 = Resources.Load<TileBase>("Tiles/Ground/Default_Ground_2");
             hoedGroundTile = Resources.Load<TileBase>("Tiles/Ground/Hoed_Ground");
             wateredGroundTile = Resources.Load<TileBase>("Tiles/Ground/Watered_Ground");
 
-            if (defaultGroundTile == null || hoedGroundTile == null || wateredGroundTile == null)
+            if (defaultGroundTile == null || defaultGroundTile_2 == null || hoedGroundTile == null || wateredGroundTile == null)
             {
                 Debug.LogError("Can't load ground tile base");
             }
@@ -34,15 +36,14 @@ namespace Environment
 
         void Start()
         {
-            // TODO: Use Transform.Find to get tile map game object automatically            
         }
 
 
         public Vector3Int GetTileInFrontCharacter()
         {
-            var _characterPosition = _groundTilemap.WorldToCell(Characters.CharacterController.characterPosition);
+            var _characterPosition = _groundTilemap.WorldToCell(Characters.CharacterController._characterPosition);
 
-            switch (Characters.CharacterController.currentDirection)
+            switch (Characters.CharacterController._currentDirection)
             {
                 case CharacterDirection.Up:
                     return _characterPosition + Vector3Int.up;

@@ -4,28 +4,22 @@ namespace GameUI
 {
     public class CharacterOptionsUIHandle : MonoBehaviour
     {
-        private Transform _rightOptionsUI;
-        private Transform _leftOptionsUI;
+        [SerializeField] private Transform _rightInteractOptionsUI;
+        [SerializeField] private Transform _leftInteractOptionsUI;
 
         private int _maxOptions;
         private int _selectedOptionIndex;
 
-        void Awake()
-        {
-            _rightOptionsUI = transform.Find("Right_CharacterOptions");
-            _leftOptionsUI = transform.Find("Left_CharacterOptions");
-        }
-
         public void EnableOptionsUI(bool isLeft)
         {
-            _rightOptionsUI.gameObject.SetActive(!isLeft);
-            _leftOptionsUI.gameObject.SetActive(isLeft);
+            _rightInteractOptionsUI.gameObject.SetActive(!isLeft);
+            _leftInteractOptionsUI.gameObject.SetActive(isLeft);
         }
 
         public void DisableOptionsUI()
         {
-            _rightOptionsUI.gameObject.SetActive(false);
-            _leftOptionsUI.gameObject.SetActive(false);
+            _rightInteractOptionsUI.gameObject.SetActive(false);
+            _leftInteractOptionsUI.gameObject.SetActive(false);
         }
 
         // TODO

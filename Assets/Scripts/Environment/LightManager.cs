@@ -33,7 +33,7 @@ namespace Environment
 
         private float PercentOfDay(TimeSpan time)
         {
-            return (float)time.TotalMinutes % EnvironmentConstants.MinuteInDay / EnvironmentConstants.MinuteInDay;
+            return (float)time.TotalMinutes % EnvironmentConstants.MINUTES_IN_DAY / EnvironmentConstants.MINUTES_IN_DAY;
         }
     }
 }

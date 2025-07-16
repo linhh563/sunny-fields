@@ -2,6 +2,7 @@ using UnityEngine;
 using Environment;
 using Management;
 using Crafting;
+using UnityEngine.Tilemaps;
 
 
 namespace Characters
@@ -17,14 +18,13 @@ namespace Characters
         private void Awake()
         {
             farmingState = CharacterFarmingState.Idle;
-
-            _tilemapManager = FindObjectOfType<TilemapManager>();
-
             _characterInventory = GetComponentInChildren<CharacterInventory>();
         }
 
         void Start()
         {
+            _tilemapManager = FindObjectOfType<TilemapManager>();
+
             // Subscribe input events
             GameplayInputManager.OnFarmingButtonPress += UpdateFarmingState;
             GameplayInputManager.OnFarmingButtonRelease += SetIdleState;
@@ -42,11 +42,16 @@ namespace Characters
 
         public void HoeGround()
         {
-            var frontTile = _tilemapManager.GetTileInFrontCharacter();
+            var frontTilePos = _tilemapManager.GetTileInFrontCharacter();
+            var frontTile = _tilemapManager.groundTilemap.GetTile(frontTilePos);
 
-            // TODO: character can only hoe the default ground
+            // character can only hoe the default ground
+            if (_tilemapManager.defaultGroundTile.name != frontTile.name && _tilemapManager.defaultGroundTile_2.name != frontTile.name)
+            {
+                return;
+            }
 
-            _tilemapManager.groundTilemap.SetTile(frontTile, _tilemapManager.hoedGroundTile);
+            _tilemapManager.groundTilemap.SetTile(frontTilePos, _tilemapManager.hoedGroundTile);
         }
 
         public void Planting()

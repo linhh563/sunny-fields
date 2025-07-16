@@ -9,13 +9,13 @@ namespace Management
         private float _dayLength;
         private TimeSpan _currentTime;
         // the duration in real life (second) corresponding to a minute in game
-        private float _minuteLength => _dayLength / EnvironmentConstants.MinuteInDay;
+        private float _minuteLength => _dayLength / EnvironmentConstants.MINUTES_IN_DAY;
 
         public static event EventHandler<TimeSpan> OnTimeChanged;
 
         void Awake()
         {
-            _dayLength = EnvironmentConstants.DayLength;
+            _dayLength = EnvironmentConstants.DAY_LENGTH;
         }
 
         void Start()

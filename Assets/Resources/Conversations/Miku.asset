@@ -10,14 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 452df9f754fc937449c5434a970ae824, type: 3}
-  m_Name: Test
+  m_Name: Miku
   m_EditorClassIdentifier: 
-  NPCName: Test
-  NPCAvatar: {fileID: 0}
-  npcTalkFirst: 1
-  NPCDialogues:
-  - Hello, Linh
-  - I'm good. How about you?
-  mainCharacterDialogues:
-  - Hi, Test. How are you?
-  - Recently, I'm feel so lazy.
+  NPCName: Miku
+  NPCParagraphs:
+  - Hi LinhH
+  - How are you today?
+  - I have got some fortune recently. That thing is very very good. I have this by
+    a give away was held by a streamer in YouTube.

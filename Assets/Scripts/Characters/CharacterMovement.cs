@@ -21,7 +21,7 @@ namespace Characters
 
         private void Awake()
         {
-            _speed = CharacterDefaultStats.DefaultSpeed;
+            _speed = CharacterDefaultStats.DEFAULT_SPEED;
             _isMoving = false;
             _isRunning = false;
             _isStrolling = false;
@@ -71,7 +71,7 @@ namespace Characters
         {
             Vector2 _movementDir = Vector2.zero;
 
-            switch (CharacterController.currentDirection)
+            switch (CharacterController._currentDirection)
             {
                 case CharacterDirection.Up:
                     _movementDir = Vector2.up;

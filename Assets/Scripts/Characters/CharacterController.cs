@@ -9,16 +9,16 @@ namespace Characters
     [RequireComponent(typeof(CharacterFarmingController))]
     public class CharacterController : MonoBehaviour
     {
-        public static CharacterDirection currentDirection { get; private set; }
+        public static CharacterDirection _currentDirection { get; private set; }
         
         // character position use in tile map
-        public static Vector3 characterPosition { get; private set; }
+        public static Vector3 _characterPosition { get; private set; }
 
         // CONTROLLERS 
-        public CharacterAnimation animController { get; private set; }
-        public CharacterInventory inventoryController { get; private set; }
-        public CharacterMovement movementController {get; private set;}
-        public CharacterFarmingController farmingController { get; private set; }
+        public CharacterAnimation _animController { get; private set; }
+        public CharacterInventory _inventoryController { get; private set; }
+        public CharacterMovement _movementController {get; private set;}
+        public CharacterFarmingController _farmingController { get; private set; }
 
         private StateManager _stateManager;
         
@@ -26,20 +26,20 @@ namespace Characters
             _stateManager = GetComponent<StateManager>();
 
             // Set controllers
-            movementController = GetComponent<CharacterMovement>();
-            farmingController = GetComponent<CharacterFarmingController>();
-            animController = GetComponentInChildren<CharacterAnimation>();
-            inventoryController = GetComponentInChildren<CharacterInventory>();
+            _movementController = GetComponent<CharacterMovement>();
+            _farmingController = GetComponent<CharacterFarmingController>();
+            _animController = GetComponentInChildren<CharacterAnimation>();
+            _inventoryController = GetComponentInChildren<CharacterInventory>();
 
             // Set default values
-            currentDirection = CharacterDirection.Down;
+            _currentDirection = CharacterDirection.Down;
             _stateManager.ChangeState(new CharacterIdleState(this));
         }
 
         private void OnDisable() {
             // Reset values
-            characterPosition = Vector3.zero;
-            currentDirection = CharacterDirection.Down;
+            _characterPosition = Vector3.zero;
+            _currentDirection = CharacterDirection.Down;
         }
 
         private void Update()
@@ -57,25 +57,25 @@ namespace Characters
             switch (_dir)
             {
                 case CharacterCommand.MoveDown:
-                    currentDirection = CharacterDirection.Down;
+                    _currentDirection = CharacterDirection.Down;
                     break;
                 case CharacterCommand.MoveUp:
-                    currentDirection = CharacterDirection.Up;
+                    _currentDirection = CharacterDirection.Up;
                     break;
                 case CharacterCommand.MoveRight:
                     transform.localScale = new Vector3(1, 1, 1);
-                    currentDirection = CharacterDirection.Right;
+                    _currentDirection = CharacterDirection.Right;
                     break;
                 case CharacterCommand.MoveLeft:
                     transform.localScale = new Vector3(-1, 1, 1);
-                    currentDirection = CharacterDirection.Left;
+                    _currentDirection = CharacterDirection.Left;
                     break;
             }
         }
 
         private void HandleMovementState()
         {        
-            switch (movementController.movementState)
+            switch (_movementController.movementState)
             {
                 case CharacterMovementState.Idle:
                     _stateManager.ChangeState(new CharacterIdleState(this));
@@ -94,22 +94,26 @@ namespace Characters
 
         private void HandleFarmingState()
         {
-            switch (farmingController.farmingState)
+            switch (_farmingController.farmingState)
             {
                 case CharacterFarmingState.Hoeing:
-                    _stateManager.ChangeState(new CharacterHoeingState(this));
+                    _farmingController.HoeGround();
+                    // Play character hoeing animation
                     break;
 
                 case CharacterFarmingState.Planting:
-                    // _stateManager.ChangeState(new CharacterPlantingState(this));
+                    _farmingController.Planting();
+                    // Play character planting animation
                     break;
 
                 case CharacterFarmingState.Watering:
-                    // _stateManager.ChangeState(new CharacterWateringState(this));
+                    _farmingController.Watering();
+                    // Play character watering animation
                     break;
 
                 case CharacterFarmingState.Harvesting:
-                    // _stateManager.ChangeState(new CharacterHarvestingState(this));
+                    _farmingController.Harvesting();
+                    // Play character harvesting animation
                     break;
 
                 default:
@@ -119,7 +123,7 @@ namespace Characters
 
         private void UpdateCharacterPosition()
         {
-            characterPosition = transform.position;
+            _characterPosition = transform.position;
         }
     }    
 

@@ -17,16 +17,16 @@ namespace Characters
 
         public void Execute()
         {
-            switch (CharacterController.currentDirection)
+            switch (CharacterController._currentDirection)
             {
                 case CharacterDirection.Down:
-                    _controller.animController.PlayAnimation(AnimationName.IdleDown);
+                    _controller._animController.PlayAnimation(AnimationName.IDLE_DOWN);
                     break;
                 case CharacterDirection.Up:
-                    _controller.animController.PlayAnimation(AnimationName.IdleUp);
+                    _controller._animController.PlayAnimation(AnimationName.IDLE_UP);
                     break;
                 default:
-                    _controller.animController.PlayAnimation(AnimationName.Idle);
+                    _controller._animController.PlayAnimation(AnimationName.IDLE);
                     break;
             }
         }
@@ -47,25 +47,25 @@ namespace Characters
 
         public void Enter()
         {
-            _controller.movementController.ChangeSpeed(CharacterDefaultStats.DefaultSpeed);
+            _controller._movementController.ChangeSpeed(CharacterDefaultStats.DEFAULT_SPEED);
         }
 
         public void Execute()
         {
-            switch (CharacterController.currentDirection)
+            switch (CharacterController._currentDirection)
             {
                 case CharacterDirection.Down:
-                    _controller.animController.PlayAnimation(AnimationName.MovingDown);
+                    _controller._animController.PlayAnimation(AnimationName.MOVING_DOWN);
                     break;
                 case CharacterDirection.Up:
-                    _controller.animController.PlayAnimation(AnimationName.MovingUp);
+                    _controller._animController.PlayAnimation(AnimationName.MOVING_UP);
                     break;
                 default:
-                    _controller.animController.PlayAnimation(AnimationName.Moving);
+                    _controller._animController.PlayAnimation(AnimationName.MOVING);
                     break;
             }
 
-            _controller.movementController.Moving();
+            _controller._movementController.Moving();
         }
 
         public void Exit()
@@ -85,13 +85,13 @@ namespace Characters
 
         public void Enter()
         {
-            _controller.movementController.ChangeSpeed(CharacterDefaultStats.DefaultSpeed * 0.65f);
+            _controller._movementController.ChangeSpeed(CharacterDefaultStats.DEFAULT_SPEED * 0.65f);
         }
 
         public void Execute()
         {
             // TODO: update strolling animation
-            _controller.movementController.Moving();
+            _controller._movementController.Moving();
         }
 
         public void Exit()
@@ -110,49 +110,25 @@ namespace Characters
 
         public void Enter()
         {
-            _controller.movementController.ChangeSpeed(CharacterDefaultStats.DefaultSpeed * 1.5f);
+            _controller._movementController.ChangeSpeed(CharacterDefaultStats.DEFAULT_SPEED * 1.5f);
         }
 
         public void Execute()
         {
-            switch (CharacterController.currentDirection)
+            switch (CharacterController._currentDirection)
             {
                 case CharacterDirection.Down:
-                    _controller.animController.PlayAnimation(AnimationName.RunDown);
+                    _controller._animController.PlayAnimation(AnimationName.RUN_DOWN);
                     break;
                 case CharacterDirection.Up:
-                    _controller.animController.PlayAnimation(AnimationName.RunUp);
+                    _controller._animController.PlayAnimation(AnimationName.RUN_UP);
                     break;
                 default:
-                    _controller.animController.PlayAnimation(AnimationName.Run);
+                    _controller._animController.PlayAnimation(AnimationName.RUN);
                     break;
             }
 
-            _controller.movementController.Moving();
-        }
-
-        public void Exit()
-        {
-        }
-    }
-
-    public class CharacterHoeingState : IState
-    {
-        CharacterController _controller;
-
-        public CharacterHoeingState(CharacterController controller)
-        {
-            _controller = controller;
-        }
-
-        public void Enter()
-        {
-            // TODO: update hoeing animation
-            _controller.farmingController.HoeGround();
-        }
-
-        public void Execute()
-        {
+            _controller._movementController.Moving();
         }
 
         public void Exit()
