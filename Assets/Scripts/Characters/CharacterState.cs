@@ -1,4 +1,6 @@
 using Management;
+using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace Characters
 {
@@ -13,6 +15,10 @@ namespace Characters
 
         public void Enter()
         {
+            var currentGridPos = _controller._tilemapManager.groundTilemap.WorldToCell(CharacterController.CharacterPosition);
+            var worrldPos = _controller._tilemapManager.groundTilemap.GetCellCenterWorld(currentGridPos);
+
+            _controller.transform.position = worrldPos;
         }
 
         public void Execute()

@@ -1,6 +1,7 @@
 using UnityEngine;
 using Management;
 using System;
+using Environment;
 
 namespace Characters
 {    
@@ -12,13 +13,14 @@ namespace Characters
         public static CharacterDirection _currentDirection { get; private set; }
         
         // character position use in tile map
-        public static Vector3 _characterPosition { get; private set; }
+        public static Vector3 CharacterPosition { get; private set; }
 
         // CONTROLLERS 
         public CharacterAnimation _animController { get; private set; }
         public CharacterInventory _inventoryController { get; private set; }
         public CharacterMovement _movementController {get; private set;}
         public CharacterFarmingController _farmingController { get; private set; }
+        public TilemapManager _tilemapManager { get; private set; }
 
         private StateManager _stateManager;
         
@@ -33,12 +35,18 @@ namespace Characters
 
             // Set default values
             _currentDirection = CharacterDirection.Down;
+        }
+
+        void Start()
+        {
+            _tilemapManager = FindObjectOfType<TilemapManager>();
             _stateManager.ChangeState(new CharacterIdleState(this));
         }
 
-        private void OnDisable() {
+        private void OnDisable()
+        {
             // Reset values
-            _characterPosition = Vector3.zero;
+            CharacterPosition = Vector3.zero;
             _currentDirection = CharacterDirection.Down;
         }
 
@@ -123,7 +131,7 @@ namespace Characters
 
         private void UpdateCharacterPosition()
         {
-            _characterPosition = transform.position;
+            CharacterPosition = transform.position;
         }
     }    
 

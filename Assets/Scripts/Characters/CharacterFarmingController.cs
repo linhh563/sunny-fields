@@ -10,10 +10,9 @@ namespace Characters
     public class CharacterFarmingController : MonoBehaviour
     {
         public CharacterFarmingState farmingState { get; private set; }
-
         private TilemapManager _tilemapManager;
-
         private CharacterInventory _characterInventory;
+        [SerializeField] private GameObject plantPrefab;
 
         private void Awake()
         {
@@ -28,6 +27,12 @@ namespace Characters
             // Subscribe input events
             GameplayInputManager.OnFarmingButtonPress += UpdateFarmingState;
             GameplayInputManager.OnFarmingButtonRelease += SetIdleState;
+
+            // check in editor config properties
+            if (plantPrefab == null)
+            {
+                Debug.LogError("Plant prefab is null");
+            }
         }
 
         private void Update() {
@@ -51,12 +56,22 @@ namespace Characters
                 return;
             }
 
+            // hoeing logic
             _tilemapManager.groundTilemap.SetTile(frontTilePos, _tilemapManager.hoedGroundTile);
         }
 
         public void Planting()
         {
-            // TODO: planting logic
+            var frontTilePos = _tilemapManager.GetTileInFrontCharacter();
+
+            var frontTilePlantingMap = _tilemapManager.plantingTilemap.GetTile(frontTilePos);
+            var frontTileGroundMap = _tilemapManager.groundTilemap.GetTile(frontTilePos);
+
+            // check if the ground was hoed and not planted yet
+            if (frontTilePlantingMap == null && frontTileGroundMap.name == _tilemapManager.hoedGroundTile.name)
+            {
+                // TODO: planting logic
+            }
         }
 
         public void Watering()

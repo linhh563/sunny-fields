@@ -8,7 +8,7 @@ namespace Environment
     {
         [Header("Tilemaps")]
         [SerializeField] private Tilemap _groundTilemap;
-        private Tilemap _plantingTilemap;
+        [SerializeField] private Tilemap _plantingTilemap;
         
 
         // TODO: Use Resources to get tile base automatically
@@ -20,6 +20,8 @@ namespace Environment
         private string _farmName;
 
         public Tilemap groundTilemap => _groundTilemap;
+        public Tilemap plantingTilemap => _plantingTilemap;
+
 
         void Awake()
         {
@@ -41,7 +43,7 @@ namespace Environment
 
         public Vector3Int GetTileInFrontCharacter()
         {
-            var _characterPosition = _groundTilemap.WorldToCell(Characters.CharacterController._characterPosition);
+            var _characterPosition = _groundTilemap.WorldToCell(Characters.CharacterController.CharacterPosition);
 
             switch (Characters.CharacterController._currentDirection)
             {

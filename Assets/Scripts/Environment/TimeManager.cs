@@ -26,7 +26,7 @@ namespace Management
         // increase time in game by 1 minute
         private IEnumerator AddMinute()
         {
-            while(true)
+            while (true)
             {
                 _currentTime += TimeSpan.FromMinutes(1);
                 OnTimeChanged?.Invoke(this, _currentTime);
