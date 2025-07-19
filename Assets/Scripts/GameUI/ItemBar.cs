@@ -45,17 +45,17 @@ namespace GameUI
         public void InitializeItemBarUI(ItemScriptableObject holdingItem, List<ItemScriptableObject> items)
         {
             var holdingItemImage = _holdingItemGameObj.GetComponent<Image>();
-            if (holdingItem.sprite != holdingItemImage.sprite)
+            if (holdingItem.avatarSprite != holdingItemImage.sprite)
             {
-                holdingItemImage.sprite = holdingItem.sprite;
+                holdingItemImage.sprite = holdingItem.avatarSprite;
             }
 
             for (int i = 0; i < items.Count; i++)
             {
                 var itemImage = _itemGameObjs[i].GetComponent<Image>();
-                if (items[i].sprite != itemImage.sprite)
+                if (items[i].avatarSprite != itemImage.sprite)
                 {
-                    itemImage.sprite = items[i].sprite;
+                    itemImage.sprite = items[i].avatarSprite;
                 }
             }
         }

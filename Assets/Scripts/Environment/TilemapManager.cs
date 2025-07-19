@@ -9,13 +9,16 @@ namespace Environment
         [Header("Tilemaps")]
         [SerializeField] private Tilemap _groundTilemap;
         [SerializeField] private Tilemap _plantingTilemap;
-        
+
 
         // TODO: Use Resources to get tile base automatically
-        public TileBase defaultGroundTile {get; private set;}
+        public TileBase defaultGroundTile { get; private set; }
         public TileBase defaultGroundTile_2 { get; private set; }
         public TileBase hoedGroundTile { get; private set; }
-        public TileBase wateredGroundTile {get; private set;}
+        public TileBase wateredGroundTile { get; private set; }
+
+        // white tile used for marking the planted tiles
+        public TileBase whiteTile { get; private set; }
 
         private string _farmName;
 
@@ -25,14 +28,22 @@ namespace Environment
 
         void Awake()
         {
+            // load tile bases from resources
             defaultGroundTile = Resources.Load<TileBase>("Tiles/Ground/Default_Ground");
             defaultGroundTile_2 = Resources.Load<TileBase>("Tiles/Ground/Default_Ground_2");
             hoedGroundTile = Resources.Load<TileBase>("Tiles/Ground/Hoed_Ground");
             wateredGroundTile = Resources.Load<TileBase>("Tiles/Ground/Watered_Ground");
 
-            if (defaultGroundTile == null || defaultGroundTile_2 == null || hoedGroundTile == null || wateredGroundTile == null)
+            whiteTile = Resources.Load<TileBase>("Tiles/WhiteTile");
+
+            // check if tile bases are loaded successfully
+            if (defaultGroundTile == null ||
+                defaultGroundTile_2 == null ||
+                hoedGroundTile == null ||
+                wateredGroundTile == null ||
+                whiteTile == null)
             {
-                Debug.LogError("Can't load ground tile base");
+                Debug.LogError("Can't load ground tile base.");
             }
         }
 
@@ -50,7 +61,7 @@ namespace Environment
                 case CharacterDirection.Up:
                     return _characterPosition + Vector3Int.up;
 
-                case CharacterDirection.Down:   
+                case CharacterDirection.Down:
                     return _characterPosition + Vector3Int.down;
 
                 case CharacterDirection.Right:
@@ -60,5 +71,5 @@ namespace Environment
                     return _characterPosition + Vector3Int.left;
             }
         }
-    }    
+    }
 }

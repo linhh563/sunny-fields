@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Hoe
   description: None
-  sprite: {fileID: 21300000, guid: 4c61d476bc78e5b4497c7cc538e4a23c, type: 3}
+  avatarSprite: {fileID: 21300000, guid: 4c61d476bc78e5b4497c7cc538e4a23c, type: 3}

@@ -35,7 +35,8 @@ namespace Characters
             }
         }
 
-        private void Update() {
+        private void Update()
+        {
         }
 
         void OnDisable()
@@ -70,7 +71,13 @@ namespace Characters
             // check if the ground was hoed and not planted yet
             if (frontTilePlantingMap == null && frontTileGroundMap.name == _tilemapManager.hoedGroundTile.name)
             {
-                // TODO: planting logic
+                // planting logic
+                // TODO: use objects pooling to improve performance
+                var plant = Instantiate(plantPrefab, _tilemapManager.groundTilemap.GetCellCenterWorld(frontTilePos), Quaternion.identity);                
+                plant.GetComponent<Plant>().Initialize(_characterInventory.GetHoldingItem() as PlantScriptableObject);
+
+                // marking the tile has planted
+                _tilemapManager.plantingTilemap.SetTile(frontTilePos, _tilemapManager.whiteTile);
             }
         }
 
@@ -96,20 +103,20 @@ namespace Characters
             }
 
             switch (_item.itemName)
-                {
-                    case "Hoe":
-                        farmingState = CharacterFarmingState.Hoeing;
-                        break;
-                    case "WaterCan":
-                        farmingState = CharacterFarmingState.Watering;
-                        break;
-                    case "Scythe":
-                        farmingState = CharacterFarmingState.Harvesting;
-                        break;
-                    default:
-                        farmingState = CharacterFarmingState.Idle;
-                        break;
-                }            
+            {
+                case "Hoe":
+                    farmingState = CharacterFarmingState.Hoeing;
+                    break;
+                case "WaterCan":
+                    farmingState = CharacterFarmingState.Watering;
+                    break;
+                case "Scythe":
+                    farmingState = CharacterFarmingState.Harvesting;
+                    break;
+                default:
+                    farmingState = CharacterFarmingState.Idle;
+                    break;
+            }
         }
 
         private void SetIdleState()

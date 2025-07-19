@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: CornSeed
   description: 
-  sprite: {fileID: 21300000, guid: 90eefc34519c69a46984e6ee5c373355, type: 3}
-  phase_1_Sprite: {fileID: 21300000, guid: 9d999f97b2507064a82a4399830cc468, type: 3}
-  phase_2_Sprite: {fileID: 21300000, guid: 9d999f97b2507064a82a4399830cc468, type: 3}
-  phase_3_Sprite: {fileID: 21300000, guid: 9d999f97b2507064a82a4399830cc468, type: 3}
-  product: {fileID: 21300000, guid: 9d999f97b2507064a82a4399830cc468, type: 3}
-  daysToPhase2: 1
-  daysToPhase3: 1
+  avatarSprite: {fileID: 21300000, guid: 90eefc34519c69a46984e6ee5c373355, type: 3}
+  totalPhase: 3
+  sprites:
+  - {fileID: 21300000, guid: b03336c06c765484eb027257698fee1d, type: 3}
+  - {fileID: 1700025110, guid: b8ae5eb6378a16048a9455db52136e13, type: 3}
+  - {fileID: -501690622, guid: b8ae5eb6378a16048a9455db52136e13, type: 3}
+  grownTime: 010000000200000003000000
+  productItemAvatar: {fileID: 0}

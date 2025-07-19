@@ -12,6 +12,7 @@ namespace Management
         private float _minuteLength => _dayLength / EnvironmentConstants.MINUTES_IN_DAY;
 
         public static event EventHandler<TimeSpan> OnTimeChanged;
+        public static Action OnDayChanged;
 
         void Awake()
         {
@@ -30,6 +31,11 @@ namespace Management
             {
                 _currentTime += TimeSpan.FromMinutes(1);
                 OnTimeChanged?.Invoke(this, _currentTime);
+
+                if (_currentTime.TotalMinutes % EnvironmentConstants.MINUTES_IN_DAY == 0)
+                {
+                    OnDayChanged?.Invoke();
+                }
 
                 yield return new WaitForSeconds(_minuteLength);
             }

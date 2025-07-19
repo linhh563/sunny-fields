@@ -29,7 +29,7 @@ namespace GameUI
             if (newTime.Minutes % 30 != 0)
                 return;
                 
-            _tmp_text.SetText("Day " + newTime.Days + "\n" + newTime.ToString(@"hh\:mm"));
+            _tmp_text.SetText("Day " + (newTime.Days + 1) + "\n" + newTime.ToString(@"hh\:mm"));
         }
     }
 }

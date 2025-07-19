@@ -10,47 +10,59 @@ namespace Crafting
         private PlantScriptableObject _scriptableObject;
         // age is calculated by days
         private int _dayAge;
-        private int _minuteCounting;
         private SpriteRenderer _spriteRenderer;
-        
-        void Awake()
+
+        // represent for each phase of growing
+        private int _phase;
+
+        public void Initialize(PlantScriptableObject scriptableObject)
         {
-            _minuteCounting = 0;
+            _phase = 0;
             _dayAge = 0;
 
             // get components
             _spriteRenderer = GetComponent<SpriteRenderer>();
-        }
 
-        void Start()
-        {
             // subscribe necessary events
-            TimeManager.OnTimeChanged += UpdateAge;
+            TimeManager.OnDayChanged += UpdateAge;
+
+            // check if scriptable object is null
+            if (scriptableObject == null)
+            {
+                Debug.LogError("Plant scriptable object is null");
+                return;
+            }
+
+            _scriptableObject = scriptableObject;
+
+            // set seed sprite for plant
+            _spriteRenderer.sprite = _scriptableObject.sprites[_phase];
         }
 
         void OnDisable()
         {
-            TimeManager.OnTimeChanged -= UpdateAge;
+            TimeManager.OnDayChanged -= UpdateAge;
         }
 
-        private void UpdateAge(object sender, TimeSpan timeSpan)
+        private void UpdateAge()
         {
-            if (_minuteCounting == EnvironmentConstants.MINUTES_IN_DAY)
-            {
-                _dayAge++;
-                _minuteCounting = 0;
-            }
-            else
-            {
-                _minuteCounting++;
-            }
+            _dayAge++;
+            UpdatePlantPhase();
         }
 
-        public void Initialize(PlantScriptableObject scriptableObject)
+        private void UpdatePlantPhase()
         {
-            _scriptableObject = scriptableObject;
+            if (_phase == _scriptableObject.totalPhase - 1)
+            {
+                return;
+            }
 
-            _spriteRenderer.sprite = _scriptableObject.sprite;
+            // plant move to new phase
+            if (_dayAge == _scriptableObject.grownTime[_phase])
+            {
+                _phase++;
+                _spriteRenderer.sprite = _scriptableObject.sprites[_phase];
+            }
         }
     }
 }
