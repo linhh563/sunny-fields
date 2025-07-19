@@ -90,6 +90,11 @@ namespace Characters
             transform.Translate(_movementDir * _speed * Time.deltaTime);
         }
 
+        public void TestMoving(Vector3 direction)
+        {
+            transform.Translate(direction * _speed * Time.deltaTime);
+        }
+
         private void EnableMovingState()
         {
             _isMoving = true;

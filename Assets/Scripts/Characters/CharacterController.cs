@@ -4,27 +4,28 @@ using System;
 using Environment;
 
 namespace Characters
-{    
+{
     [RequireComponent(typeof(CharacterMovement))]
     [RequireComponent(typeof(StateManager))]
     [RequireComponent(typeof(CharacterFarmingController))]
     public class CharacterController : MonoBehaviour
     {
         public static CharacterDirection _currentDirection { get; private set; }
-        
-        // character position use in tile map
-        public static Vector3 CharacterPosition { get; private set; }
+
+        // character position in world position (use to convert to tile map position)
+        public static Vector3 CharacterWorldPosition { get; private set; }
 
         // CONTROLLERS 
         public CharacterAnimation _animController { get; private set; }
         public CharacterInventory _inventoryController { get; private set; }
-        public CharacterMovement _movementController {get; private set;}
+        public CharacterMovement _movementController { get; private set; }
         public CharacterFarmingController _farmingController { get; private set; }
         public TilemapManager _tilemapManager { get; private set; }
 
         private StateManager _stateManager;
-        
-        private void Awake() {
+
+        private void Awake()
+        {
             _stateManager = GetComponent<StateManager>();
 
             // Set controllers
@@ -46,14 +47,14 @@ namespace Characters
         private void OnDisable()
         {
             // Reset values
-            CharacterPosition = Vector3.zero;
+            CharacterWorldPosition = Vector3.zero;
             _currentDirection = CharacterDirection.Down;
         }
 
         private void Update()
         {
             UpdateCurrentDirection();
-            UpdateCharacterPosition();
+            UpdateCharacterWorldPosition();
             HandleFarmingState();
             HandleMovementState();
         }
@@ -82,7 +83,7 @@ namespace Characters
         }
 
         private void HandleMovementState()
-        {        
+        {
             switch (_movementController.movementState)
             {
                 case CharacterMovementState.Idle:
@@ -129,9 +130,15 @@ namespace Characters
             }
         }
 
-        private void UpdateCharacterPosition()
+        private void UpdateCharacterWorldPosition()
         {
-            CharacterPosition = transform.position;
+            CharacterWorldPosition = transform.position;
+        }
+
+        public void Moving()
+        {
+            // TODO:get the position of the tile in front of the character and convert it to world position
+            // TODO: call character movement translate method
         }
     }    
 

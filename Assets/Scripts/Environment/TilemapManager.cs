@@ -51,10 +51,10 @@ namespace Environment
         {
         }
 
-
+        // get the position (in tile map) of the tile in front of the character
         public Vector3Int GetTileInFrontCharacter()
         {
-            var _characterPosition = _groundTilemap.WorldToCell(Characters.CharacterController.CharacterPosition);
+            var _characterPosition = _groundTilemap.WorldToCell(Characters.CharacterController.CharacterWorldPosition);
 
             switch (Characters.CharacterController._currentDirection)
             {
