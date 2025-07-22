@@ -71,7 +71,8 @@ namespace Characters
                     break;
             }
 
-            _controller._movementController.Moving();
+            // _controller._movementController.Moving();
+            _controller.Moving();
         }
 
         public void Exit()
@@ -97,7 +98,7 @@ namespace Characters
         public void Execute()
         {
             // TODO: update strolling animation
-            _controller._movementController.Moving();
+            _controller.Moving();
         }
 
         public void Exit()
@@ -134,7 +135,7 @@ namespace Characters
                     break;
             }
 
-            _controller._movementController.Moving();
+            _controller.Moving();
         }
 
         public void Exit()

@@ -12,13 +12,16 @@ namespace Crafting
         private int _dayAge;
         private SpriteRenderer _spriteRenderer;
 
-        // represent for each phase of growing
+        // represent for current growing phase of the plant
         private int _phase;
+        private bool _canHarvest;
 
         public void Initialize(PlantScriptableObject scriptableObject)
         {
+            // set up default values
             _phase = 0;
             _dayAge = 0;
+            _canHarvest = false;
 
             // get components
             _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -32,7 +35,6 @@ namespace Crafting
                 Debug.LogError("Plant scriptable object is null");
                 return;
             }
-
             _scriptableObject = scriptableObject;
 
             // set seed sprite for plant
@@ -54,6 +56,7 @@ namespace Crafting
         {
             if (_phase == _scriptableObject.totalPhase - 1)
             {
+                _canHarvest = true;
                 return;
             }
 
@@ -66,4 +69,3 @@ namespace Crafting
         }
     }
 }
-

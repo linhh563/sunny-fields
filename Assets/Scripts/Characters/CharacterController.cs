@@ -137,8 +137,12 @@ namespace Characters
 
         public void Moving()
         {
-            // TODO:get the position of the tile in front of the character and convert it to world position
-            // TODO: call character movement translate method
+            // get the position of the tile in front of the character and convert it to world position
+            var positionTowardCharacter = _tilemapManager.groundTilemap.GetCellCenterWorld(_tilemapManager.GetTileInFrontCharacter());
+            var direction = positionTowardCharacter - transform.position;
+
+            // call character move toward method
+            _movementController.MoveToward(direction.normalized);
         }
     }    
 

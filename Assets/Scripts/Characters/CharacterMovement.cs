@@ -33,7 +33,6 @@ namespace Characters
         {
             // Subscribe to input events
             GameplayInputManager.OnMovingButtonPress += EnableMovingState;
-            GameplayInputManager.OnMovingButtonPress += Moving;
 
             GameplayInputManager.OnRunningButtonPress += EnableRunningState;
             GameplayInputManager.OnRunningButtonRelease += DisableRunningState;
@@ -52,7 +51,6 @@ namespace Characters
         {
             // Unsubscribe from input events
             GameplayInputManager.OnMovingButtonPress -= EnableMovingState;
-            GameplayInputManager.OnMovingButtonPress -= Moving;
 
             GameplayInputManager.OnRunningButtonPress -= EnableRunningState;
             GameplayInputManager.OnRunningButtonRelease -= DisableRunningState;
@@ -67,32 +65,27 @@ namespace Characters
             _speed = newSpeed;
         }
 
-        public void Moving()
+        public void MoveToward(Vector3 direction)
         {
-            Vector2 _movementDir = Vector2.zero;
+            Vector2 movementDir = Vector2.zero;
 
             switch (CharacterController._currentDirection)
             {
                 case CharacterDirection.Up:
-                    _movementDir = Vector2.up;
+                    movementDir.y = Mathf.Abs(direction.y);
                     break;
                 case CharacterDirection.Down:
-                    _movementDir = Vector2.down;
+                    movementDir.y = -Mathf.Abs(direction.y);
                     break;
                 case CharacterDirection.Left:
-                    _movementDir = Vector2.left;
+                    movementDir.x = -Mathf.Abs(direction.x);
                     break;
                 case CharacterDirection.Right:
-                    _movementDir = Vector2.right;
+                    movementDir.x = Mathf.Abs(direction.x);
                     break;
             }
 
-            transform.Translate(_movementDir * _speed * Time.deltaTime);
-        }
-
-        public void TestMoving(Vector3 direction)
-        {
-            transform.Translate(direction * _speed * Time.deltaTime);
+            transform.Translate(movementDir * _speed * Time.deltaTime);
         }
 
         private void EnableMovingState()

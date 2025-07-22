@@ -8,4 +8,11 @@ namespace Management
         MoveRight,
         DoNothing
     }
+
+    public enum ObjectPoolType
+    {
+        Plant,
+        GameObject,
+        None
+    }
 }

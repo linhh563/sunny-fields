@@ -68,12 +68,13 @@ namespace Characters
             var frontTilePlantingMap = _tilemapManager.plantingTilemap.GetTile(frontTilePos);
             var frontTileGroundMap = _tilemapManager.groundTilemap.GetTile(frontTilePos);
 
+            var worldFrontPos = _tilemapManager.groundTilemap.GetCellCenterWorld(frontTilePos);
+
             // check if the ground was hoed and not planted yet
             if (frontTilePlantingMap == null && frontTileGroundMap.name == _tilemapManager.hoedGroundTile.name)
             {
-                // planting logic
-                // TODO: use objects pooling to improve performance
-                var plant = Instantiate(plantPrefab, _tilemapManager.groundTilemap.GetCellCenterWorld(frontTilePos), Quaternion.identity);                
+                // spawn new plant and set up its property
+                GameObject plant = ObjectPoolManager.SpawnObject(plantPrefab, worldFrontPos, Quaternion.identity, ObjectPoolType.Plant);
                 plant.GetComponent<Plant>().Initialize(_characterInventory.GetHoldingItem() as PlantScriptableObject);
 
                 // marking the tile has planted
