@@ -6,8 +6,14 @@ namespace Management
     {
         public static void ExitGame()
         {
-            Debug.Log("Exit game.");
+            // Application.Quit();
+
+            // test quit game in unity editor
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
             Application.Quit();
+#endif
         }
     }
 }

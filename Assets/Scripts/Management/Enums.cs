@@ -15,4 +15,12 @@ namespace Management
         GameObject,
         None
     }
+
+    public enum ClotheType
+    {
+        Hat,
+        Hair,
+        Shirt,
+        Pant
+    }
 }

@@ -15,9 +15,14 @@ namespace GameUI
             CheckPropertiesValue();
         }
 
-        void Update()
+        void OnEnable()
         {
-            _backBtn.onClick.AddListener(_mainMenuUIManager.DisableFarmListUI);
+            _backBtn.onClick.AddListener(_mainMenuUIManager.DisableFarmListUI);            
+        }
+
+        void OnDisable()
+        {
+            _backBtn.onClick.RemoveAllListeners();
         }
 
         private void CheckPropertiesValue()

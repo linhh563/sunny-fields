@@ -20,12 +20,19 @@ namespace Management
             CheckPropertiesValue();
         }
 
-        void Update()
+        void OnEnable()
         {
             _newGameBtn.onClick.AddListener(_mainMenuUIManager.EnableCustomizeCharacterUI);
             _loadFarmBtn.onClick.AddListener(_mainMenuUIManager.EnableFarmListUI);
             _settingBtn.onClick.AddListener(_mainMenuUIManager.EnableSettingUI);
             _exitButton.onClick.AddListener(MainMenuManager.ExitGame);
+        }
+
+        void OnDisable()
+        {
+            _newGameBtn.onClick.RemoveAllListeners();
+            _loadFarmBtn.onClick.RemoveAllListeners();
+            _settingBtn.onClick.RemoveAllListeners();
         }
 
         private void CheckPropertiesValue()
