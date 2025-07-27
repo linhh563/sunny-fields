@@ -35,8 +35,16 @@ namespace Characters
         {
             var itemIndex = GameplayInputManager.Instance.GetItemIndex();
 
-            if (itemIndex == GameplayInputManager.noItemSelected)
+            Debug.Log(itemIndex);
+
+            if (itemIndex == GameplayInputManager.noItemSelected) return;
+
+            if (itemIndex > _itemsInHotBar.Count)
+            {
+                _itemsInHotBar[itemIndex] = _holdingItem;
+                _holdingItem = null;
                 return;
+            }
 
             var temp = _holdingItem;
             _holdingItem = _itemsInHotBar[itemIndex - 1];

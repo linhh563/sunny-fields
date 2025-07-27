@@ -49,6 +49,8 @@ namespace GameUI
         private void OnEnable()
         {
             AddButtonsListener();
+            ResetClotheUI();
+            UpdateClothesIndexUI();
         }
 
         void OnDisable()
@@ -230,6 +232,25 @@ namespace GameUI
             _previousShirtBtn.onClick.RemoveAllListeners();
             _nextPantBtn.onClick.RemoveAllListeners();
             _previousPantBtn.onClick.RemoveAllListeners();
+        }
+
+        private void ResetClotheUI()
+        {
+            // reset hat image
+            var initialHat = CharacterCustomization._hatCollection[CharacterCustomization._currentHatIndex] as ClotheScriptableObject;
+            _hatImage.sprite = initialHat.sprite;
+
+            // reset hair image
+            var initialHair = CharacterCustomization._hairCollection[CharacterCustomization._currentHairIndex] as ClotheScriptableObject;
+            _hairImage.sprite = initialHair.sprite;
+
+            // reset shirt image
+            var initialShirt = CharacterCustomization._shirtCollection[CharacterCustomization._currentShirtIndex] as ClotheScriptableObject;
+            _shirtImage.sprite = initialShirt.sprite;
+
+            // reset pant image
+            var initialPant = CharacterCustomization._pantCollection[CharacterCustomization._currentPantIndex] as ClotheScriptableObject;
+            _pantImage.sprite = initialPant.sprite;
         }
 
         private void CheckPropertiesValue()

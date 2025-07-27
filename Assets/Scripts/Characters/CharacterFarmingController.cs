@@ -94,16 +94,18 @@ namespace Characters
 
         private void UpdateFarmingState()
         {
-            var _item = _characterInventory.GetHoldingItem();
+            var item = _characterInventory.GetHoldingItem();
 
-            // TODO: check if holding item is plant seed
-            if (_item.GetType() == typeof(PlantScriptableObject))
-            {
-                farmingState = CharacterFarmingState.Planting;
-                return;
-            }
+            if (item == null) { return; }
 
-            switch (_item.itemName)
+            // check if holding item is plant seed
+                if (item.GetType() == typeof(PlantScriptableObject))
+                {
+                    farmingState = CharacterFarmingState.Planting;
+                    return;
+                }
+
+            switch (item.itemName)
             {
                 case "Hoe":
                     farmingState = CharacterFarmingState.Hoeing;

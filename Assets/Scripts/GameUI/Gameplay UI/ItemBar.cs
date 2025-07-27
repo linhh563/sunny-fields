@@ -32,14 +32,13 @@ namespace GameUI
         public void RefreshItemBarUI()
         {
             var itemIndex = GameplayInputManager.Instance.GetItemIndex();
+
+            if (itemIndex == GameplayInputManager.noItemSelected) return;
             
-            if (itemIndex != GameplayInputManager.noItemSelected)
-            {
-                // TODO: swap item ui in item bar and holding item ui 
-                var temp = _holdingItemGameObj.GetComponent<Image>().sprite;
-                _holdingItemGameObj.GetComponent<Image>().sprite = _itemGameObjs[itemIndex - 1].GetComponent<Image>().sprite;
-                _itemGameObjs[itemIndex - 1].GetComponent<Image>().sprite = temp;
-            }
+            // swap item ui in item bar and holding item ui 
+            var temp = _holdingItemGameObj.GetComponent<Image>().sprite;
+            _holdingItemGameObj.GetComponent<Image>().sprite = _itemGameObjs[itemIndex - 1].GetComponent<Image>().sprite;
+            _itemGameObjs[itemIndex - 1].GetComponent<Image>().sprite = temp;
         }
 
         public void InitializeItemBarUI(ItemScriptableObject holdingItem, List<ItemScriptableObject> items)
