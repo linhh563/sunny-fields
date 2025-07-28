@@ -4,6 +4,6 @@ namespace Crafting
 {
     public class Item : MonoBehaviour
     {
-        protected ItemScriptableObject itemScriptableObject;
+        public ItemScriptableObject itemScriptableObject;
     }
 }

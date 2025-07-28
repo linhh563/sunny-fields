@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using Characters;
+using Management;
 
 namespace Environment
 {
@@ -56,7 +56,7 @@ namespace Environment
         {
             var _characterPosition = _groundTilemap.WorldToCell(Characters.CharacterController.CharacterWorldPosition);
 
-            switch (Characters.CharacterController._currentDirection)
+            switch (Characters.CharacterController.currentDirection)
             {
                 case CharacterDirection.Up:
                     return _characterPosition + Vector3Int.up;

@@ -15,24 +15,24 @@ namespace Characters
 
         public void Enter()
         {
-            var currentGridPos = _controller._tilemapManager.groundTilemap.WorldToCell(CharacterController.CharacterWorldPosition);
-            var worrldPos = _controller._tilemapManager.groundTilemap.GetCellCenterWorld(currentGridPos);
+            var currentGridPos = _controller.tilemapManager.groundTilemap.WorldToCell(CharacterController.CharacterWorldPosition);
+            var worrldPos = _controller.tilemapManager.groundTilemap.GetCellCenterWorld(currentGridPos);
 
             _controller.transform.position = worrldPos;
         }
 
         public void Execute()
         {
-            switch (CharacterController._currentDirection)
+            switch (CharacterController.currentDirection)
             {
                 case CharacterDirection.Down:
-                    _controller._animController.PlayAnimation(AnimationName.IDLE_DOWN);
+                    _controller.animController.PlayAnimation(AnimationName.IDLE_DOWN);
                     break;
                 case CharacterDirection.Up:
-                    _controller._animController.PlayAnimation(AnimationName.IDLE_UP);
+                    _controller.animController.PlayAnimation(AnimationName.IDLE_UP);
                     break;
                 default:
-                    _controller._animController.PlayAnimation(AnimationName.IDLE);
+                    _controller.animController.PlayAnimation(AnimationName.IDLE);
                     break;
             }
         }
@@ -53,21 +53,21 @@ namespace Characters
 
         public void Enter()
         {
-            _controller._movementController.ChangeSpeed(CharacterDefaultStats.DEFAULT_SPEED);
+            _controller.movementController.ChangeSpeed(CharacterDefaultStats.DEFAULT_SPEED);
         }
 
         public void Execute()
         {
-            switch (CharacterController._currentDirection)
+            switch (CharacterController.currentDirection)
             {
                 case CharacterDirection.Down:
-                    _controller._animController.PlayAnimation(AnimationName.MOVING_DOWN);
+                    _controller.animController.PlayAnimation(AnimationName.MOVING_DOWN);
                     break;
                 case CharacterDirection.Up:
-                    _controller._animController.PlayAnimation(AnimationName.MOVING_UP);
+                    _controller.animController.PlayAnimation(AnimationName.MOVING_UP);
                     break;
                 default:
-                    _controller._animController.PlayAnimation(AnimationName.MOVING);
+                    _controller.animController.PlayAnimation(AnimationName.MOVING);
                     break;
             }
 
@@ -92,7 +92,7 @@ namespace Characters
 
         public void Enter()
         {
-            _controller._movementController.ChangeSpeed(CharacterDefaultStats.DEFAULT_SPEED * 0.65f);
+            _controller.movementController.ChangeSpeed(CharacterDefaultStats.DEFAULT_SPEED * 0.65f);
         }
 
         public void Execute()
@@ -117,21 +117,21 @@ namespace Characters
 
         public void Enter()
         {
-            _controller._movementController.ChangeSpeed(CharacterDefaultStats.DEFAULT_SPEED * 1.5f);
+            _controller.movementController.ChangeSpeed(CharacterDefaultStats.DEFAULT_SPEED * 1.5f);
         }
 
         public void Execute()
         {
-            switch (CharacterController._currentDirection)
+            switch (CharacterController.currentDirection)
             {
                 case CharacterDirection.Down:
-                    _controller._animController.PlayAnimation(AnimationName.RUN_DOWN);
+                    _controller.animController.PlayAnimation(AnimationName.RUN_DOWN);
                     break;
                 case CharacterDirection.Up:
-                    _controller._animController.PlayAnimation(AnimationName.RUN_UP);
+                    _controller.animController.PlayAnimation(AnimationName.RUN_UP);
                     break;
                 default:
-                    _controller._animController.PlayAnimation(AnimationName.RUN);
+                    _controller.animController.PlayAnimation(AnimationName.RUN);
                     break;
             }
 

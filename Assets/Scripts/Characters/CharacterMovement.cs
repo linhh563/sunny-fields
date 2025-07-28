@@ -3,14 +3,6 @@ using Management;
 
 namespace Characters
 {
-    public enum CharacterMovementState
-    {
-        Idle,
-        Moving,
-        Running,
-        Strolling
-    }
-
     public class CharacterMovement : MonoBehaviour
     {
         private float _speed;
@@ -69,7 +61,7 @@ namespace Characters
         {
             Vector2 movementDir = Vector2.zero;
 
-            switch (CharacterController._currentDirection)
+            switch (CharacterController.currentDirection)
             {
                 case CharacterDirection.Up:
                     movementDir.y = Mathf.Abs(direction.y);

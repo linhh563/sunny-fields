@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Shirt 3
   type: 2
-  sprite: {fileID: 7482667652216324306, guid: 9a5c27a3c8235f844a133f2ae0e6e79b, type: 3}
+  forwardSprite: {fileID: 7482667652216324306, guid: 07d9453d8a89e7a45b454460a9a3e643, type: 3}
+  behindSprite: {fileID: 7482667652216324306, guid: 07d9453d8a89e7a45b454460a9a3e643, type: 3}
+  leftSprite: {fileID: 7482667652216324306, guid: 07d9453d8a89e7a45b454460a9a3e643, type: 3}
+  rightSprite: {fileID: 7482667652216324306, guid: 07d9453d8a89e7a45b454460a9a3e643, type: 3}

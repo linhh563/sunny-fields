@@ -1,6 +1,5 @@
 using UnityEngine;
 using Management;
-using System;
 using Environment;
 
 namespace Characters
@@ -10,17 +9,17 @@ namespace Characters
     [RequireComponent(typeof(CharacterFarmingController))]
     public class CharacterController : MonoBehaviour
     {
-        public static CharacterDirection _currentDirection { get; private set; }
+        public static CharacterDirection currentDirection { get; private set; }
 
         // character position in world position (use to convert to tile map position)
         public static Vector3 CharacterWorldPosition { get; private set; }
 
         // CONTROLLERS 
-        public CharacterAnimation _animController { get; private set; }
-        public CharacterInventory _inventoryController { get; private set; }
-        public CharacterMovement _movementController { get; private set; }
-        public CharacterFarmingController _farmingController { get; private set; }
-        public TilemapManager _tilemapManager { get; private set; }
+        public CharacterAnimation animController { get; private set; }
+        public CharacterInventory inventoryController { get; private set; }
+        public CharacterMovement movementController { get; private set; }
+        public CharacterFarmingController farmingController { get; private set; }
+        public TilemapManager tilemapManager { get; private set; }
 
         private StateManager _stateManager;
 
@@ -29,18 +28,18 @@ namespace Characters
             _stateManager = GetComponent<StateManager>();
 
             // Set controllers
-            _movementController = GetComponent<CharacterMovement>();
-            _farmingController = GetComponent<CharacterFarmingController>();
-            _animController = GetComponentInChildren<CharacterAnimation>();
-            _inventoryController = GetComponentInChildren<CharacterInventory>();
+            movementController = GetComponent<CharacterMovement>();
+            farmingController = GetComponent<CharacterFarmingController>();
+            animController = GetComponentInChildren<CharacterAnimation>();
+            inventoryController = GetComponentInChildren<CharacterInventory>();
 
             // Set default values
-            _currentDirection = CharacterDirection.Down;
+            currentDirection = CharacterDirection.Down;
         }
 
         void Start()
         {
-            _tilemapManager = FindObjectOfType<TilemapManager>();
+            tilemapManager = FindObjectOfType<TilemapManager>();
             _stateManager.ChangeState(new CharacterIdleState(this));
         }
 
@@ -48,7 +47,7 @@ namespace Characters
         {
             // Reset values
             CharacterWorldPosition = Vector3.zero;
-            _currentDirection = CharacterDirection.Down;
+            currentDirection = CharacterDirection.Down;
         }
 
         private void Update()
@@ -66,25 +65,28 @@ namespace Characters
             switch (_dir)
             {
                 case CharacterCommand.MoveDown:
-                    _currentDirection = CharacterDirection.Down;
+                    currentDirection = CharacterDirection.Down;
                     break;
+                    
                 case CharacterCommand.MoveUp:
-                    _currentDirection = CharacterDirection.Up;
+                    currentDirection = CharacterDirection.Up;
                     break;
+
                 case CharacterCommand.MoveRight:
                     transform.localScale = new Vector3(1, 1, 1);
-                    _currentDirection = CharacterDirection.Right;
+                    currentDirection = CharacterDirection.Right;
                     break;
+
                 case CharacterCommand.MoveLeft:
                     transform.localScale = new Vector3(-1, 1, 1);
-                    _currentDirection = CharacterDirection.Left;
+                    currentDirection = CharacterDirection.Left;
                     break;
             }
         }
 
         private void HandleMovementState()
         {
-            switch (_movementController.movementState)
+            switch (movementController.movementState)
             {
                 case CharacterMovementState.Idle:
                     _stateManager.ChangeState(new CharacterIdleState(this));
@@ -103,25 +105,25 @@ namespace Characters
 
         private void HandleFarmingState()
         {
-            switch (_farmingController.farmingState)
+            switch (farmingController.farmingState)
             {
                 case CharacterFarmingState.Hoeing:
-                    _farmingController.HoeGround();
+                    farmingController.HoeGround();
                     // Play character hoeing animation
                     break;
 
                 case CharacterFarmingState.Planting:
-                    _farmingController.Planting();
+                    farmingController.Planting();
                     // Play character planting animation
                     break;
 
                 case CharacterFarmingState.Watering:
-                    _farmingController.Watering();
+                    farmingController.Watering();
                     // Play character watering animation
                     break;
 
                 case CharacterFarmingState.Harvesting:
-                    _farmingController.Harvesting();
+                    farmingController.Harvesting();
                     // Play character harvesting animation
                     break;
 
@@ -138,19 +140,11 @@ namespace Characters
         public void Moving()
         {
             // get the position of the tile in front of the character and convert it to world position
-            var positionTowardCharacter = _tilemapManager.groundTilemap.GetCellCenterWorld(_tilemapManager.GetTileInFrontCharacter());
+            var positionTowardCharacter = tilemapManager.groundTilemap.GetCellCenterWorld(tilemapManager.GetTileInFrontCharacter());
             var direction = positionTowardCharacter - transform.position;
 
             // call character move toward method
-            _movementController.MoveToward(direction.normalized);
+            movementController.MoveToward(direction.normalized);
         }
     }    
-
-    public enum CharacterDirection 
-    {
-        Up,
-        Down,
-        Left,
-        Right
-    }
 }

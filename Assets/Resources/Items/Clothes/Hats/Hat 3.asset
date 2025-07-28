@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Hat 3
   type: 0
-  sprite: {fileID: 7482667652216324306, guid: 054f365b46ca2544daa3de5ba5675bc7, type: 3}
+  forwardSprite: {fileID: 7482667652216324306, guid: 054f365b46ca2544daa3de5ba5675bc7, type: 3}
+  behindSprite: {fileID: 7482667652216324306, guid: 054f365b46ca2544daa3de5ba5675bc7, type: 3}
+  leftSprite: {fileID: 7482667652216324306, guid: 054f365b46ca2544daa3de5ba5675bc7, type: 3}
+  rightSprite: {fileID: 7482667652216324306, guid: 054f365b46ca2544daa3de5ba5675bc7, type: 3}

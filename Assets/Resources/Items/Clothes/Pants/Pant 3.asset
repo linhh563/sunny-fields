@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Pant 3
   type: 3
-  sprite: {fileID: 7482667652216324306, guid: 8e68cbc1682eca946bc876e71afb69e5, type: 3}
+  forwardSprite: {fileID: 7482667652216324306, guid: 342b8649d876df54fbdbf6d30fbbaddf, type: 3}
+  behindSprite: {fileID: 7482667652216324306, guid: 342b8649d876df54fbdbf6d30fbbaddf, type: 3}
+  leftSprite: {fileID: 7482667652216324306, guid: 342b8649d876df54fbdbf6d30fbbaddf, type: 3}
+  rightSprite: {fileID: 7482667652216324306, guid: 342b8649d876df54fbdbf6d30fbbaddf, type: 3}

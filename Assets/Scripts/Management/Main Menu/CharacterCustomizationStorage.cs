@@ -3,12 +3,15 @@ using UnityEngine;
 
 namespace Management
 {
+    // ===== SUMMARY =====
+    //      Use to store the character customization that player custom in character customization UI, or the one in saved farm.
+    // ===================
     public class CharacterCustomizationStorage : MonoBehaviour
     {
-        private ClotheScriptableObject _hair;
-        private ClotheScriptableObject _hat;
-        private ClotheScriptableObject _shirt;
-        private ClotheScriptableObject _pant;
+        public static ClotheScriptableObject hair { get; private set; }
+        public static ClotheScriptableObject hat { get; private set; }
+        public static ClotheScriptableObject shirt { get; private set; }
+        public static ClotheScriptableObject pant { get; private set; }
 
         void Awake()
         {
@@ -21,10 +24,10 @@ namespace Management
 
         private void ResetCustomization()
         {
-            _hair = Resources.Load<ClotheScriptableObject>("Items/Clothes/Hair/Hair 1");
-            _hat = Resources.Load<ClotheScriptableObject>("Items/Clothes/Hats/Hat 1");
-            _shirt = Resources.Load<ClotheScriptableObject>("Items/Clothes/Shirts/Shirt 1");
-            _pant = Resources.Load<ClotheScriptableObject>("Items/Clothes/Pants/Pant 1");
+            hair = Resources.Load<ClotheScriptableObject>("Items/Clothes/Hair/Hair 1");
+            hat = Resources.Load<ClotheScriptableObject>("Items/Clothes/Hats/Hat 1");
+            shirt = Resources.Load<ClotheScriptableObject>("Items/Clothes/Shirts/Shirt 1");
+            pant = Resources.Load<ClotheScriptableObject>("Items/Clothes/Pants/Pant 1");
         }
 
         public void ChangeClothe(ClotheScriptableObject newClothe, ClotheType type)
@@ -38,19 +41,19 @@ namespace Management
             switch (type)
             {
                 case ClotheType.Hair:
-                    _hair = newClothe;
+                    hair = newClothe;
                     break;
 
                 case ClotheType.Hat:
-                    _hat = newClothe;
+                    hat = newClothe;
                     break;
 
                 case ClotheType.Shirt:
-                    _shirt = newClothe;
+                    shirt = newClothe;
                     break;
 
                 case ClotheType.Pant:
-                    _pant = newClothe;
+                    pant = newClothe;
                     break;
 
                 default:

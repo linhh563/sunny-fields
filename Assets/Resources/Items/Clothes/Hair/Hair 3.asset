@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Hair 3
   type: 1
-  sprite: {fileID: 7482667652216324306, guid: 6e495d894cc36574fbba8f4ba3013ce7, type: 3}
+  forwardSprite: {fileID: 7482667652216324306, guid: a1946b537341ef84ebe17a12d1aff8ed, type: 3}
+  behindSprite: {fileID: 7482667652216324306, guid: a1946b537341ef84ebe17a12d1aff8ed, type: 3}
+  leftSprite: {fileID: 7482667652216324306, guid: a1946b537341ef84ebe17a12d1aff8ed, type: 3}
+  rightSprite: {fileID: 7482667652216324306, guid: a1946b537341ef84ebe17a12d1aff8ed, type: 3}

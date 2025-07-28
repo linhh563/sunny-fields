@@ -1,11 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 using Crafting;
 using Management;
 using GameUI;
-using UnityEngine.TextCore.Text;
 
 namespace Characters
 {
@@ -14,7 +12,7 @@ namespace Characters
         // TODO: delete SerializeField
         [SerializeField] private ItemScriptableObject _holdingItem;
         // TODO: delete SerializeField
-        [SerializeField] private List<ItemScriptableObject> _itemsInHotBar = new List<ItemScriptableObject>();
+        [SerializeField] private List<Item> _itemsInHotBar = new List<Item>();
         private List<ItemScriptableObject> _itemsInBag = new List<ItemScriptableObject>();
 
         void Start()
@@ -35,20 +33,12 @@ namespace Characters
         {
             var itemIndex = GameplayInputManager.Instance.GetItemIndex();
 
-            Debug.Log(itemIndex);
-
             if (itemIndex == GameplayInputManager.noItemSelected) return;
 
-            if (itemIndex > _itemsInHotBar.Count)
-            {
-                _itemsInHotBar[itemIndex] = _holdingItem;
-                _holdingItem = null;
-                return;
-            }
-
+            // swap item in hot bar and holding item
             var temp = _holdingItem;
-            _holdingItem = _itemsInHotBar[itemIndex - 1];
-            _itemsInHotBar[itemIndex - 1] = temp;
+            _holdingItem = _itemsInHotBar[itemIndex - 1].itemScriptableObject;
+            _itemsInHotBar[itemIndex - 1].itemScriptableObject = temp;
         }
 
         private void GetItemInBag()

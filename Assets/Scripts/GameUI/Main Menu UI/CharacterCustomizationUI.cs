@@ -1,8 +1,10 @@
-using Management;
-using Management.ScriptableObjects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+using Management;
+using Management.ScriptableObjects;
 
 namespace GameUI
 {
@@ -21,6 +23,8 @@ namespace GameUI
         [SerializeField] private Button _nextShirtBtn;
         [SerializeField] private Button _previousPantBtn;
         [SerializeField] private Button _nextPantBtn;
+
+        [SerializeField] private Button _startButton;
 
         // character clothes index
         [SerializeField] TMP_Text _hairIndex;
@@ -71,7 +75,7 @@ namespace GameUI
                 return;
             }
 
-            _hatImage.sprite = nextHat.sprite;
+            _hatImage.sprite = nextHat.forwardSprite;
         }
 
         private void ChangePreviousHat()
@@ -87,7 +91,7 @@ namespace GameUI
                 return;
             }
 
-            _hatImage.sprite = previousHat.sprite;
+            _hatImage.sprite = previousHat.forwardSprite;
         }
 
         private void ChangeNextHair()
@@ -103,7 +107,7 @@ namespace GameUI
                 return;
             }
 
-            _hairImage.sprite = nextHair.sprite;
+            _hairImage.sprite = nextHair.forwardSprite;
         }
 
         private void ChangePreviousHair()
@@ -119,7 +123,7 @@ namespace GameUI
                 return;
             }
 
-            _hairImage.sprite = previousHair.sprite;
+            _hairImage.sprite = previousHair.forwardSprite;
         }
 
         private void ChangeNextShirt()
@@ -135,7 +139,7 @@ namespace GameUI
                 return;
             }
 
-            _shirtImage.sprite = nextShirt.sprite;
+            _shirtImage.sprite = nextShirt.forwardSprite;
         }
 
         private void ChangePreviousShirt()
@@ -151,7 +155,7 @@ namespace GameUI
                 return;
             }
 
-            _shirtImage.sprite = previousShirt.sprite;
+            _shirtImage.sprite = previousShirt.forwardSprite;
         }
 
         private void ChangeNextPant()
@@ -167,7 +171,7 @@ namespace GameUI
                 return;
             }
 
-            _pantImage.sprite = nextPant.sprite;
+            _pantImage.sprite = nextPant.forwardSprite;
         }
 
         private void ChangePreviousPant()
@@ -183,7 +187,7 @@ namespace GameUI
                 return;
             }
 
-            _pantImage.sprite = previousPant.sprite;
+            _pantImage.sprite = previousPant.forwardSprite;
         }
 
         private void UpdateClothesIndexUI()
@@ -192,6 +196,11 @@ namespace GameUI
             _hatIndex.SetText((CharacterCustomization._currentHatIndex + 1).ToString());
             _shirtIndex.SetText((CharacterCustomization._currentShirtIndex + 1).ToString());
             _pantIndex.SetText((CharacterCustomization._currentPantIndex + 1).ToString());
+        }
+
+        private void LoadGameplayScene()
+        {
+            SceneManager.LoadScene("Gameplay");
         }
 
         private void AddButtonsListener()
@@ -217,6 +226,9 @@ namespace GameUI
             _previousShirtBtn.onClick.AddListener(UpdateClothesIndexUI);
             _nextPantBtn.onClick.AddListener(UpdateClothesIndexUI);
             _previousPantBtn.onClick.AddListener(UpdateClothesIndexUI);
+
+            // add listener to start button
+            _startButton.onClick.AddListener(LoadGameplayScene);
         }
 
         private void RemoveListenerFromAllButtons()
@@ -238,19 +250,19 @@ namespace GameUI
         {
             // reset hat image
             var initialHat = CharacterCustomization._hatCollection[CharacterCustomization._currentHatIndex] as ClotheScriptableObject;
-            _hatImage.sprite = initialHat.sprite;
+            _hatImage.sprite = initialHat.forwardSprite;
 
             // reset hair image
             var initialHair = CharacterCustomization._hairCollection[CharacterCustomization._currentHairIndex] as ClotheScriptableObject;
-            _hairImage.sprite = initialHair.sprite;
+            _hairImage.sprite = initialHair.forwardSprite;
 
             // reset shirt image
             var initialShirt = CharacterCustomization._shirtCollection[CharacterCustomization._currentShirtIndex] as ClotheScriptableObject;
-            _shirtImage.sprite = initialShirt.sprite;
+            _shirtImage.sprite = initialShirt.forwardSprite;
 
             // reset pant image
             var initialPant = CharacterCustomization._pantCollection[CharacterCustomization._currentPantIndex] as ClotheScriptableObject;
-            _pantImage.sprite = initialPant.sprite;
+            _pantImage.sprite = initialPant.forwardSprite;
         }
 
         private void CheckPropertiesValue()
@@ -266,7 +278,7 @@ namespace GameUI
             if (_backBtn == null || _previousGenderBtn == null || _nextGenderBtn == null
             || _previousHatBtn == null || _nextHatBtn == null || _previousHairBtn == null
             || _nextHairBtn == null || _previousShirtBtn == null || _nextShirtBtn == null
-            || _previousPantBtn == null || _nextPantBtn == null)
+            || _previousPantBtn == null || _nextPantBtn == null || _startButton == null)
             {
                 Debug.LogError("There is a button was not assigned in " + gameObject.name + ".");
                 return;

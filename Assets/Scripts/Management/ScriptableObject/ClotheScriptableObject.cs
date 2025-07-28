@@ -7,6 +7,12 @@ namespace Management.ScriptableObjects
     {
         public string name;
         public ClotheType type;
-        public Sprite sprite;
+
+        public Sprite forwardSprite;
+        public Sprite behindSprite;
+        public Sprite leftSprite;
+        public Sprite rightSprite;
+
+        // TODO: DELETE LEFT AND RIGHT SPRITE, ADD SIDE SPRITE
     }
 }

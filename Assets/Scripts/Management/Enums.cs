@@ -1,5 +1,24 @@
+using System;
+
 namespace Management
 {
+    [Serializable]
+        public enum CharacterDirection
+    {
+        Up,
+        Down,
+        Left,
+        Right
+    }
+    
+    public enum CharacterMovementState
+    {
+        Idle,
+        Moving,
+        Running,
+        Strolling
+    }
+
     public enum CharacterCommand
     {
         MoveUp,
