@@ -21,14 +21,18 @@ namespace Characters
 
             // Subscribe input events
             GameplayInputManager.OnItemSelected += SelectItem;
+            ItemBar.OnItemButtonClicked += SelectItem;
         }
 
         void OnDisable()
         {
             // Unsubscribe input events
             GameplayInputManager.OnItemSelected -= SelectItem;
+            ItemBar.OnItemButtonClicked -= SelectItem;
         }
 
+
+        // select item by press hotkey
         private void SelectItem()
         {
             var itemIndex = GameplayInputManager.Instance.GetItemIndex();
@@ -39,6 +43,15 @@ namespace Characters
             var temp = _holdingItem;
             _holdingItem = _itemsInHotBar[itemIndex - 1].itemScriptableObject;
             _itemsInHotBar[itemIndex - 1].itemScriptableObject = temp;
+        }
+
+        // select item by click button
+        private void SelectItem(int index)
+        {
+            // swap item in hot bar and holding item
+            var temp = _holdingItem;
+            _holdingItem = _itemsInHotBar[index - 1].itemScriptableObject;
+            _itemsInHotBar[index - 1].itemScriptableObject = temp;
         }
 
         private void GetItemInBag()

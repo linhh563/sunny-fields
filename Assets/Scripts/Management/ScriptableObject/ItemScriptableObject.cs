@@ -8,5 +8,6 @@ namespace Crafting
         public string itemName;
         public string description;
         public Sprite avatarSprite;
+        public bool stackable;
     }
 }

@@ -13,18 +13,22 @@ namespace Management
         public static int noItemSelected = -1;
 
         // Events
-        public static event Action OnMovingButtonPress;
-        public static event Action OnRunningButtonPress;
-        public static event Action OnRunningButtonRelease;
-        public static event Action OnStrollingButtonPress;
+        public static event Action OnMovingKeyPress;
+        public static event Action OnRunningKeyPress;
+        public static event Action OnRunningKeyRelease;
+        public static event Action OnStrollingKeyPress;
         public static event Action OnNothingPress;
 
         public static event Action OnItemSelected;
 
-        public static event Action OnFarmingButtonPress;
-        public static event Action OnFarmingButtonRelease;
+        public static event Action OnFarmingKeyPress;
+        public static event Action OnFarmingKeyRelease;
 
-        public static event Action OnInteractButtonPress;
+        public static event Action OnInteractKeyPress;
+
+        public static event Action OnBagKeyPress;
+        public static event Action OnExitUIKeyPress;
+
 
         void Awake()
         {
@@ -42,6 +46,8 @@ namespace Management
             HandleSelectItemInput();
             HandleFarmingInput();
             HandleCharacterInteractInput();
+            HandleBagInput();
+            HandleExitUIInput();
         }
 
         private void InitializeKeyBindings()
@@ -59,8 +65,9 @@ namespace Management
             _keyBindings.Add("Farming", KeyCode.F);
 
             _keyBindings.Add("Interact", KeyCode.E);
-            _keyBindings.Add("Inventory", KeyCode.I);
+            _keyBindings.Add("Bag", KeyCode.B);
             _keyBindings.Add("Pause", KeyCode.Escape);
+            _keyBindings.Add("ExitUI", KeyCode.Escape);
         }
 
         private void HandleMovementInput()
@@ -69,17 +76,17 @@ namespace Management
             {
                 if (Input.GetKey(_keyBindings["Running"]))
                 {
-                    OnRunningButtonPress?.Invoke();
+                    OnRunningKeyPress?.Invoke();
                 }
                 else
                 {
-                    OnRunningButtonRelease?.Invoke();
-                    OnMovingButtonPress?.Invoke();
+                    OnRunningKeyRelease?.Invoke();
+                    OnMovingKeyPress?.Invoke();
                 }
             }
             else if (Input.GetKey(_keyBindings["Strolling"]))
             {
-                OnStrollingButtonPress?.Invoke();
+                OnStrollingKeyPress?.Invoke();
             }
             else
             {
@@ -91,12 +98,12 @@ namespace Management
         {
             if (Input.GetKey(_keyBindings["Farming"]))
             {
-                OnFarmingButtonPress?.Invoke();
+                OnFarmingKeyPress?.Invoke();
             }
 
             if (Input.GetKeyUp(_keyBindings["Farming"]))
             {
-                OnFarmingButtonRelease?.Invoke();
+                OnFarmingKeyRelease?.Invoke();
             }
         }
 
@@ -121,7 +128,23 @@ namespace Management
         {
             if (Input.GetKeyDown(_keyBindings["Interact"]))
             {
-                OnInteractButtonPress?.Invoke();
+                OnInteractKeyPress?.Invoke();
+            }
+        }
+
+        private void HandleBagInput()
+        {
+            if (Input.GetKeyDown(_keyBindings["Bag"]))
+            {
+                OnBagKeyPress?.Invoke();
+            }
+        }
+
+        private void HandleExitUIInput()
+        {
+            if (Input.GetKeyDown(_keyBindings["ExitUI"]))
+            {
+                OnExitUIKeyPress?.Invoke();
             }
         }
 

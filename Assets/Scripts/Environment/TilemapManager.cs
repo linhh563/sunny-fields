@@ -7,6 +7,7 @@ namespace Environment
     public class TilemapManager : MonoBehaviour
     {
         [Header("Tilemaps")]
+        [SerializeField] private Tilemap _baseTilemap;
         [SerializeField] private Tilemap _groundTilemap;
         [SerializeField] private Tilemap _plantingTilemap;
 
@@ -22,6 +23,7 @@ namespace Environment
 
         private string _farmName;
 
+        public Tilemap baseTilemap => _baseTilemap;
         public Tilemap groundTilemap => _groundTilemap;
         public Tilemap plantingTilemap => _plantingTilemap;
 
@@ -29,10 +31,10 @@ namespace Environment
         void Awake()
         {
             // load tile bases from resources
-            defaultGroundTile = Resources.Load<TileBase>("Tiles/Ground/Default_Ground");
-            defaultGroundTile_2 = Resources.Load<TileBase>("Tiles/Ground/Default_Ground_2");
-            hoedGroundTile = Resources.Load<TileBase>("Tiles/Ground/Hoed_Ground");
-            wateredGroundTile = Resources.Load<TileBase>("Tiles/Ground/Watered_Ground");
+            defaultGroundTile = Resources.Load<TileBase>("Tiles/Ground/default_ground");
+            defaultGroundTile_2 = Resources.Load<TileBase>("Tiles/Ground/default_ground_2");
+            hoedGroundTile = Resources.Load<TileBase>("Tiles/Ground/hoed_ground");
+            wateredGroundTile = Resources.Load<TileBase>("Tiles/Ground/watered_ground");
 
             whiteTile = Resources.Load<TileBase>("Tiles/WhiteTile");
 
@@ -45,10 +47,6 @@ namespace Environment
             {
                 Debug.LogError("Can't load ground tile base.");
             }
-        }
-
-        void Start()
-        {
         }
 
         // get the position (in tile map) of the tile in front of the character

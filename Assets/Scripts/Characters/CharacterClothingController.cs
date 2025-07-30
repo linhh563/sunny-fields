@@ -31,18 +31,22 @@ namespace Characters
             {
                 case CharacterDirection.Down:
                     hat.sprite = CharacterCustomizationStorage.hat.forwardSprite;
+                    hair.sprite = CharacterCustomizationStorage.hair.forwardSprite;
                     break;
 
                 case CharacterDirection.Up:
                     hat.sprite = CharacterCustomizationStorage.hat.behindSprite;
+                    hair.sprite = CharacterCustomizationStorage.hair.behindSprite;
                     break;
 
                 case CharacterDirection.Left:
                     hat.sprite = CharacterCustomizationStorage.hat.leftSprite;
+                    hair.sprite = CharacterCustomizationStorage.hair.leftSprite;
                     break;
 
                 case CharacterDirection.Right:
                     hat.sprite = CharacterCustomizationStorage.hat.rightSprite;
+                    hair.sprite = CharacterCustomizationStorage.hair.rightSprite;
                     break;
 
                 default:

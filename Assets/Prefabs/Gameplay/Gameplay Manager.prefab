@@ -88,6 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c497476dbc21ee64fb5a52e48b246fb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _baseTilemap: {fileID: 0}
   _groundTilemap: {fileID: 0}
   _plantingTilemap: {fileID: 0}
 --- !u!1 &4110491365230532051

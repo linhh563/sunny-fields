@@ -25,8 +25,8 @@ namespace Characters
             _tilemapManager = FindObjectOfType<TilemapManager>();
 
             // Subscribe input events
-            GameplayInputManager.OnFarmingButtonPress += UpdateFarmingState;
-            GameplayInputManager.OnFarmingButtonRelease += SetIdleState;
+            GameplayInputManager.OnFarmingKeyPress += UpdateFarmingState;
+            GameplayInputManager.OnFarmingKeyRelease += SetIdleState;
 
             // check in editor config properties
             if (plantPrefab == null)
@@ -35,29 +35,26 @@ namespace Characters
             }
         }
 
-        private void Update()
-        {
-        }
-
         void OnDisable()
         {
             // Unsubscribe input events
-            GameplayInputManager.OnFarmingButtonPress -= UpdateFarmingState;
-            GameplayInputManager.OnFarmingButtonRelease -= SetIdleState;
+            GameplayInputManager.OnFarmingKeyPress -= UpdateFarmingState;
+            GameplayInputManager.OnFarmingKeyRelease -= SetIdleState;
         }
 
         public void HoeGround()
         {
             var frontTilePos = _tilemapManager.GetTileInFrontCharacter();
-            var frontTile = _tilemapManager.groundTilemap.GetTile(frontTilePos);
+
+            var frontTileBaseMap = _tilemapManager.baseTilemap.GetTile(frontTilePos);
 
             // character can only hoe the default ground
-            if (_tilemapManager.defaultGroundTile.name != frontTile.name && _tilemapManager.defaultGroundTile_2.name != frontTile.name)
+            if (_tilemapManager.defaultGroundTile.name != frontTileBaseMap.name && _tilemapManager.defaultGroundTile_2.name != frontTileBaseMap.name)
             {
                 return;
             }
 
-            // hoeing logic
+            // spawn hoed tile in front of the character in ground tile map
             _tilemapManager.groundTilemap.SetTile(frontTilePos, _tilemapManager.hoedGroundTile);
         }
 
@@ -69,6 +66,9 @@ namespace Characters
             var frontTileGroundMap = _tilemapManager.groundTilemap.GetTile(frontTilePos);
 
             var worldFrontPos = _tilemapManager.groundTilemap.GetCellCenterWorld(frontTilePos);
+
+            // if the ground had not hoed, player can't plant
+            if (frontTileGroundMap == null) return;
 
             // check if the ground was hoed and not planted yet
             if (frontTilePlantingMap == null && frontTileGroundMap.name == _tilemapManager.hoedGroundTile.name)

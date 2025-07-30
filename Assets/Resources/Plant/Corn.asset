@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: CornSeed
   description: 
   avatarSprite: {fileID: 21300000, guid: 90eefc34519c69a46984e6ee5c373355, type: 3}
+  stackable: 1
   totalPhase: 3
   sprites:
   - {fileID: 21300000, guid: b03336c06c765484eb027257698fee1d, type: 3}

@@ -24,12 +24,12 @@ namespace Characters
         void Start()
         {
             // Subscribe to input events
-            GameplayInputManager.OnMovingButtonPress += EnableMovingState;
+            GameplayInputManager.OnMovingKeyPress += EnableMovingState;
 
-            GameplayInputManager.OnRunningButtonPress += EnableRunningState;
-            GameplayInputManager.OnRunningButtonRelease += DisableRunningState;
+            GameplayInputManager.OnRunningKeyPress += EnableRunningState;
+            GameplayInputManager.OnRunningKeyRelease += DisableRunningState;
 
-            GameplayInputManager.OnStrollingButtonPress += ToggleStrollingState;
+            GameplayInputManager.OnStrollingKeyPress += ToggleStrollingState;
 
             GameplayInputManager.OnNothingPress += DisableMovingState;
         }
@@ -42,12 +42,12 @@ namespace Characters
         void OnDisable()
         {
             // Unsubscribe from input events
-            GameplayInputManager.OnMovingButtonPress -= EnableMovingState;
+            GameplayInputManager.OnMovingKeyPress -= EnableMovingState;
 
-            GameplayInputManager.OnRunningButtonPress -= EnableRunningState;
-            GameplayInputManager.OnRunningButtonRelease -= DisableRunningState;
+            GameplayInputManager.OnRunningKeyPress -= EnableRunningState;
+            GameplayInputManager.OnRunningKeyRelease -= DisableRunningState;
 
-            GameplayInputManager.OnStrollingButtonPress -= ToggleStrollingState;
+            GameplayInputManager.OnStrollingKeyPress -= ToggleStrollingState;
 
             GameplayInputManager.OnNothingPress -= DisableMovingState;
         }

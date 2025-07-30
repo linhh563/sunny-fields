@@ -1,5 +1,6 @@
 using UnityEngine;
 using Management.ScriptableObjects;
+using Management;
 
 namespace GameUI
 {
@@ -8,6 +9,7 @@ namespace GameUI
         public static GameplayUIManager Instance;
         private CharacterOptionsUIHandle _characterOptionsUI;
         [SerializeField] private DialogueUIController _dialogueUI;
+        [SerializeField] private GameObject _bagUI;
 
         public ItemBar _itemBar { get; private set; }
 
@@ -22,6 +24,18 @@ namespace GameUI
             _characterOptionsUI = GetComponentInChildren<CharacterOptionsUIHandle>();
 
             // _dialogueUI.gameObject.SetActive(false);
+        }
+
+        void Start()
+        {
+            CheckPropertiesValue();
+
+            GameplayInputManager.OnBagKeyPress += EnableBagUI;
+        }
+
+        void OnDisable()
+        {
+            GameplayInputManager.OnBagKeyPress -= EnableBagUI;
         }
 
         public void EnableCharacterOptionsUI(bool enable, bool isLeft)
@@ -48,6 +62,20 @@ namespace GameUI
             else
             {
                 _itemBar.gameObject.SetActive(true);
+            }
+        }
+
+        private void EnableBagUI()
+        {
+            _bagUI.gameObject.SetActive(true);
+        }
+
+        private void CheckPropertiesValue()
+        {
+            if (_characterOptionsUI == null || _bagUI == null)
+            {
+                Debug.LogError("There is a game object was not assigned in " + gameObject.name + ".");
+                return;
             }
         }
     }

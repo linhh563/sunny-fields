@@ -12,10 +12,18 @@ namespace GameUI
         [SerializeField] private GameObject _holdingItemGameObj;
         [SerializeField] private List<GameObject> _itemGameObjs = new List<GameObject>();
 
+        [SerializeField] private GameObject[] _itemBarHotkeyObjects;
+
+
+        public delegate void ItemButtonClicked(int index);
+        public static event ItemButtonClicked OnItemButtonClicked;
+
         void Start()
         {
             // Subscribe input events
             GameplayInputManager.OnItemSelected += RefreshItemBarUI;
+
+            CheckPropertiesValue();
         }
 
         void OnDisable()
@@ -30,10 +38,7 @@ namespace GameUI
 
             if (itemIndex == GameplayInputManager.noItemSelected) return;
 
-            // swap item ui in item bar and holding item ui 
-            var temp = _holdingItemGameObj.GetComponent<Image>().sprite;
-            _holdingItemGameObj.GetComponent<Image>().sprite = _itemGameObjs[itemIndex - 1].GetComponent<Image>().sprite;
-            _itemGameObjs[itemIndex - 1].GetComponent<Image>().sprite = temp;
+            SwapHoldingItemUI(itemIndex);
         }
 
         public void InitializeItemBarUI(ItemScriptableObject holdingItem, List<Item> items)
@@ -51,6 +56,38 @@ namespace GameUI
                     break;
 
                 itemImage.sprite = items[i].itemScriptableObject.avatarSprite;
+            }
+        }
+
+        private void ToggleItemBarHotkey(bool enable)
+        {
+            foreach (var obj in _itemBarHotkeyObjects)
+            {
+                obj.SetActive(enable);
+            }
+        }
+
+        public void ClickItem(int index)
+        {
+            OnItemButtonClicked?.Invoke(index);
+
+            SwapHoldingItemUI(index);
+        }
+
+        private void SwapHoldingItemUI(int itemIndex)
+        {
+            // swap item ui in item bar and holding item ui 
+            var temp = _holdingItemGameObj.GetComponent<Image>().sprite;
+            _holdingItemGameObj.GetComponent<Image>().sprite = _itemGameObjs[itemIndex - 1].GetComponent<Image>().sprite;
+            _itemGameObjs[itemIndex - 1].GetComponent<Image>().sprite = temp;
+        }
+
+        private void CheckPropertiesValue()
+        {
+            if (_holdingItemGameObj == null || _itemBarHotkeyObjects == null)
+            {
+                Debug.LogError("There is a game object was not assigned in " + gameObject.name + ".");
+                return;
             }
         }
     }

@@ -15,13 +15,13 @@ namespace Characters
         void Awake()
         {
             // TEST: subscribe input events
-            GameplayInputManager.OnInteractButtonPress += Interact;
+            GameplayInputManager.OnInteractKeyPress += Interact;
         }
 
         void OnDisable()
         {
             // TEST: unsubscribe event
-            GameplayInputManager.OnInteractButtonPress -= Interact;
+            GameplayInputManager.OnInteractKeyPress -= Interact;
         }
 
         public void Interact()

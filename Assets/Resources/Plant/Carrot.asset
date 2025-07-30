@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef867c5b9c0a4444eb6af15347840ec0, type: 3}
-  m_Name: Cabbage
+  m_Name: Carrot
   m_EditorClassIdentifier: 
-  itemName: Cabbage
+  itemName: Carrot
   description: 
-  avatarSprite: {fileID: 221378662, guid: f20485a75458c604a9672d72a0df48ad, type: 3}
+  avatarSprite: {fileID: 1488601689, guid: e43615c9955c6e84e854c778ff978035, type: 3}
   stackable: 1
   totalPhase: 4
   sprites:
-  - {fileID: -600396169, guid: f20485a75458c604a9672d72a0df48ad, type: 3}
-  - {fileID: 148214872, guid: f20485a75458c604a9672d72a0df48ad, type: 3}
-  - {fileID: -1492142553, guid: f20485a75458c604a9672d72a0df48ad, type: 3}
-  - {fileID: 221378662, guid: f20485a75458c604a9672d72a0df48ad, type: 3}
+  - {fileID: 1901693287, guid: e43615c9955c6e84e854c778ff978035, type: 3}
+  - {fileID: -1752501120, guid: e43615c9955c6e84e854c778ff978035, type: 3}
+  - {fileID: -1980491998, guid: e43615c9955c6e84e854c778ff978035, type: 3}
+  - {fileID: 1488601689, guid: e43615c9955c6e84e854c778ff978035, type: 3}
   grownTime: 01000000020000000300000004000000
   productItemAvatar: {fileID: 0}
