@@ -69,6 +69,35 @@ namespace Management
             return spawnableObj;
         }
 
+        public static GameObject SpawnObject(GameObject spawnObj, Transform parentTransform)
+        {
+            PooledObjectInfo pool = objectPools.Find(p => p.lookupString == spawnObj.name);
+
+            // check if the pool doesn't exist and create new one
+            if (pool == null)
+            {
+                pool = new PooledObjectInfo() { lookupString = spawnObj.name };
+                objectPools.Add(pool);
+            }
+
+            // check if there is any inactive object in the pool
+            GameObject spawnableObj = pool.inactiveObjects.FirstOrDefault();
+
+            // check if the spawnable object is null and create new object
+            if (spawnableObj == null)
+            {
+                spawnableObj = Instantiate(spawnObj, parentTransform);
+            }
+            // if there is any inactive object in the pool, reuse it
+            else
+            {
+                pool.inactiveObjects.Remove(spawnableObj);
+                spawnableObj.SetActive(true);
+            }
+
+            return spawnableObj;
+        }
+
         public static void ReturnObjectToPool(GameObject gameObj)
         {
             // remove the "(Clone)" word from the name of the passed object

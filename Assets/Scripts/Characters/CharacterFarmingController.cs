@@ -11,13 +11,13 @@ namespace Characters
     {
         public CharacterFarmingState farmingState { get; private set; }
         private TilemapManager _tilemapManager;
-        private CharacterInventory _characterInventory;
         [SerializeField] private GameObject plantPrefab;
+
+        [SerializeField] private InventoryManager _inventory;
 
         private void Awake()
         {
             farmingState = CharacterFarmingState.Idle;
-            _characterInventory = GetComponentInChildren<CharacterInventory>();
         }
 
         void Start()
@@ -31,7 +31,12 @@ namespace Characters
             // check in editor config properties
             if (plantPrefab == null)
             {
-                Debug.LogError("Plant prefab is null");
+                Debug.LogError("Plant prefab is not assigned in " + gameObject.name + ".");
+            }
+
+            if (_inventory == null)
+            {
+                Debug.LogError("Inventory is not assigned in " + gameObject.name + ".");
             }
         }
 
@@ -75,7 +80,10 @@ namespace Characters
             {
                 // spawn new plant and set up its property
                 GameObject plant = ObjectPoolManager.SpawnObject(plantPrefab, worldFrontPos, Quaternion.identity, ObjectPoolType.Plant);
-                plant.GetComponent<Plant>().Initialize(_characterInventory.GetHoldingItem() as PlantScriptableObject);
+                plant.GetComponent<Plant>().Initialize(_inventory.GetHoldingItem() as PlantScriptableObject);
+
+                // decrease item count by 1
+                _inventory.ConsumeItem();
 
                 // marking the tile has planted
                 _tilemapManager.plantingTilemap.SetTile(frontTilePos, _tilemapManager.whiteTile);
@@ -94,9 +102,9 @@ namespace Characters
 
         private void UpdateFarmingState()
         {
-            var item = _characterInventory.GetHoldingItem();
+            var item = _inventory.GetHoldingItem();
 
-            if (item == null) { return; }
+            if (item == null) return;
 
             // check if holding item is plant seed
                 if (item.GetType() == typeof(PlantScriptableObject))

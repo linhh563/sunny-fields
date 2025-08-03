@@ -8,10 +8,10 @@ namespace GameUI
     {
         [SerializeField] private Button _backButton;
 
-        [SerializeField] private Image _characterHat;
-        [SerializeField] private Image _characterHair;
-        [SerializeField] private Image _characterShirt;
-        [SerializeField] private Image _characterPant;
+        // [SerializeField] private Image _characterHat;
+        // [SerializeField] private Image _characterHair;
+        // [SerializeField] private Image _characterShirt;
+        // [SerializeField] private Image _characterPant;
 
         void Start()
         {
@@ -23,7 +23,7 @@ namespace GameUI
             _backButton.onClick.AddListener(DisableBagUI);
             GameplayInputManager.OnExitUIKeyPress += DisableBagUI;
 
-            UpdateCharacterClothesUI();
+            // UpdateCharacterClothesUI();
         }
 
         void OnDisable()
@@ -37,13 +37,13 @@ namespace GameUI
             gameObject.SetActive(false);
         }
 
-        private void UpdateCharacterClothesUI()
-        {
-            _characterHat.sprite = CharacterCustomizationStorage.hat.forwardSprite;
-            _characterHair.sprite = CharacterCustomizationStorage.hair.forwardSprite;
-            _characterShirt.sprite = CharacterCustomizationStorage.shirt.forwardSprite;
-            _characterPant.sprite = CharacterCustomizationStorage.pant.forwardSprite;
-        }
+        // private void UpdateCharacterClothesUI()
+        // {
+            // _characterHat.sprite = CharacterCustomizationStorage.hat.forwardSprite;
+            // _characterHair.sprite = CharacterCustomizationStorage.hair.forwardSprite;
+            // _characterShirt.sprite = CharacterCustomizationStorage.shirt.forwardSprite;
+            // _characterPant.sprite = CharacterCustomizationStorage.pant.forwardSprite;
+        // }
 
         private void CheckPropertiesValue()
         {

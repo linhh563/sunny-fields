@@ -23,6 +23,11 @@ namespace Management
         // the duration in real life (second) corresponding to a day in game
         public const float DAY_LENGTH = 20;
         public const int MINUTES_IN_DAY = 1440;
-    
+
+    }
+
+    public class InventoryConstant
+    {
+        public static int MAX_ITEM_STACK_COUNT = 99;
     }
 }

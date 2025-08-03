@@ -2,25 +2,44 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Crafting;
+using TMPro;
 
 namespace GameUI
 {
     [RequireComponent(typeof(Image))]
     public class DragableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
-        // Private properties
+        // private properties
         private ItemScriptableObject _itemScriptableObj;
         private Transform _parent;
+        private TMP_Text _countText;
+        private int _count;
+
         [SerializeField] private Image image;
 
-        // Public fields
+        // public fields
         public Transform parent { get => _parent; set => _parent = value; }
         public ItemScriptableObject itemScriptableObj { get => _itemScriptableObj; set => _itemScriptableObj = value; }
+        public int count { get => _count; set => _count = value; }
+
+        void OnEnable()
+        {
+            _count = 1;
+            _countText = GetComponentInChildren<TMP_Text>();
+        }
 
         public void InitializeItem(ItemScriptableObject newItem)
         {
             _itemScriptableObj = newItem;
             image.sprite = newItem.avatarSprite;
+        }
+
+        public void RefreshCount()
+        {
+            _countText.SetText(_count.ToString());
+
+            // if item's count is 1, hide the count text
+            _countText.gameObject.SetActive(!(count == 1));
         }
 
         public void OnBeginDrag(PointerEventData eventData)
