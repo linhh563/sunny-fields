@@ -22,4 +22,5 @@ MonoBehaviour:
   - {fileID: 1700025110, guid: b8ae5eb6378a16048a9455db52136e13, type: 3}
   - {fileID: -501690622, guid: b8ae5eb6378a16048a9455db52136e13, type: 3}
   grownTime: 010000000200000003000000
+  noWateredLimit: 2
   productItemAvatar: {fileID: 0}

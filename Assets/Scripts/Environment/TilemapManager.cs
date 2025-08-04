@@ -1,18 +1,21 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Management;
+using System.Collections.Generic;
 
 namespace Environment
 {
     public class TilemapManager : MonoBehaviour
     {
+        private string _farmName;
+
+
         [Header("Tilemaps")]
         [SerializeField] private Tilemap _baseTilemap;
         [SerializeField] private Tilemap _groundTilemap;
         [SerializeField] private Tilemap _plantingTilemap;
 
 
-        // TODO: Use Resources to get tile base automatically
         public TileBase defaultGroundTile { get; private set; }
         public TileBase defaultGroundTile_2 { get; private set; }
         public TileBase hoedGroundTile { get; private set; }
@@ -21,8 +24,9 @@ namespace Environment
         // white tile used for marking the planted tiles
         public TileBase whiteTile { get; private set; }
 
-        private string _farmName;
+        private static List<Vector3Int> _hoedGround = new List<Vector3Int>();
 
+        // public fields
         public Tilemap baseTilemap => _baseTilemap;
         public Tilemap groundTilemap => _groundTilemap;
         public Tilemap plantingTilemap => _plantingTilemap;
@@ -49,6 +53,19 @@ namespace Environment
             }
         }
 
+
+        void Start()
+        {
+            TimeManager.OnDayChanged += ResetWateredGround;
+        }
+
+
+        void OnDisable()
+        {
+            TimeManager.OnDayChanged -= ResetWateredGround;
+        }
+
+
         // get the position (in tile map) of the tile in front of the character
         public Vector3Int GetTileInFrontCharacter()
         {
@@ -67,6 +84,21 @@ namespace Environment
 
                 default:
                     return _characterPosition + Vector3Int.left;
+            }
+        }
+
+
+        public void AddHoedGround(Vector3Int newHoedGround)
+        {
+            _hoedGround.Add(newHoedGround);
+        }
+
+
+        private void ResetWateredGround()
+        {
+            foreach (var hoedGround in _hoedGround)
+            {
+                _groundTilemap.SetTile(hoedGround, hoedGroundTile);
             }
         }
     }
