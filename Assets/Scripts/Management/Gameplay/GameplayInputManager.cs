@@ -8,7 +8,7 @@ namespace Management
     {
         public static GameplayInputManager Instance;
 
-        private Dictionary<string, KeyCode> _keyBindings = new Dictionary<string, KeyCode>();
+        // private Dictionary<string, KeyCode> _keyBindings = new Dictionary<string, KeyCode>();
 
         public static int noItemSelected = -1;
 
@@ -36,9 +36,8 @@ namespace Management
             {
                 Instance = this;
             }
-
-            InitializeKeyBindings();
         }
+
 
         void Update()
         {
@@ -50,31 +49,12 @@ namespace Management
             HandleExitUIInput();
         }
 
-        private void InitializeKeyBindings()
-        {
-            // Initialize key bindings for character movement
-            _keyBindings.Add("MoveUp", KeyCode.UpArrow);
-            _keyBindings.Add("MoveDown", KeyCode.DownArrow);
-            _keyBindings.Add("MoveLeft", KeyCode.LeftArrow);
-            _keyBindings.Add("MoveRight", KeyCode.RightArrow);
-
-            _keyBindings.Add("Strolling", KeyCode.LeftControl);
-            _keyBindings.Add("Running", KeyCode.LeftShift);
-
-            // Initialize key bindings for character farming
-            _keyBindings.Add("Farming", KeyCode.F);
-
-            _keyBindings.Add("Interact", KeyCode.E);
-            _keyBindings.Add("Bag", KeyCode.B);
-            _keyBindings.Add("Pause", KeyCode.Escape);
-            _keyBindings.Add("ExitUI", KeyCode.Escape);
-        }
 
         private void HandleMovementInput()
         {
             if (IsPressMovingButton())
             {
-                if (Input.GetKey(_keyBindings["Running"]))
+                if (Input.GetKey(GameSetting.Instance.keyBindings["Running"]))
                 {
                     OnRunningKeyPress?.Invoke();
                 }
@@ -84,7 +64,7 @@ namespace Management
                     OnMovingKeyPress?.Invoke();
                 }
             }
-            else if (Input.GetKey(_keyBindings["Strolling"]))
+            else if (Input.GetKey(GameSetting.Instance.keyBindings["Strolling"]))
             {
                 OnStrollingKeyPress?.Invoke();
             }
@@ -94,18 +74,20 @@ namespace Management
             }
         }
 
+
         private void HandleFarmingInput()
         {
-            if (Input.GetKey(_keyBindings["Farming"]))
+            if (Input.GetKey(GameSetting.Instance.keyBindings["Farming"]))
             {
                 OnFarmingKeyPress?.Invoke();
             }
 
-            if (Input.GetKeyUp(_keyBindings["Farming"]))
+            if (Input.GetKeyUp(GameSetting.Instance.keyBindings["Farming"]))
             {
                 OnFarmingKeyRelease?.Invoke();
             }
         }
+
 
         private void HandleSelectItemInput()
         {
@@ -116,54 +98,60 @@ namespace Management
             }
         }
 
+
         private bool IsPressMovingButton()
         {
-            return (Input.GetKey(_keyBindings["MoveUp"])
-                || Input.GetKey(_keyBindings["MoveDown"])
-                || Input.GetKey(_keyBindings["MoveLeft"])
-                || Input.GetKey(_keyBindings["MoveRight"]));
+            return (Input.GetKey(GameSetting.Instance.keyBindings["MoveUp"])
+                || Input.GetKey(GameSetting.Instance.keyBindings["MoveDown"])
+                || Input.GetKey(GameSetting.Instance.keyBindings["MoveLeft"])
+                || Input.GetKey(GameSetting.Instance.keyBindings["MoveRight"]));
         }
+
 
         private void HandleCharacterInteractInput()
         {
-            if (Input.GetKeyDown(_keyBindings["Interact"]))
+            if (Input.GetKeyDown(GameSetting.Instance.keyBindings["Interact"]))
             {
                 OnInteractKeyPress?.Invoke();
             }
         }
 
+
         private void HandleBagInput()
         {
-            if (Input.GetKeyDown(_keyBindings["Bag"]))
+            if (Input.GetKeyDown(GameSetting.Instance.keyBindings["Bag"]))
             {
                 OnBagKeyPress?.Invoke();
             }
         }
 
+
         private void HandleExitUIInput()
         {
-            if (Input.GetKeyDown(_keyBindings["ExitUI"]))
+            if (Input.GetKeyDown(GameSetting.Instance.keyBindings["ExitUI"]))
             {
                 OnExitUIKeyPress?.Invoke();
             }
         }
 
+
         public CharacterCommand GetCharacterMoveDirection()
         {
-            if (Input.GetKey(_keyBindings["MoveUp"]))
+            if (Input.GetKey(GameSetting.Instance.keyBindings["MoveUp"]))
                 return CharacterCommand.MoveUp;
 
-            if (Input.GetKey(_keyBindings["MoveDown"]))
+            if (Input.GetKey(GameSetting.Instance.keyBindings["MoveDown"]))
                 return CharacterCommand.MoveDown;
 
-            if (Input.GetKey(_keyBindings["MoveLeft"]))
+            if (Input.GetKey(GameSetting.Instance.keyBindings["MoveLeft"]))
                 return CharacterCommand.MoveLeft;
 
-            if (Input.GetKey(_keyBindings["MoveRight"]))
+            if (Input.GetKey(GameSetting.Instance.keyBindings["MoveRight"]))
                 return CharacterCommand.MoveRight;
 
             return CharacterCommand.DoNothing;
         }
+
 
         public int GetItemIndex()
         {

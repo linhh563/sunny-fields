@@ -3,14 +3,14 @@ using System;
 namespace Management
 {
     [Serializable]
-        public enum CharacterDirection
+    public enum CharacterDirection
     {
         Up,
         Down,
         Left,
         Right
     }
-    
+
     public enum CharacterMovementState
     {
         Idle,
@@ -41,5 +41,11 @@ namespace Management
         Hair,
         Shirt,
         Pant
+    }
+
+    public enum GameLanguage
+    {
+        Vietnamese,
+        English
     }
 }

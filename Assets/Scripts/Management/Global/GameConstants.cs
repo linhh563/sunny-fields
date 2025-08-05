@@ -13,10 +13,12 @@ namespace Management
         public const string RUN_UP = "player_run_up";
     }
 
+
     public static class CharacterDefaultStats
     {
         public const float DEFAULT_SPEED = 5.0f;
     }
+
 
     public static class EnvironmentConstants
     {
@@ -26,8 +28,15 @@ namespace Management
 
     }
 
-    public class InventoryConstant
+
+    public static class InventoryConstant
     {
-        public static int MAX_ITEM_STACK_COUNT = 99;
+        public const int MAX_ITEM_STACK_COUNT = 99;
+    }
+
+
+    public static class FilePath
+    {
+        public const string CONFIG_FILE_PATH = "Resources/Data/GameSetting.json";
     }
 }

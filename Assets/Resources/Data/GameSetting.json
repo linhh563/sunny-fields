@@ -1,0 +1,16 @@
+{
+    "language": "Vietnamese",
+    
+    "hotkeysWrapper": [
+        {"action":"MoveUp", "key": "UpArrow"},
+        {"action":"MoveDown", "key": "DownArrow"},
+        {"action":"MoveLeft", "key": "LeftArrow"},
+        {"action":"MoveRight", "key": "RightArrow"},
+        {"action":"Run", "key": "LeftShift"},
+        {"action":"OpenBag", "key": "B"},
+        {"action":"Interact", "key": "E"},
+        {"action":"Farming", "key": "F"},
+        {"action":"PauseGame", "key": "Escape"},
+        {"action":"OpenQuestList", "key": "Q"}        
+    ]
+}
