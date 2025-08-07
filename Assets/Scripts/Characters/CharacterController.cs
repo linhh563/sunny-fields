@@ -94,9 +94,9 @@ namespace Characters
                 case CharacterMovementState.Moving:
                     _stateManager.ChangeState(new CharacterMovingState(this));
                     break;
-                case CharacterMovementState.Strolling:
-                    _stateManager.ChangeState(new CharacterStrollingState(this));
-                    break;
+                // case CharacterMovementState.Strolling:
+                //     _stateManager.ChangeState(new CharacterStrollingState(this));
+                //     break;
                 case CharacterMovementState.Running:
                     _stateManager.ChangeState(new CharacterRunningState(this));
                     break;

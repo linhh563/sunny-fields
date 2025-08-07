@@ -21,30 +21,21 @@ namespace Management
                 Instance = this;
             }
 
-            InitializeKeyBiding();
+            InitializeGameSetting();
 
             DontDestroyOnLoad(this);
         }
 
 
-        private void InitializeKeyBiding()
+        private void InitializeGameSetting()
         {
+            // load key binding from config file
             if (keyBindings == null)
             {
                 keyBindings = new Dictionary<string, KeyCode>();
             }
 
-            // get the game config file and check it's exist
-            string path = Path.Combine(Application.dataPath, FilePath.CONFIG_FILE_PATH);
-            if (!File.Exists(path))
-            {
-                Debug.LogError("Not found file");
-                return;
-            }
-
-            // read the file and parse it to object
-            string content = File.ReadAllText(path);
-            var hotkeysWrapper = JsonUtility.FromJson<GameConfig>(content).hotkeysWrapper;
+            var hotkeysWrapper = GameConfig.LoadGameConfig().hotkeysWrapper;
 
             // create the key bindings for each action
             keyBindings.Clear();
@@ -56,14 +47,78 @@ namespace Management
                     keyBindings.Add(hotkey.action, keyCode);
                 }
             }
+
+
+            // load game language from config file
+            gameLanguage = GameConfig.LoadGameConfig().language;
+
+            // load volume from config file
+            bgmVolume = GameConfig.LoadGameConfig().bgmVolume;
+            sfxVolume = GameConfig.LoadGameConfig().sfxVolume;
         }
 
 
-        public void ModifyKeyBiding(string keyName, KeyCode newKey)
+        public void ModifyGameLanguage(GameLanguage newLanguage)
         {
-            // TODO: check if new key is existed
+            gameLanguage = newLanguage;
+
+            // update game language in game config file
+            var config = GameConfig.LoadGameConfig();
+            config.language = newLanguage;
+
+            GameConfig.SaveConfig(config);
+
+            // TODO: CHANGE LANGUAGE IN GAME
+        }
+
+
+        // return true if new key can assign for the action
+        public bool ModifyKeyBiding(string keyName, KeyCode newKey)
+        {
+            // check if new key is existed
+            if (keyBindings.ContainsValue(newKey)) return false;
 
             keyBindings[keyName] = newKey;
+
+            // create the new hotkey list
+            List<HotKeyEntry> newHotkeys = new List<HotKeyEntry>();
+            foreach (var pair in keyBindings)
+            {
+                newHotkeys.Add(new HotKeyEntry()
+                {
+                    action = pair.Key,
+                    key = pair.Value.ToString()
+                });
+            }
+
+            // assign the hotkeys attribute from the game config object by new hotkey list
+            var config = GameConfig.LoadGameConfig();
+            config.hotkeysWrapper = newHotkeys;
+
+            GameConfig.SaveConfig(config);
+            return true;
+        }
+
+
+        public void ModifyBackgroundVolume(float newVolume)
+        {
+            bgmVolume = newVolume;
+
+            var config = GameConfig.LoadGameConfig();
+            config.bgmVolume = bgmVolume;
+
+            GameConfig.SaveConfig(config);
+        }
+
+
+        public void ModifySoundVolume(float newVolume)
+        {
+            sfxVolume = newVolume;
+
+            var config = GameConfig.LoadGameConfig();
+            config.sfxVolume = sfxVolume;
+
+            GameConfig.SaveConfig(config);
         }
     }
 }

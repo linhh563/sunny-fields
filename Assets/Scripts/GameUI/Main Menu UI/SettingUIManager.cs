@@ -36,14 +36,14 @@ namespace GameUI
             _backBtn.onClick.AddListener(_mainMenuUIManager.DisableSettingUI);
             ModifyHotKeyUI.OnKeyChanged += UpdateHotKey;
 
-            AddListenerForButtons();
+            AddListeners();
         }
 
 
         void OnDisable()
         {
             _backBtn.onClick.RemoveAllListeners();
-            RemoveListenerFromButtons();
+            RemoveAllListeners();
 
             ModifyHotKeyUI.OnKeyChanged -= UpdateHotKey;
         }
@@ -51,9 +51,8 @@ namespace GameUI
 
         private void InitializeSettingUI()
         {
-            _bgmSlider.value = GameSetting.Instance.bgmVolume;
-            _sfxSlider.value = GameSetting.Instance.sfxVolume;
-
+            InitializeGameLanguage();
+            InitializeVolumeSlider();
             UpdateHotKey();
         }
 
@@ -79,6 +78,23 @@ namespace GameUI
         }
 
 
+        private void InitializeGameLanguage()
+        {
+            _languageDropdown.ClearOptions();
+            _languageDropdown.options.Add(new TMP_Dropdown.OptionData(GameLanguage.Vietnamese.ToString(), null));
+            _languageDropdown.options.Add(new TMP_Dropdown.OptionData(GameLanguage.English.ToString(), null));
+
+            _languageDropdown.value = (int)GameSetting.Instance.gameLanguage;
+        }
+
+
+        private void InitializeVolumeSlider()
+        {
+            _bgmSlider.value = GameSetting.Instance.bgmVolume;
+            _sfxSlider.value = GameSetting.Instance.sfxVolume;
+        }
+
+
         private void OnModifyKeyPress(string keyName)
         {
             _modifyHotKeyUI.InitializeUI(keyName);
@@ -86,22 +102,54 @@ namespace GameUI
         }
 
 
-        private void AddListenerForButtons()
+        private void OnLanguageChanged(int index)
+        {
+            GameSetting.Instance.ModifyGameLanguage((GameLanguage)index);
+        }
+
+
+        private void OnBgmVolumeChanged(float value)
+        {
+            GameSetting.Instance.ModifyBackgroundVolume(value);
+        }
+
+
+        private void OnSfxVolumeChanged(float value)
+        {
+            GameSetting.Instance.ModifySoundVolume(value);
+        }
+
+
+        private void AddListeners()
         {
             foreach (var hotkey in _hotkeys)
             {
                 // use lambda expression to add listener has arguments
                 hotkey.onClick.AddListener(() => OnModifyKeyPress(hotkey.gameObject.name));
             }
+
+            // add listener for language dropdown
+            _languageDropdown.onValueChanged.AddListener(OnLanguageChanged);
+
+            // add listener to sliders
+            _bgmSlider.onValueChanged.AddListener(OnBgmVolumeChanged);
+            _sfxSlider.onValueChanged.AddListener(OnSfxVolumeChanged);
         }
 
 
-        private void RemoveListenerFromButtons()
+        private void RemoveAllListeners()
         {
             foreach (var hotkey in _hotkeys)
             {
                 hotkey.onClick.RemoveAllListeners();
             }
+
+            // remove all listeners from language dropdown
+            _languageDropdown.onValueChanged.RemoveAllListeners();
+
+            // remove all listeners from sliders
+            _bgmSlider.onValueChanged.RemoveAllListeners();
+            _sfxSlider.onValueChanged.RemoveAllListeners();
         }
 
 

@@ -1,6 +1,5 @@
 using Management;
-using UnityEngine;
-using UnityEngine.Tilemaps;
+
 
 namespace Characters
 {
@@ -8,10 +7,12 @@ namespace Characters
     {
         private CharacterController _controller;
 
+
         public CharacterIdleState(CharacterController controller)
         {
             _controller = controller;
         }
+
 
         public void Enter()
         {
@@ -20,6 +21,7 @@ namespace Characters
 
             _controller.transform.position = worrldPos;
         }
+
 
         public void Execute()
         {
@@ -37,24 +39,29 @@ namespace Characters
             }
         }
 
+
         public void Exit()
         {
         }
     }
 
+
     public class CharacterMovingState : IState
     {
         CharacterController _controller;
+
 
         public CharacterMovingState(CharacterController controller)
         {
             _controller = controller;
         }
 
+
         public void Enter()
         {
             _controller.movementController.ChangeSpeed(CharacterDefaultStats.DEFAULT_SPEED);
         }
+
 
         public void Execute()
         {
@@ -75,50 +82,56 @@ namespace Characters
             _controller.Moving();
         }
 
+
         public void Exit()
         {
 
         }
     }
 
-    public class CharacterStrollingState : IState
-    {
-        CharacterController _controller;
 
-        public CharacterStrollingState(CharacterController controller)
-        {
-            _controller = controller;
-        }
+    // public class CharacterStrollingState : IState
+    // {
+    //     CharacterController _controller;
 
-        public void Enter()
-        {
-            _controller.movementController.ChangeSpeed(CharacterDefaultStats.DEFAULT_SPEED * 0.65f);
-        }
+    //     public CharacterStrollingState(CharacterController controller)
+    //     {
+    //         _controller = controller;
+    //     }
 
-        public void Execute()
-        {
-            // TODO: update strolling animation
-            _controller.Moving();
-        }
+    //     public void Enter()
+    //     {
+    //         _controller.movementController.ChangeSpeed(CharacterDefaultStats.DEFAULT_SPEED * 0.65f);
+    //     }
 
-        public void Exit()
-        {
-        }
-    }
+    //     public void Execute()
+    //     {
+    //         // TODO: update strolling animation
+    //         _controller.Moving();
+    //     }
+
+    //     public void Exit()
+    //     {
+    //     }
+    // }
+
 
     public class CharacterRunningState : IState
     {
         CharacterController _controller;
+
 
         public CharacterRunningState(CharacterController controller)
         {
             _controller = controller;
         }
 
+
         public void Enter()
         {
             _controller.movementController.ChangeSpeed(CharacterDefaultStats.DEFAULT_SPEED * 1.5f);
         }
+
 
         public void Execute()
         {
@@ -137,6 +150,7 @@ namespace Characters
 
             _controller.Moving();
         }
+        
 
         public void Exit()
         {

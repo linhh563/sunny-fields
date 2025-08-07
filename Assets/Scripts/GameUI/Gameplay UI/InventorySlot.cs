@@ -12,6 +12,10 @@ namespace GameUI
                 var inventoryItem = eventData.pointerDrag.GetComponent<DragableItem>();
                 inventoryItem.parent = transform;
             }
+            else if (transform.childCount == 1)
+            {
+                // TODO: swap 2 items
+            }
         }
     }
 }

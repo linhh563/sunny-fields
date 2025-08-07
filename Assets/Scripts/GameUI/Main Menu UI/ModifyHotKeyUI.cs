@@ -40,20 +40,33 @@ namespace Management
         {
             if (!Input.anyKey) return;
 
+            bool assignSuccess = false;
             // wait for player press new hotkey
             foreach (KeyCode kcode in System.Enum.GetValues(typeof(KeyCode)))
             {
                 if (Input.GetKeyDown(kcode))
                 {
-                    GameSetting.Instance.ModifyKeyBiding(_keyName, kcode);
+                    // check if new key can assign to the action
+                    assignSuccess = GameSetting.Instance.ModifyKeyBiding(_keyName, kcode);
+
+                    // modify the ui if player can't assign new hotkey
+                    if (!assignSuccess)
+                    {
+                        _message.SetText("The key pressed is assigned in another action.\nPlease press another key!");
+                        _message.color = Color.red;
+                        return;
+                    }
+
+                    assignSuccess = true;
+                    _message.color = Color.black;
                 }
             }
 
             // update new key in setting ui
             OnKeyChanged?.Invoke();
 
-            // close ui
-            gameObject.SetActive(false);
+            // if player assign new hotkey unsuccessful, don't close the ui
+            gameObject.SetActive(!assignSuccess);
         }
 
 

@@ -1,16 +1,51 @@
 {
-    "language": "Vietnamese",
-    
+    "language": 0,
+    "bgmVolume": 0.5,
+    "sfxVolume": 0.5,
     "hotkeysWrapper": [
-        {"action":"MoveUp", "key": "UpArrow"},
-        {"action":"MoveDown", "key": "DownArrow"},
-        {"action":"MoveLeft", "key": "LeftArrow"},
-        {"action":"MoveRight", "key": "RightArrow"},
-        {"action":"Run", "key": "LeftShift"},
-        {"action":"OpenBag", "key": "B"},
-        {"action":"Interact", "key": "E"},
-        {"action":"Farming", "key": "F"},
-        {"action":"PauseGame", "key": "Escape"},
-        {"action":"OpenQuestList", "key": "Q"}        
+        {
+            "action": "MoveUp",
+            "key": "UpArrow"
+        },
+        {
+            "action": "MoveDown",
+            "key": "DownArrow"
+        },
+        {
+            "action": "MoveLeft",
+            "key": "LeftArrow"
+        },
+        {
+            "action": "MoveRight",
+            "key": "RightArrow"
+        },
+        {
+            "action": "Run",
+            "key": "LeftShift"
+        },
+        {
+            "action": "OpenBag",
+            "key": "B"
+        },
+        {
+            "action": "Interact",
+            "key": "E"
+        },
+        {
+            "action": "Farming",
+            "key": "F"
+        },
+        {
+            "action": "PauseGame",
+            "key": "Escape"
+        },
+        {
+            "action": "OpenQuestList",
+            "key": "Q"
+        },
+        {
+            "action": "ExitUI",
+            "key": "Escape"
+        }
     ]
 }

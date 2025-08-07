@@ -1,8 +1,6 @@
-using System;
-
 namespace Management
 {
-    [Serializable]
+    [System.Serializable]
     public enum CharacterDirection
     {
         Up,
@@ -11,6 +9,8 @@ namespace Management
         Right
     }
 
+
+    [System.Serializable]
     public enum CharacterMovementState
     {
         Idle,
@@ -19,6 +19,8 @@ namespace Management
         Strolling
     }
 
+
+    [System.Serializable]
     public enum CharacterCommand
     {
         MoveUp,
@@ -28,6 +30,8 @@ namespace Management
         DoNothing
     }
 
+
+    [System.Serializable]
     public enum ObjectPoolType
     {
         Plant,
@@ -35,6 +39,17 @@ namespace Management
         None
     }
 
+
+    [System.Serializable]
+    public enum GroundState
+    {
+        None = 1,
+        Hoed = 2,
+        Watered = 3
+    }
+
+
+    [System.Serializable]
     public enum ClotheType
     {
         Hat,
@@ -43,9 +58,11 @@ namespace Management
         Pant
     }
 
+
+    [System.Serializable]
     public enum GameLanguage
     {
-        Vietnamese,
-        English
+        Vietnamese = 0,
+        English = 1
     }
 }

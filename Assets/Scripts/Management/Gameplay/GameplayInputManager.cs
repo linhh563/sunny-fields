@@ -54,7 +54,7 @@ namespace Management
         {
             if (IsPressMovingButton())
             {
-                if (Input.GetKey(GameSetting.Instance.keyBindings["Running"]))
+                if (Input.GetKey(GameSetting.Instance.keyBindings["Run"]))
                 {
                     OnRunningKeyPress?.Invoke();
                 }
@@ -64,10 +64,10 @@ namespace Management
                     OnMovingKeyPress?.Invoke();
                 }
             }
-            else if (Input.GetKey(GameSetting.Instance.keyBindings["Strolling"]))
-            {
-                OnStrollingKeyPress?.Invoke();
-            }
+            // else if (Input.GetKey(GameSetting.Instance.keyBindings["Strolling"]))
+            // {
+            //     OnStrollingKeyPress?.Invoke();
+            // }
             else
             {
                 OnNothingPress?.Invoke();
@@ -119,7 +119,7 @@ namespace Management
 
         private void HandleBagInput()
         {
-            if (Input.GetKeyDown(GameSetting.Instance.keyBindings["Bag"]))
+            if (Input.GetKeyDown(GameSetting.Instance.keyBindings["OpenBag"]))
             {
                 OnBagKeyPress?.Invoke();
             }

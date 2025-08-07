@@ -9,6 +9,7 @@ namespace Management
     {
         [SerializeField] private InventorySlot _holdingItem;
         [SerializeField] private InventorySlot[] _inventorySlots;
+        public static int gold;
         private GameObject inventoryItemPrefab;
 
         void Start()
@@ -19,6 +20,9 @@ namespace Management
             CharacterInteractionDetect.OnCollectItem += AddItem;
 
             CheckPropertiesValue();
+
+            // TEST
+            gold = 100;
         }
 
 
