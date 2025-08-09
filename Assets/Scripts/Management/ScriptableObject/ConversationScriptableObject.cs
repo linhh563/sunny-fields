@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Management.ScriptableObjects
@@ -6,11 +7,21 @@ namespace Management.ScriptableObjects
     public class ConversationScriptableObject : ScriptableObject
     {
         public string NPCName;
-        // public Sprite NPCAvatar;
-        // public bool npcTalkFirst;
+        public Sprite NPCAvatar;
+        public string[] dialogueLines;
+        public List<int> endConversationIndex;
+        
+        public ConversationDecision[] decisions;
+    }
 
-        [TextArea(3, 20)]
-        public string[] NPCParagraphs;
-        // public string[] mainCharacterDialogues;
+
+    [System.Serializable]
+    public class ConversationDecision
+    {
+        // the dialogue index that the decisions appear
+        public int dialogueIndex;
+        public string[] decisions;
+        public DecisionType[] decisionTypes;
+        public int[] nextDialogueIndex;
     }
 }

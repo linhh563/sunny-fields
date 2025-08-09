@@ -8,10 +8,13 @@ namespace GameUI
     {
         public static GameplayUIManager Instance;
         private CharacterOptionsUIHandle _characterOptionsUI;
-        [SerializeField] private DialogueUIController _dialogueUI;
+        [SerializeField] private DialogueUIController _conversationUI;
         [SerializeField] private GameObject _bagUI;
+        [SerializeField] private StoreUIController _storeUI;
+
 
         public ItemBar _itemBar { get; private set; }
+        public DialogueUIController conversationUI { get => _conversationUI; set => _conversationUI = value; }
 
         void Awake()
         {
@@ -23,8 +26,9 @@ namespace GameUI
             _itemBar = GetComponentInChildren<ItemBar>();
             _characterOptionsUI = GetComponentInChildren<CharacterOptionsUIHandle>();
 
-            // _dialogueUI.gameObject.SetActive(false);
+            _conversationUI.gameObject.SetActive(false);
         }
+
 
         void Start()
         {
@@ -33,10 +37,12 @@ namespace GameUI
             GameplayInputManager.OnBagKeyPress += EnableBagUI;
         }
 
+
         void OnDisable()
         {
             GameplayInputManager.OnBagKeyPress -= EnableBagUI;
         }
+
 
         public void EnableCharacterOptionsUI(bool enable, bool isLeft)
         {
@@ -49,32 +55,33 @@ namespace GameUI
             _characterOptionsUI.EnableOptionsUI(isLeft);
         }
 
-        public void PlayNextDialogue(ConversationScriptableObject conversation)
-        {
-            _dialogueUI.PlayNextDialogue(conversation);
 
-            // hide item bar when character is in conversation
-            if (_dialogueUI.gameObject.activeSelf)
-            {
-                _itemBar.gameObject.SetActive(false);
-                _characterOptionsUI.DisableOptionsUI();
-            }
-            else
-            {
-                _itemBar.gameObject.SetActive(true);
-            }
+        public void EnableConversationUI(bool enable)
+        {
+            _conversationUI.gameObject.SetActive(enable);
         }
+
 
         private void EnableBagUI()
         {
             _bagUI.gameObject.SetActive(true);
         }
 
+
+        public void EnableStoreUI(bool enable)
+        {
+            _storeUI.gameObject.SetActive(enable);
+        }
+
+
         private void CheckPropertiesValue()
         {
-            if (_characterOptionsUI == null || _bagUI == null)
+            if (_characterOptionsUI == null ||
+                _bagUI == null ||
+                _conversationUI == null ||
+                _storeUI == null)
             {
-                Debug.LogError("There is a game object was not assigned in " + gameObject.name + ".");
+                Debug.LogError("There is a component was not assigned in " + gameObject.name + ".");
                 return;
             }
         }

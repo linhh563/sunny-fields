@@ -1,120 +1,64 @@
 using UnityEngine;
 using TMPro;
-using System.Collections.Generic;
 using Management.ScriptableObjects;
 using System.Collections;
+using UnityEngine.UI;
+using Management;
 
 namespace GameUI
 {
     public class DialogueUIController : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _npcNameText;
-        [SerializeField] private TextMeshProUGUI _dialogueText;
+        [SerializeField] private TMP_Text _npcNameText;
+        [SerializeField] private Image _npcAvatar;
+        [SerializeField] private TMP_Text _dialogueText;
+        [SerializeField] private Transform _decisionPanel;
+        
+        public GameObject decisionButtonPrefab { get; private set;}
 
-        private Queue<string> _dialogueQueue = new Queue<string>();
-        private bool _conversationEnded;
-        private float _typeSpeed = 10f;
-        private bool _isTyping;
-        private string _nextDialogue;
-        private Coroutine _typeDialogueCoroutine;
 
-        private const string HTML_ALPHA = "<color=#00000000>";
-        private const float MAX_TYPE_TIME = 0.25f;
+        public TMP_Text dialogueText { get => _dialogueText; set => _dialogueText = value; }
+        public Transform decisionPanel { get => _decisionPanel; set => _decisionPanel = value; }
 
-        public void PlayNextDialogue(ConversationScriptableObject conversation)
+        void Awake()
         {
-            // if there is nothing in the queue
-            if (_dialogueQueue.Count == 0)
-            {
-                // start the conversation
-                if (!_conversationEnded)
-                {
-                    StartConversation(conversation);
-                }
-                // end the conversation
-                else if (_conversationEnded && !_isTyping)
-                {
-                    EndConversation();
-                    return;
-                }
-            }
+            decisionButtonPrefab = Resources.Load<GameObject>("Prefabs/DecisionButton");
 
-            // if there is something in the queue
-            if (!_isTyping)
-            {
-                _nextDialogue = _dialogueQueue.Dequeue();
-                _typeDialogueCoroutine = StartCoroutine(TypeDialogueText(_nextDialogue));
-            }
-            // conversation is being type out
-            else
-            {
-                FinishParagraphEarly();
-            }
-
-            if (_dialogueQueue.Count == 0)
-            {
-                _conversationEnded = true;
-            }
+            CheckPropertiesValue();
         }
 
-        private void StartConversation(ConversationScriptableObject conversation)
+
+        public void SetNPC(string name, Sprite avatar)
         {
-            // activate conversation ui game object
-            if (!gameObject.activeSelf)
-            {
-                gameObject.SetActive(true);
-            }
-
-            _npcNameText.text = conversation.NPCName;
-
-            // add dialogue to queue
-            for (int i = 0; i < conversation.NPCParagraphs.Length; i++)
-            {
-                _dialogueQueue.Enqueue(conversation.NPCParagraphs[i]);
-            }
+            _npcNameText.SetText(name);
+            _npcAvatar.sprite = avatar;
         }
 
-        private void EndConversation()
+
+        public void SetDialogue(string dialogue)
         {
-            _dialogueQueue.Clear();
-
-            _conversationEnded = false;
-
-            if (gameObject.activeSelf)
-            {
-                gameObject.SetActive(false);
-            }
+            _dialogueText.SetText(dialogue);
         }
 
-        private IEnumerator TypeDialogueText(string _nextDialogue)
+
+        public void AddLetterToDialogue(char letter)
         {
-            _isTyping = true;
-
-            _dialogueText.text = "";
-
-            string originalText = _nextDialogue;
-            string displayedText = "";
-            int alphaIndex = 0;
-
-            foreach (char c in _nextDialogue.ToCharArray())
-            {
-                alphaIndex++;
-                _dialogueText.text = originalText;
-
-                displayedText = _dialogueText.text.Insert(alphaIndex, HTML_ALPHA);
-                _dialogueText.text = displayedText;
-
-                yield return new WaitForSeconds(MAX_TYPE_TIME / _typeSpeed);
-            }
-
-            _isTyping = false;
+            _dialogueText.text += letter;
         }
 
-        private void FinishParagraphEarly()
+
+        private void CheckPropertiesValue()
         {
-            StopCoroutine(_typeDialogueCoroutine);
-            _dialogueText.text = _nextDialogue;
-            _isTyping = false;
+            if (_decisionPanel == null ||
+                _npcNameText == null ||
+                _npcAvatar == null ||
+                _dialogueText == null ||
+                decisionButtonPrefab == null)
+            {
+                Debug.LogError("There is a component was not assigned in " + gameObject.name + ".");
+                return;
+            }
+
         }
     }
 }

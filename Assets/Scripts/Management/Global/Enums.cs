@@ -65,4 +65,13 @@ namespace Management
         Vietnamese = 0,
         English = 1
     }
+
+
+    [System.Serializable]
+    public enum DecisionType
+    {
+        Talking,
+        Buying,
+        Selling
+    }
 }

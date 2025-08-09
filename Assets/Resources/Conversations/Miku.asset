@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: Miku
   m_EditorClassIdentifier: 
   NPCName: Miku
-  NPCParagraphs:
-  - Hi LinhH
-  - How are you today?
-  - I have got some fortune recently. That thing is very very good. I have this by
-    a give away was held by a streamer in YouTube.
+  NPCAvatar: {fileID: 7482667652216324306, guid: 7c21d452f8af0ca40a0478563761c89d, type: 3}
+  NPCParagraphs: []
+  dialogueDecisions: []
