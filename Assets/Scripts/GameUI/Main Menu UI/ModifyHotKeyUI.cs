@@ -2,8 +2,10 @@ using UnityEngine;
 using TMPro;
 using System;
 
+using Management;
 
-namespace Management
+
+namespace GameUI
 {
     public class ModifyHotKeyUI : MonoBehaviour
     {

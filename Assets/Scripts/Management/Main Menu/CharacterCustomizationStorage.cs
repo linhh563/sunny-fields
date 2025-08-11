@@ -13,6 +13,10 @@ namespace Management
         public static ClotheScriptableObject shirt { get; private set; }
         public static ClotheScriptableObject pant { get; private set; }
 
+        private static string _farmName;
+        private static string _characterName;
+
+
         void Awake()
         {
             ResetCustomization();
@@ -22,6 +26,7 @@ namespace Management
             DontDestroyOnLoad(this);
         }
 
+
         private void ResetCustomization()
         {
             hair = Resources.Load<ClotheScriptableObject>("Items/Clothes/Hair/Hair 1");
@@ -29,6 +34,14 @@ namespace Management
             shirt = Resources.Load<ClotheScriptableObject>("Items/Clothes/Shirts/Shirt 1");
             pant = Resources.Load<ClotheScriptableObject>("Items/Clothes/Pants/Pant 1");
         }
+
+
+        public static void SetFarmAttribute(string characterName, string farmName)
+        {
+            _characterName = characterName;
+            _farmName = farmName;
+        }
+
 
         public void ChangeClothe(ClotheScriptableObject newClothe, ClotheType type)
         {

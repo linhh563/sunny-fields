@@ -9,16 +9,14 @@ namespace GameUI
 {
     public class SettingUIManager : MonoBehaviour
     {
-        [SerializeField] private Button _backBtn;
+        [SerializeField] protected Button _backBtn;
+        [SerializeField] protected TMP_Dropdown _languageDropdown;
+        [SerializeField] protected Slider _bgmSlider;
+        [SerializeField] protected Slider _sfxSlider;
+        [SerializeField] protected List<Button> _hotkeys;
+        [SerializeField] protected ModifyHotKeyUI _modifyHotKeyUI;
+
         private MainMenuUIManager _mainMenuUIManager;
-
-        [SerializeField] private TMP_Dropdown _languageDropdown;
-        [SerializeField] private Slider _bgmSlider;
-        [SerializeField] private Slider _sfxSlider;
-
-        [SerializeField] private List<Button> _hotkeys;
-
-        [SerializeField] private ModifyHotKeyUI _modifyHotKeyUI;
 
 
         void Awake()
@@ -155,25 +153,19 @@ namespace GameUI
 
         private void CheckPropertiesValue()
         {
+            if (_backBtn == null ||
+                _hotkeys == null ||
+                _languageDropdown == null ||
+                _bgmSlider == null ||
+                _sfxSlider == null ||
+                _modifyHotKeyUI == null)
+            {
+                Debug.LogError("There is a component was not assigned in " + gameObject.name + ".");
+            }
+
             if (_mainMenuUIManager == null)
             {
-                Debug.LogError("Can't Main Menu UI Manager script in " + gameObject.name + ".");
-                return;
-            }
-
-            if (_backBtn == null || _hotkeys == null)
-            {
-                Debug.LogError("There is a button was not assigned in " + gameObject.name + ".");
-            }
-
-            if (_languageDropdown == null || _bgmSlider == null || _sfxSlider == null)
-            {
-                Debug.LogError("There is a slider or dropdown was not assigned in " + gameObject.name + ".");
-            }
-
-            if (_modifyHotKeyUI == null)
-            {
-                Debug.LogError("There is a script was not assigned in " + gameObject.name + ".");
+                Debug.LogError("Can't load _mainMenuUIManager.");
             }
         }
     }

@@ -10,6 +10,7 @@ namespace GameUI
 {
     public class CharacterCustomizationUI : MonoBehaviour
     {
+        [Header("Buttons")]
         [SerializeField] private Button _backBtn;
 
         // customize character buttons
@@ -23,25 +24,36 @@ namespace GameUI
         [SerializeField] private Button _nextShirtBtn;
         [SerializeField] private Button _previousPantBtn;
         [SerializeField] private Button _nextPantBtn;
-
         [SerializeField] private Button _startButton;
 
-        // character clothes index
-        [SerializeField] TMP_Text _hairIndex;
-        [SerializeField] TMP_Text _hatIndex;
-        [SerializeField] TMP_Text _shirtIndex;
-        [SerializeField] TMP_Text _pantIndex;
 
+        [Header("Texts")]
+        // character clothes index
+        [SerializeField] private TMP_Text _hairIndex;
+        [SerializeField] private TMP_Text _hatIndex;
+        [SerializeField] private TMP_Text _shirtIndex;
+        [SerializeField] private TMP_Text _pantIndex;
+
+
+        [Header("Images")]
         // character customization images
-        [SerializeField] Image _hairImage;
-        [SerializeField] Image _hatImage;
-        [SerializeField] Image _shirtImage;
-        [SerializeField] Image _pantImage;
+        [SerializeField] private Image _hairImage;
+        [SerializeField] private Image _hatImage;
+        [SerializeField] private Image _shirtImage;
+        [SerializeField] private Image _pantImage;
+
+
+        [Header("Text Fields")]
+        [SerializeField] private TMP_InputField _characterNameTxtField;
+        [SerializeField] private TMP_InputField _farmNameTxtField;
+
 
         private MainMenuUIManager _mainMenuUIManager;
 
         public delegate void CustomizeButtonClicked(ClotheType clotheType, bool isNextButton);
         public static CustomizeButtonClicked OnCustomizeButtonClicked;
+
+
 
         void Awake()
         {
@@ -50,6 +62,7 @@ namespace GameUI
             CheckPropertiesValue();
         }
 
+
         private void OnEnable()
         {
             AddButtonsListener();
@@ -57,10 +70,12 @@ namespace GameUI
             UpdateClothesIndexUI();
         }
 
+
         void OnDisable()
         {
             RemoveListenerFromAllButtons();
         }
+
 
         private void ChangeNextHat()
         {
@@ -78,6 +93,7 @@ namespace GameUI
             _hatImage.sprite = nextHat.forwardSprite;
         }
 
+
         private void ChangePreviousHat()
         {
             OnCustomizeButtonClicked?.Invoke(ClotheType.Hat, false);
@@ -93,6 +109,7 @@ namespace GameUI
 
             _hatImage.sprite = previousHat.forwardSprite;
         }
+
 
         private void ChangeNextHair()
         {
@@ -110,6 +127,7 @@ namespace GameUI
             _hairImage.sprite = nextHair.forwardSprite;
         }
 
+
         private void ChangePreviousHair()
         {
             OnCustomizeButtonClicked?.Invoke(ClotheType.Hair, false);
@@ -125,6 +143,7 @@ namespace GameUI
 
             _hairImage.sprite = previousHair.forwardSprite;
         }
+
 
         private void ChangeNextShirt()
         {
@@ -142,6 +161,7 @@ namespace GameUI
             _shirtImage.sprite = nextShirt.forwardSprite;
         }
 
+
         private void ChangePreviousShirt()
         {
             OnCustomizeButtonClicked?.Invoke(ClotheType.Shirt, false);
@@ -157,6 +177,7 @@ namespace GameUI
 
             _shirtImage.sprite = previousShirt.forwardSprite;
         }
+
 
         private void ChangeNextPant()
         {
@@ -174,6 +195,7 @@ namespace GameUI
             _pantImage.sprite = nextPant.forwardSprite;
         }
 
+
         private void ChangePreviousPant()
         {
             OnCustomizeButtonClicked?.Invoke(ClotheType.Pant, false);
@@ -190,6 +212,7 @@ namespace GameUI
             _pantImage.sprite = previousPant.forwardSprite;
         }
 
+
         private void UpdateClothesIndexUI()
         {
             _hairIndex.SetText((CharacterCustomization._currentHairIndex + 1).ToString());
@@ -198,10 +221,29 @@ namespace GameUI
             _pantIndex.SetText((CharacterCustomization._currentPantIndex + 1).ToString());
         }
 
+
         private void LoadGameplayScene()
         {
-            SceneManager.LoadScene("Gameplay");
+            if (CheckCustomizeInfo())
+            {
+                // set up farm attributes
+                CharacterCustomizationStorage.SetFarmAttribute(_characterNameTxtField.text, _farmNameTxtField.text);
+
+                SceneManager.LoadScene("Gameplay");
+            }
+            // else
+                // TODO: show the message
         }
+
+
+        private bool CheckCustomizeInfo()
+        {
+            if (_characterNameTxtField.text == "" || _farmNameTxtField.text == "")
+                return false;
+
+            return true;
+        }
+
 
         private void AddButtonsListener()
         {
@@ -231,6 +273,7 @@ namespace GameUI
             _startButton.onClick.AddListener(LoadGameplayScene);
         }
 
+
         private void RemoveListenerFromAllButtons()
         {
             _backBtn.onClick.RemoveAllListeners();
@@ -245,6 +288,7 @@ namespace GameUI
             _nextPantBtn.onClick.RemoveAllListeners();
             _previousPantBtn.onClick.RemoveAllListeners();
         }
+
 
         private void ResetClotheUI()
         {
@@ -264,6 +308,7 @@ namespace GameUI
             var initialPant = CharacterCustomization._pantCollection[CharacterCustomization._currentPantIndex] as ClotheScriptableObject;
             _pantImage.sprite = initialPant.forwardSprite;
         }
+
 
         private void CheckPropertiesValue()
         {
@@ -296,6 +341,12 @@ namespace GameUI
             {
                 Debug.LogError("There is an image was not assigned in " + gameObject.name + ".");
                 return;
+            }
+
+            if (_characterNameTxtField == null ||
+                _farmNameTxtField == null)
+            {
+                Debug.LogError("There is a text fields was not assigned in " + gameObject.name + ".");
             }
         }
     }
