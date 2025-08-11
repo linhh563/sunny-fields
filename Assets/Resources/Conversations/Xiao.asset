@@ -20,16 +20,12 @@ MonoBehaviour:
   - Welcome to my store.
   - Ya, see you later.
   endConversationIndex: 0200000003000000
-  decisions:
+  allDecisions:
   - dialogueIndex: 1
     decisions:
-    - Yeah, let's me check it.
-    - Nah, I'm out of money, bro.
-    decisionTypes: 0000000001000000
-    nextDialogueIndex: 0200000003000000
-  - dialogueIndex: 1
-    decisions:
-    - Yeah, let's me check it.
-    - Nah, I'm out of money, bro.
-    decisionTypes: 0000000001000000
-    nextDialogueIndex: 0200000003000000
+    - decisionText: Yah, let me check some items.
+      decisionType: 1
+      nextDialogueIndex: 2
+    - decisionText: Nah, I'm out of money.
+      decisionType: 0
+      nextDialogueIndex: 3

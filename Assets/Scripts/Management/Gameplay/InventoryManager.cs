@@ -9,6 +9,7 @@ namespace Management
     {
         [SerializeField] private InventorySlot _holdingItem;
         [SerializeField] private InventorySlot[] _inventorySlots;
+
         public static int gold;
         private GameObject inventoryItemPrefab;
 
@@ -22,7 +23,8 @@ namespace Management
             CheckPropertiesValue();
 
             // TEST
-            gold = 100;
+            gold = 2000;
+            ItemInStoreUI.OnItemBought += BuyItems;
         }
 
 
@@ -30,6 +32,9 @@ namespace Management
         {
             GameplayInputManager.OnItemSelected -= ChangeSelectedItem;
             CharacterInteractionDetect.OnCollectItem -= AddItem;
+
+            // TEST
+            ItemInStoreUI.OnItemBought -= BuyItems;
         }
 
 
@@ -102,6 +107,30 @@ namespace Management
         }
 
 
+        private void SpawnNewItem(ItemScriptableObject item, InventorySlot slot)
+        {
+            var newItemGameObj = ObjectPoolManager.SpawnObject(inventoryItemPrefab, slot.transform);
+
+            // set item scriptable object
+            var inventoryItem = newItemGameObj.GetComponent<DragableItem>();
+
+            inventoryItem.InitializeItem(item);
+        }
+
+
+        public ItemScriptableObject GetHoldingItem()
+        {
+            // if holding item is null or not active, return null
+            if (_holdingItem.transform.childCount == 0 ||
+                _holdingItem.transform.GetChild(0).gameObject.activeSelf == false)
+            {
+                return null;
+            }
+
+            return _holdingItem.GetComponentInChildren<DragableItem>().itemScriptableObj;
+        }
+
+
         public void ConsumeItem()
         {
             if (_holdingItem.transform.childCount == 0) return;
@@ -119,26 +148,12 @@ namespace Management
         }
 
 
-        public ItemScriptableObject GetHoldingItem()
+        private void BuyItems(ItemScriptableObject item, int quantity)
         {
-            // if holding item is null or not active, return null
-            if (_holdingItem.transform.childCount == 0 ||
-                _holdingItem.transform.GetChild(0).gameObject.activeSelf == false)
+            for (int i = 0; i < quantity; i++)
             {
-                return null;
+                AddItem(item);
             }
-
-            return _holdingItem.GetComponentInChildren<DragableItem>().itemScriptableObj;
-        }
-
-        private void SpawnNewItem(ItemScriptableObject item, InventorySlot slot)
-        {
-            var newItemGameObj = ObjectPoolManager.SpawnObject(inventoryItemPrefab, slot.transform);
-
-            // set item scriptable object
-            var inventoryItem = newItemGameObj.GetComponent<DragableItem>();
-            // inventoryItem.itemScriptableObj = item;
-            inventoryItem.InitializeItem(item);
         }
 
 

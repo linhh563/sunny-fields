@@ -10,8 +10,8 @@ namespace Management.ScriptableObjects
         public Sprite NPCAvatar;
         public string[] dialogueLines;
         public List<int> endConversationIndex;
-        
-        public ConversationDecision[] decisions;
+
+        public ConversationDecision[] allDecisions;
     }
 
 
@@ -20,8 +20,15 @@ namespace Management.ScriptableObjects
     {
         // the dialogue index that the decisions appear
         public int dialogueIndex;
-        public string[] decisions;
-        public DecisionType[] decisionTypes;
-        public int[] nextDialogueIndex;
+        public DecisionEntry[] decisions;
+    }
+
+
+    [System.Serializable]
+    public class DecisionEntry
+    {
+        public string decisionText;
+        public DecisionType decisionType;
+        public int nextDialogueIndex;
     }
 }

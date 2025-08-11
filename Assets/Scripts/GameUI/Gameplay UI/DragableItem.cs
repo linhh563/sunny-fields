@@ -15,12 +15,19 @@ namespace GameUI
         private TMP_Text _countText;
         private int _count;
 
-        [SerializeField] private Image image;
+        [SerializeField] private Image _image;
 
         // public fields
         public Transform parent { get => _parent; set => _parent = value; }
         public ItemScriptableObject itemScriptableObj { get => _itemScriptableObj; set => _itemScriptableObj = value; }
         public int count { get => _count; set => _count = value; }
+
+
+        void Start()
+        {
+            CheckPropertiesValue();
+        }
+
 
         void OnEnable()
         {
@@ -28,11 +35,14 @@ namespace GameUI
             _countText = GetComponentInChildren<TMP_Text>();
         }
 
+
         public void InitializeItem(ItemScriptableObject newItem)
         {
             _itemScriptableObj = newItem;
-            image.sprite = newItem.avatarSprite;
+
+            _image.sprite = _itemScriptableObj.avatarSprite;
         }
+
 
         public void RefreshCount()
         {
@@ -42,23 +52,35 @@ namespace GameUI
             _countText.gameObject.SetActive(!(count == 1));
         }
 
+
         public void OnBeginDrag(PointerEventData eventData)
         {
             _parent = transform.parent;
-            image.raycastTarget = false;
+            _image.raycastTarget = false;
             transform.SetParent(transform.root);
 
         }
+
 
         public void OnDrag(PointerEventData eventData)
         {
             transform.position = Input.mousePosition;
         }
 
+
         public void OnEndDrag(PointerEventData eventData)
         {
-            image.raycastTarget = true;
+            _image.raycastTarget = true;
             transform.SetParent(_parent);
+        }
+
+
+        private void CheckPropertiesValue()
+        {
+            if (_image == null)
+            {
+                Debug.LogError("There is a component was not assigned in " + gameObject.name + ".");
+            }
         }
     }
 }

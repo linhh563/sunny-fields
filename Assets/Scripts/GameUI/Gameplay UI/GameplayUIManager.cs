@@ -1,12 +1,14 @@
 using UnityEngine;
-using Management.ScriptableObjects;
+
 using Management;
+
 
 namespace GameUI
 {
     public class GameplayUIManager : MonoBehaviour
     {
         public static GameplayUIManager Instance;
+        
         private CharacterOptionsUIHandle _characterOptionsUI;
         [SerializeField] private DialogueUIController _conversationUI;
         [SerializeField] private GameObject _bagUI;
@@ -15,6 +17,7 @@ namespace GameUI
 
         public ItemBar _itemBar { get; private set; }
         public DialogueUIController conversationUI { get => _conversationUI; set => _conversationUI = value; }
+        public StoreUIController storeUI { get => _storeUI; set => _storeUI = value; }
 
         void Awake()
         {

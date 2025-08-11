@@ -7,7 +7,7 @@ using Management;
 using Management.Interface;
 using Management.ScriptableObjects;
 using GameUI;
-using Unity.VisualScripting;
+using System;
 
 
 namespace Characters
@@ -21,6 +21,7 @@ namespace Characters
         private bool _isConversationActive;
         private bool _isTyping;
         private int _dialogueIndex;
+
 
         void Awake()
         {
@@ -88,7 +89,7 @@ namespace Characters
             }
 
             // clear decision
-            ClearDecisions();
+            GameplayUIManager.Instance.conversationUI.ClearDecisions();
 
             // check if the line is end conversation and the line is not skipped
             if (conversationData.dialogueLines.Length > _dialogueIndex &&
@@ -100,7 +101,7 @@ namespace Characters
             }
 
             // check if have decisions and display them
-            foreach (var decision in conversationData.decisions)
+            foreach (var decision in conversationData.allDecisions)
             {
                 if (decision.dialogueIndex == _dialogueIndex)
                 {
@@ -155,49 +156,40 @@ namespace Characters
         }
 
 
-        private void ClearDecisions()
-        {
-            foreach (Transform child in GameplayUIManager.Instance.conversationUI.decisionPanel)
-            {
-                ObjectPoolManager.ReturnObjectToPool(child.gameObject);
-            }
-        }
-
-
         private void DisplayDecision(ConversationDecision decisionLine)
         {
             for (int i = 0; i < decisionLine.decisions.Length; i++)
             {
-                var nextIndex = decisionLine.nextDialogueIndex[i];
-                CreateDecisionButtons(decisionLine.decisions[i], () => ChooseOption(nextIndex, decisionLine.decisionTypes[i]));
+                var nextIndex = decisionLine.decisions[i].nextDialogueIndex;
+                var decisionType = decisionLine.decisions[i].decisionType;
+
+                GameplayUIManager.Instance.conversationUI.CreateDecisionButtons(decisionLine.decisions[i].decisionText, () => ChooseOption(nextIndex, decisionType));
             }
         }
 
 
-        private void ChooseOption(int index, DecisionType decisionType)
+        private void ChooseOption(int nextIndex, DecisionType decisionType)
         {
-            _dialogueIndex = index;
+            _dialogueIndex = nextIndex;
+
+            GameplayUIManager.Instance.conversationUI.ClearDecisions();
+            DisplayCurrentLine();
+
+            if (decisionType == DecisionType.Talking) return;
 
             switch (decisionType)
             {
-                case DecisionType.Talking:
-                    DisplayCurrentLine();
-                    break;
-
                 case DecisionType.Buying:
                     GameplayUIManager.Instance.EnableStoreUI(true);
+                    GameplayUIManager.Instance.EnableConversationUI(false);
                     break;
 
                 case DecisionType.Selling:
-                    // enable sell ui
-                    break;
-
-                default:
+                    // display sell ui
+                    
+                    GameplayUIManager.Instance.EnableConversationUI(false);
                     break;
             }
-
-            ClearDecisions();
-            DisplayCurrentLine();
         }
 
 
@@ -205,18 +197,6 @@ namespace Characters
         {
             StopAllCoroutines();
             StartCoroutine(TypeNextLine());
-        }
-
-
-        // create and set up decision buttons
-        private void CreateDecisionButtons(string decisionText, UnityEngine.Events.UnityAction buttonEvent)
-        {
-            var decisionButtonPrefab = GameplayUIManager.Instance.conversationUI.decisionButtonPrefab;
-            var decisionPanel = GameplayUIManager.Instance.conversationUI.decisionPanel;
-
-            GameObject decisionButton = ObjectPoolManager.SpawnObject(decisionButtonPrefab, decisionPanel);
-            decisionButton.GetComponentInChildren<TMP_Text>().SetText(decisionText);
-            decisionButton.GetComponent<Button>().onClick.AddListener(buttonEvent);
         }
     }
 }

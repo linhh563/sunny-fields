@@ -1,9 +1,9 @@
 using UnityEngine;
-using TMPro;
-using Management.ScriptableObjects;
-using System.Collections;
 using UnityEngine.UI;
+using TMPro;
+
 using Management;
+using Management.ScriptableObjects;
 
 namespace GameUI
 {
@@ -13,8 +13,8 @@ namespace GameUI
         [SerializeField] private Image _npcAvatar;
         [SerializeField] private TMP_Text _dialogueText;
         [SerializeField] private Transform _decisionPanel;
-        
-        public GameObject decisionButtonPrefab { get; private set;}
+
+        public GameObject decisionButtonPrefab { get; private set; }
 
 
         public TMP_Text dialogueText { get => _dialogueText; set => _dialogueText = value; }
@@ -25,6 +25,31 @@ namespace GameUI
             decisionButtonPrefab = Resources.Load<GameObject>("Prefabs/DecisionButton");
 
             CheckPropertiesValue();
+        }
+
+
+        // create and set up decision buttons
+        public void CreateDecisionButtons(string decisionText, UnityEngine.Events.UnityAction buttonEvent)
+        {
+            var decisionButtonPrefab = GameplayUIManager.Instance.conversationUI.decisionButtonPrefab;
+            var decisionPanel = GameplayUIManager.Instance.conversationUI.decisionPanel;
+
+            GameObject decisionButton = ObjectPoolManager.SpawnObject(decisionButtonPrefab, decisionPanel);
+            
+            decisionButton.GetComponentInChildren<TMP_Text>().SetText(decisionText);
+            decisionButton.GetComponent<Button>().onClick.AddListener(buttonEvent);
+        }
+
+
+        public void ClearDecisions()
+        {
+            foreach (Transform child in GameplayUIManager.Instance.conversationUI.decisionPanel)
+            {
+                var button = child.GetComponent<Button>();
+                button.onClick.RemoveAllListeners();
+
+                ObjectPoolManager.ReturnObjectToPool(child.gameObject);
+            }
         }
 
 
