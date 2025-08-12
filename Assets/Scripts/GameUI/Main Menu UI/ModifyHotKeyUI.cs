@@ -23,6 +23,12 @@ namespace GameUI
         }
 
 
+        void OnDisable()
+        {
+            _message.color = Color.black;
+        }
+
+
         void Update()
         {
             WaitingForInput();

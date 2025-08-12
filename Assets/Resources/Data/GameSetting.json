@@ -41,7 +41,7 @@
         },
         {
             "action": "OpenQuestList",
-            "key": "H"
+            "key": "Q"
         },
         {
             "action": "ExitUI",

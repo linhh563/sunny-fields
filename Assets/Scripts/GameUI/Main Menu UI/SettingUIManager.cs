@@ -44,6 +44,8 @@ namespace GameUI
             RemoveAllListeners();
 
             ModifyHotKeyUI.OnKeyChanged -= UpdateHotKey;
+
+            _modifyHotKeyUI.gameObject.SetActive(false);
         }
 
 
