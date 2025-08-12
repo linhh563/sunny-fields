@@ -33,10 +33,11 @@ namespace Management
 
 
         // save new game config to file
-        public static void SaveConfig(GameConfig config)
+        public void SaveConfig()
         {
-            string content = JsonUtility.ToJson(config, true);
+            string content = JsonUtility.ToJson(this, true);
             string path = Path.Combine(Application.dataPath, FilePath.CONFIG_FILE_PATH);
+            
             File.WriteAllText(path, content);
         }
     }

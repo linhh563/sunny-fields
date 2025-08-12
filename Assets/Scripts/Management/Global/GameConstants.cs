@@ -38,5 +38,6 @@ namespace Management
     public static class FilePath
     {
         public const string CONFIG_FILE_PATH = "Resources/Data/GameSetting.json";
+        public const string FARMS_FOLDER_PATH = "Resources/Data/SavedGames";
     }
 }

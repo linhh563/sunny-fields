@@ -10,6 +10,7 @@ namespace Characters
         public delegate bool CollectItemEvent(ItemScriptableObject scriptableObj);
         public static event CollectItemEvent OnCollectItem;
 
+
         void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.gameObject.tag == "Collectable")
@@ -24,6 +25,7 @@ namespace Characters
             }
         }
 
+
         void OnTriggerStay2D(Collider2D collision)
         {
             if (collision.gameObject.tag == "NPC")
@@ -34,6 +36,7 @@ namespace Characters
 
             }
         }
+        
 
         void OnTriggerExit2D(Collider2D collision)
         {

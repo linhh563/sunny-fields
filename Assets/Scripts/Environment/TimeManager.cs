@@ -7,7 +7,7 @@ namespace Management
     public class TimeManager : MonoBehaviour
     {
         private float _dayLength;
-        private TimeSpan _currentTime;
+        private static TimeSpan _currentTime;
         // the duration in real life (second) corresponding to a minute in game
         private float _minuteLength => _dayLength / EnvironmentConstants.MINUTES_IN_DAY;
 
@@ -39,6 +39,12 @@ namespace Management
 
                 yield return new WaitForSeconds(_minuteLength);
             }
+        }
+
+
+        public static double GetGameTime()
+        {
+            return (double)_currentTime.TotalMinutes;
         }
     }
 }

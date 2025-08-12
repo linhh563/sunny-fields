@@ -9,8 +9,8 @@ namespace Characters
 {
     public class Trader : MonoBehaviour
     {
+        [SerializeField] private string _storeName;
         [SerializeField] private ItemScriptableObject[] _sellItems;
-        [SerializeField] private Transform _storeUIPanel;
 
         private GameObject _itemInStorePrefab;
 
@@ -24,7 +24,9 @@ namespace Characters
 
         void Start()
         {
-            // TODO: initialize items only when character want to buy something from this npc
+            GameplayUIManager.Instance.storeUI.SetStoreName(_storeName);
+
+            // TODO: initialize items only when character want to buy something from specific npc
             InitializeSellItem();
         }
 
@@ -34,7 +36,7 @@ namespace Characters
             foreach (var item in _sellItems)
             {
                 // create item in store and set up its attributes
-                var itemInStoreObj = ObjectPoolManager.SpawnObject(_itemInStorePrefab, _storeUIPanel);
+                var itemInStoreObj = ObjectPoolManager.SpawnObject(_itemInStorePrefab, GameplayUIManager.Instance.storeUI.itemsContainer);
                 itemInStoreObj.GetComponent<ItemInStoreUI>().InitializeItemUI(item);
             }
         }
@@ -43,7 +45,7 @@ namespace Characters
         private void CheckPropertiesValue()
         {
             if (_sellItems.Length == 0 ||
-                _storeUIPanel == null)
+                _storeName.Length == 0)
             {
                 Debug.LogError("There is a component was not assigned in " + gameObject.name + ".");
             }

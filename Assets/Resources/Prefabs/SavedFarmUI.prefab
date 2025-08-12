@@ -811,8 +811,9 @@ GameObject:
   - component: {fileID: 4583886244919039554}
   - component: {fileID: 4583886244919039552}
   - component: {fileID: 4583886244919039553}
+  - component: {fileID: 2454708511561521649}
   m_Layer: 5
-  m_Name: Saved Farm UI
+  m_Name: SavedFarmUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -878,3 +879,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2454708511561521649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4583886244919039555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b7fb428ccb94c40996781a778bb926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterAvatarImage: {fileID: 4583886244533722690}
+  _characterNameText: {fileID: 4583886244148395577}
+  _farmNameText: {fileID: 4583886243859700506}
+  _totalPlayTimeText: {fileID: 4583886243573036818}
+  _gameTimeText: {fileID: 4583886244822740435}

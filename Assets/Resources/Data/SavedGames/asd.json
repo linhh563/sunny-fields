@@ -1,0 +1,14 @@
+{
+    "characterName": "asd",
+    "farmName": "asd",
+    "gameTimeMinutes": 846.0,
+    "characterPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "characterDirection": 1,
+    "groundStates": [],
+    "inventory": [],
+    "plants": []
+}

@@ -8,6 +8,7 @@ using Management.Interface;
 using Management.ScriptableObjects;
 using GameUI;
 using System;
+using Unity.VisualScripting;
 
 
 namespace Characters
@@ -21,6 +22,7 @@ namespace Characters
         private bool _isConversationActive;
         private bool _isTyping;
         private int _dialogueIndex;
+        private bool _canInteract;
 
 
         void Awake()
@@ -29,6 +31,7 @@ namespace Characters
             GameplayInputManager.OnInteractKeyPress += Interact;
 
             _dialogueIndex = 0;
+            _canInteract = false;
         }
 
 
@@ -41,7 +44,7 @@ namespace Characters
 
         public void Interact()
         {
-            if (conversationData == null) return;
+            if (conversationData == null || !_canInteract) return;
 
             if (_isConversationActive)
             {
@@ -186,7 +189,7 @@ namespace Characters
 
                 case DecisionType.Selling:
                     // display sell ui
-                    
+
                     GameplayUIManager.Instance.EnableConversationUI(false);
                     break;
             }
@@ -197,6 +200,24 @@ namespace Characters
         {
             StopAllCoroutines();
             StartCoroutine(TypeNextLine());
+        }
+
+
+        void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                _canInteract = true;
+            }
+        }
+
+
+        void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                _canInteract = false;
+            }
         }
     }
 }

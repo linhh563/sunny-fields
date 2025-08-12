@@ -60,7 +60,7 @@ namespace GameUI
                     // modify the ui if player can't assign new hotkey
                     if (!assignSuccess)
                     {
-                        _message.SetText("The key pressed is assigned in another action.\nPlease press another key!");
+                        _message.SetText("The key pressed can't assigned to this action.\nPlease press another key!");
                         _message.color = Color.red;
                         return;
                     }
@@ -74,7 +74,7 @@ namespace GameUI
             OnKeyChanged?.Invoke();
 
             // if player assign new hotkey unsuccessful, don't close the ui
-            gameObject.SetActive(!assignSuccess);
+            gameObject.transform.parent.gameObject.SetActive(!assignSuccess);
         }
 
 

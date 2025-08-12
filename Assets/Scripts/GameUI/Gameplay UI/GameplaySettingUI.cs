@@ -1,20 +1,27 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 using System.Collections.Generic;
 
+using Management;
 
 namespace GameUI
 {
     public class GameplaySettingUI : MonoBehaviour
     {
+        [Header("Buttons")]
         [SerializeField] protected Button _backBtn;
+        [SerializeField] private Button _saveGameButton;
+        [SerializeField] protected List<Button> _hotkeys;
+
+        [Header("Dropdowns & Sliders")]
         [SerializeField] protected TMP_Dropdown _languageDropdown;
         [SerializeField] protected Slider _bgmSlider;
         [SerializeField] protected Slider _sfxSlider;
-        [SerializeField] protected List<Button> _hotkeys;
-        [SerializeField] protected ModifyHotKeyUI _modifyHotKeyUI;
-        [SerializeField] private Button _saveGameButton;
+
+        [Header("Game Objects")]
+        [SerializeField] protected GameObject _modifyHotKeyUI;
 
 
         void Start()
@@ -24,11 +31,148 @@ namespace GameUI
 
         void OnEnable()
         {
-            _backBtn.onClick.AddListener(() => gameObject.SetActive(false));            
+            InitializeGameplaySettingUI();
+            ModifyHotKeyUI.OnKeyChanged += UpdateHotKey;
+
+            AddListeners();
         }
 
         void OnDisable()
         {
+            RemoveAllListeners();
+            ModifyHotKeyUI.OnKeyChanged -= UpdateHotKey;
+
+            _modifyHotKeyUI.gameObject.SetActive(false);
+        }
+
+
+        private void InitializeGameplaySettingUI()
+        {
+            InitializeGameLanguage();
+            InitializeVolumeSlider();
+            UpdateHotKey();
+        }
+
+
+        private void InitializeGameLanguage()
+        {
+            _languageDropdown.ClearOptions();
+            _languageDropdown.options.Add(new TMP_Dropdown.OptionData(GameLanguage.Vietnamese.ToString(), null));
+            _languageDropdown.options.Add(new TMP_Dropdown.OptionData(GameLanguage.English.ToString(), null));
+
+            _languageDropdown.value = (int)GameSetting.Instance.gameLanguage;
+        }
+
+
+        private void InitializeVolumeSlider()
+        {
+            _bgmSlider.value = GameSetting.Instance.bgmVolume;
+            _sfxSlider.value = GameSetting.Instance.sfxVolume;
+        }
+
+
+        private void UpdateHotKey()
+        {
+            foreach (var hotkey in _hotkeys)
+            {
+                // get tmp text of hotkey button
+                TMP_Text keyText;
+                if (hotkey.gameObject.transform.childCount == 0) break;
+                keyText = hotkey.gameObject.GetComponentInChildren<TMP_Text>();
+
+                // get game obj name
+                var keyName = hotkey.gameObject.name;
+
+                // check and set text equal key binding [obj name]
+                if (GameSetting.Instance.keyBindings.ContainsKey(keyName))
+                {
+                    keyText.SetText(GameSetting.Instance.keyBindings[keyName].ToString());
+                }
+            }
+        }
+
+
+        private void OnModifyKeyPress(string keyName)
+        {
+            _modifyHotKeyUI.GetComponentInChildren<ModifyHotKeyUI>().InitializeUI(keyName);
+            _modifyHotKeyUI.gameObject.SetActive(true);
+        }
+
+
+        private void OnLanguageChanged(int index)
+        {
+            GameSetting.Instance.ModifyGameLanguage((GameLanguage)index);
+        }
+
+
+        private void OnBgmVolumeChanged(float value)
+        {
+            GameSetting.Instance.ModifyBackgroundVolume(value);
+        }
+
+
+        private void OnSfxVolumeChanged(float value)
+        {
+            GameSetting.Instance.ModifySoundVolume(value);
+        }
+
+
+        private void SaveGame()
+        {
+            // load farm config and modify it by current farm state
+            var farmConfig = FarmConfig.LoadFarmConfigByFileName(CharacterCustomizationStorage.farmName);
+
+            farmConfig.gameTimeMinutes = TimeManager.GetGameTime();
+            farmConfig.characterPosition = Characters.CharacterController.CharacterWorldPosition;
+            farmConfig.characterDirection = Characters.CharacterController.currentDirection;
+
+            farmConfig.SaveFarmConfig();
+        }
+
+
+        private void BackToMainMenu()
+        {
+            SaveGame();
+
+            SceneManager.LoadScene("MainMenu");
+        }
+
+
+        private void AddListeners()
+        {
+            foreach (var hotkey in _hotkeys)
+            {
+                // use lambda expression to add listener has arguments
+                hotkey.onClick.AddListener(() => OnModifyKeyPress(hotkey.gameObject.name));
+            }
+
+            // add listener for language dropdown
+            _languageDropdown.onValueChanged.AddListener(OnLanguageChanged);
+
+            // add listener to sliders
+            _bgmSlider.onValueChanged.AddListener(OnBgmVolumeChanged);
+            _sfxSlider.onValueChanged.AddListener(OnSfxVolumeChanged);
+
+            _backBtn.onClick.AddListener(() => gameObject.SetActive(false));
+
+            _saveGameButton.onClick.AddListener(BackToMainMenu);
+        }
+
+
+        private void RemoveAllListeners()
+        {
+            foreach (var hotkey in _hotkeys)
+            {
+                hotkey.onClick.RemoveAllListeners();
+            }
+
+            // remove all listeners from language dropdown
+            _languageDropdown.onValueChanged.RemoveAllListeners();
+
+            // remove all listeners from sliders
+            _bgmSlider.onValueChanged.RemoveAllListeners();
+            _sfxSlider.onValueChanged.RemoveAllListeners();
+
             _backBtn.onClick.RemoveAllListeners();
         }
 

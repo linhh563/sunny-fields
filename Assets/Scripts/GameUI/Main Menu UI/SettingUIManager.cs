@@ -9,12 +9,17 @@ namespace GameUI
 {
     public class SettingUIManager : MonoBehaviour
     {
+        [Header("Buttons")]
         [SerializeField] protected Button _backBtn;
+        [SerializeField] protected List<Button> _hotkeys;
+
+        [Header("Dropdowns & Sliders")]
         [SerializeField] protected TMP_Dropdown _languageDropdown;
         [SerializeField] protected Slider _bgmSlider;
         [SerializeField] protected Slider _sfxSlider;
-        [SerializeField] protected List<Button> _hotkeys;
-        [SerializeField] protected ModifyHotKeyUI _modifyHotKeyUI;
+
+        [Header("Game Objects")]
+        [SerializeField] protected GameObject _modifyHotKeyUI;
 
         private MainMenuUIManager _mainMenuUIManager;
 
@@ -97,7 +102,7 @@ namespace GameUI
 
         private void OnModifyKeyPress(string keyName)
         {
-            _modifyHotKeyUI.InitializeUI(keyName);
+            _modifyHotKeyUI.GetComponentInChildren<ModifyHotKeyUI>().InitializeUI(keyName);
             _modifyHotKeyUI.gameObject.SetActive(true);
         }
 

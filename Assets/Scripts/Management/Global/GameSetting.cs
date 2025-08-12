@@ -66,7 +66,7 @@ namespace Management
             var config = GameConfig.LoadGameConfig();
             config.language = newLanguage;
 
-            GameConfig.SaveConfig(config);
+            config.SaveConfig();
 
             // TODO: CHANGE LANGUAGE IN GAME
         }
@@ -77,6 +77,18 @@ namespace Management
         {
             // check if new key is existed
             if (keyBindings.ContainsValue(newKey)) return false;
+
+            // player can't assign mouse button for action
+            if (newKey == KeyCode.Mouse0 ||
+                newKey == KeyCode.Mouse1 ||
+                newKey == KeyCode.Mouse2 ||
+                newKey == KeyCode.Mouse3 ||
+                newKey == KeyCode.Mouse4 ||
+                newKey == KeyCode.Mouse5 ||
+                newKey == KeyCode.Mouse6)
+            {
+                return false;
+            }
 
             keyBindings[keyName] = newKey;
 
@@ -95,7 +107,7 @@ namespace Management
             var config = GameConfig.LoadGameConfig();
             config.hotkeysWrapper = newHotkeys;
 
-            GameConfig.SaveConfig(config);
+            config.SaveConfig();
             return true;
         }
 
@@ -107,7 +119,7 @@ namespace Management
             var config = GameConfig.LoadGameConfig();
             config.bgmVolume = bgmVolume;
 
-            GameConfig.SaveConfig(config);
+            config.SaveConfig();
         }
 
 
@@ -118,7 +130,7 @@ namespace Management
             var config = GameConfig.LoadGameConfig();
             config.sfxVolume = sfxVolume;
 
-            GameConfig.SaveConfig(config);
+            config.SaveConfig();
         }
     }
 }

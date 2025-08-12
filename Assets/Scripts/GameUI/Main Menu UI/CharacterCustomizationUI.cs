@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 using Management;
 using Management.ScriptableObjects;
+using System.IO;
 
 namespace GameUI
 {
@@ -228,6 +229,21 @@ namespace GameUI
             {
                 // set up farm attributes
                 CharacterCustomizationStorage.SetFarmAttribute(_characterNameTxtField.text, _farmNameTxtField.text);
+
+                // check if there is no saved farm has the same name with new farm
+                string file = FilePath.FARMS_FOLDER_PATH + "/" + _characterNameTxtField.text + ".json";
+                string path = Path.Combine(Application.dataPath, file);
+
+                if (File.Exists(path))
+                {
+                    // display message, farm was existed
+
+                    return;
+                }
+
+                // create new farm config file
+                FarmConfig newFarm = new FarmConfig(_characterNameTxtField.text, _farmNameTxtField.text);
+                newFarm.SaveFarmConfig();
 
                 SceneManager.LoadScene("Gameplay");
             }

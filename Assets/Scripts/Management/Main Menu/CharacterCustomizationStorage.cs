@@ -3,9 +3,7 @@ using UnityEngine;
 
 namespace Management
 {
-    // ===== SUMMARY =====
-    //      Use to store the character customization that player custom in character customization UI, or the one in saved farm.
-    // ===================
+    // use to store the character customization that player custom in character customization UI, or the one in saved farm.
     public class CharacterCustomizationStorage : MonoBehaviour
     {
         public static ClotheScriptableObject hair { get; private set; }
@@ -13,8 +11,8 @@ namespace Management
         public static ClotheScriptableObject shirt { get; private set; }
         public static ClotheScriptableObject pant { get; private set; }
 
-        private static string _farmName;
-        private static string _characterName;
+        public static string farmName;
+        public static string characterName;
 
 
         void Awake()
@@ -38,8 +36,8 @@ namespace Management
 
         public static void SetFarmAttribute(string characterName, string farmName)
         {
-            _characterName = characterName;
-            _farmName = farmName;
+            CharacterCustomizationStorage.characterName = characterName;
+            CharacterCustomizationStorage.farmName = farmName;
         }
 
 
