@@ -21,7 +21,7 @@ namespace GameUI
         public Transform parent { get => _parent; set => _parent = value; }
         public ItemScriptableObject itemScriptableObj { get => _itemScriptableObj; set => _itemScriptableObj = value; }
         public int count { get => _count; set => _count = value; }
-
+        
 
         void Start()
         {
@@ -72,6 +72,12 @@ namespace GameUI
         {
             _image.raycastTarget = true;
             transform.SetParent(_parent);
+        }
+
+
+        public void SetCount(int count)
+        {
+            _count = count;
         }
 
 

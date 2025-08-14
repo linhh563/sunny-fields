@@ -351,7 +351,7 @@ GameObject:
   - component: {fileID: 111051174}
   - component: {fileID: 111051173}
   m_Layer: 5
-  m_Name: Next Button
+  m_Name: Farm Size Next Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -984,7 +984,7 @@ GameObject:
   - component: {fileID: 197644382}
   - component: {fileID: 197644381}
   m_Layer: 5
-  m_Name: Next Button
+  m_Name: Shirt Next Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1749,11 +1749,14 @@ MonoBehaviour:
   _nextShirtBtn: {fileID: 197644381}
   _previousPantBtn: {fileID: 1918355104}
   _nextPantBtn: {fileID: 564556450}
+  _nextFarmSizeButton: {fileID: 111051173}
+  _previousFarmSizeButton: {fileID: 1653333515}
   _startButton: {fileID: 1290916118970312038}
   _hairIndex: {fileID: 1424553771}
   _hatIndex: {fileID: 2061737285}
   _shirtIndex: {fileID: 791038691}
   _pantIndex: {fileID: 1492646624}
+  _farmSizeText: {fileID: 756542742}
   _hairImage: {fileID: 642086501}
   _hatImage: {fileID: 1853048233}
   _shirtImage: {fileID: 2063986501}
@@ -2060,7 +2063,7 @@ GameObject:
   - component: {fileID: 324481141}
   - component: {fileID: 324481140}
   m_Layer: 5
-  m_Name: Next Button
+  m_Name: Hair Next Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4620,7 +4623,7 @@ GameObject:
   - component: {fileID: 564556451}
   - component: {fileID: 564556450}
   m_Layer: 5
-  m_Name: Next Button
+  m_Name: Pant Next Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6357,7 +6360,7 @@ GameObject:
   - component: {fileID: 756542743}
   - component: {fileID: 756542742}
   m_Layer: 5
-  m_Name: Size
+  m_Name: Farm Size Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6665,7 +6668,7 @@ GameObject:
   - component: {fileID: 776202238}
   - component: {fileID: 776202237}
   m_Layer: 5
-  m_Name: Previous Button
+  m_Name: Gender Previous Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9976,7 +9979,7 @@ GameObject:
   - component: {fileID: 1093454749}
   - component: {fileID: 1093454748}
   m_Layer: 5
-  m_Name: Previous Button
+  m_Name: Hat Previous Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11217,7 +11220,7 @@ GameObject:
   - component: {fileID: 1251370724}
   - component: {fileID: 1251370723}
   m_Layer: 5
-  m_Name: Next Button
+  m_Name: Hat Next Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12198,7 +12201,7 @@ GameObject:
   - component: {fileID: 1343506468}
   - component: {fileID: 1343506467}
   m_Layer: 5
-  m_Name: Next Button
+  m_Name: Gender Next Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14075,7 +14078,7 @@ GameObject:
   - component: {fileID: 1653333516}
   - component: {fileID: 1653333515}
   m_Layer: 5
-  m_Name: Previous Button
+  m_Name: Farm Size Previous Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15164,7 +15167,7 @@ GameObject:
   - component: {fileID: 1760346430}
   - component: {fileID: 1760346429}
   m_Layer: 5
-  m_Name: Previous Button
+  m_Name: Hair Previous Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16845,7 +16848,7 @@ GameObject:
   - component: {fileID: 1906935783}
   - component: {fileID: 1906935782}
   m_Layer: 5
-  m_Name: Previous Button
+  m_Name: Shirt Previous Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16966,7 +16969,7 @@ GameObject:
   - component: {fileID: 1918355105}
   - component: {fileID: 1918355104}
   m_Layer: 5
-  m_Name: Previous Button
+  m_Name: Pant Previous Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

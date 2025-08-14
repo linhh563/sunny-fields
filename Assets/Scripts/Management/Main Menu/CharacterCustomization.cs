@@ -136,5 +136,11 @@ namespace Management
                 _currentPantIndex = _pantCollection.Length - 1;
             }
         }
+
+
+        private void ChangeFarmSize(bool next)
+        {
+
+        }
     }
 }

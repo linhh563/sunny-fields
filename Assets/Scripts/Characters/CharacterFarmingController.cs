@@ -53,7 +53,10 @@ namespace Characters
             // spawn hoed tile in front of the character in ground tile map
             _tilemapManager.groundTilemap.SetTile(frontTilePos, _tilemapManager.hoedGroundTile);
 
-            // add the ground position to hoed ground list
+            // add the ground position to hoed ground list if it had not existed ywt
+            if (TilemapManager.hoedGrounds.Contains(frontTilePos))
+                return;
+
             _tilemapManager.AddHoedGround(frontTilePos);
         }
 
@@ -110,7 +113,11 @@ namespace Characters
                 // ground watered logic
                 _tilemapManager.groundTilemap.SetTile(frontTilePos, _tilemapManager.wateredGroundTile);
 
-                // plant watered logic
+                if (TilemapManager.wateredGrounds.Contains(frontTilePos))
+                    return;
+                    
+                _tilemapManager.AddWateredGround(frontTilePos);
+
                 // if there is a plant in ground, water it
                 if (PlantManager.plantList.ContainsKey(frontTilePos))
                 {

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef867c5b9c0a4444eb6af15347840ec0, type: 3}
   m_Name: Corn
   m_EditorClassIdentifier: 
-  itemName: CornSeed
+  itemName: Corn
   description: 
   avatarSprite: {fileID: 21300000, guid: 90eefc34519c69a46984e6ee5c373355, type: 3}
   stackable: 1

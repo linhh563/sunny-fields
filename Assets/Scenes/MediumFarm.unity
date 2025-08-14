@@ -12290,6 +12290,17 @@ MonoBehaviour:
   hair: {fileID: 916140531}
   shirt: {fileID: 1784960793}
   pant: {fileID: 385277364}
+--- !u!114 &1361201304 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4882604478919889926, guid: fa7ece4313c1da24d9cca238ef54261e, type: 3}
+  m_PrefabInstance: {fileID: 1361201300}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75807fd381893b748a4f1a3acf17dc7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1368967275
 GameObject:
   m_ObjectHideFlags: 0
@@ -16515,6 +16526,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75cb422b742708d43a5ba48764d6ef86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterController: {fileID: 1361201304}
+  _tileMapManager: {fileID: 4110491365750952299}
+  _inventoryManager: {fileID: 1737140492}
 --- !u!4 &4110491364764041124
 Transform:
   m_ObjectHideFlags: 0

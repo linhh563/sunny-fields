@@ -1,18 +1,29 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+using Management;
 
 
 namespace GameUI
 {
     public class SavedFarmUI : MonoBehaviour
     {
+        [Header("Character Attributes")]
         [SerializeField] private Image _characterAvatarImage;
         [SerializeField] private TMP_Text _characterNameText;
 
+        [Header("Farm Attributes")]
         [SerializeField] private TMP_Text _farmNameText;
+        [SerializeField] private TMP_Text _farmSizeText;
         [SerializeField] private TMP_Text _totalPlayTimeText;
         [SerializeField] private TMP_Text _gameTimeText;
+
+        [Header("Buttons")]
+        [SerializeField] private Button _loadButton;
+
+        private FarmSize _farmSize;
 
 
         void Start()
@@ -21,16 +32,54 @@ namespace GameUI
         }
 
 
-        public void InitializeSavedFarm(string characterName, string farmName, double inGameMinutes)
+        void OnEnable()
+        {
+            _loadButton.onClick.AddListener(LoadGame);
+        }
+
+
+        void OnDisable()
+        {
+            _loadButton.onClick.RemoveAllListeners();
+        }
+
+
+        public void InitializeSavedFarm(string characterName, string farmName, double inGameMinutes, FarmSize farmSize)
         {
             // TODO: set up character avatar
 
+            _farmSize = farmSize;
+
             _characterNameText.SetText(characterName);
             _farmNameText.SetText(farmName);
+            _farmSizeText.SetText("Size: " + farmSize.ToString());
 
             // convert to "year ..., day ..." format
-            _gameTimeText.SetText(inGameMinutes.ToString());
-            // _totalPlayTimeText.SetText();
+            string gameTime = "";
+            if (inGameMinutes >= EnvironmentConstants.MINUTES_IN_YEAR)
+            {
+                gameTime += "Year ";
+                gameTime += (inGameMinutes / EnvironmentConstants.MINUTES_IN_YEAR).ToString();
+                gameTime += " - ";
+            }
+
+            int remainDays = (int)inGameMinutes % EnvironmentConstants.MINUTES_IN_YEAR;
+            gameTime += "Day ";
+            gameTime += (((remainDays / EnvironmentConstants.MINUTES_IN_DAY) + 1).ToString());
+
+            _gameTimeText.SetText(gameTime);
+
+            int playTime = (int)inGameMinutes * (int)(EnvironmentConstants.DAY_LENGTH / EnvironmentConstants.MINUTES_IN_DAY);
+            _totalPlayTimeText.SetText((playTime / 60).ToString() + " minutes");
+        }
+
+
+        private void LoadGame()
+        {
+            // set up character customization storage
+            CharacterCustomizationStorage.SetFarmAttribute(_characterNameText.text, _farmNameText.text);
+
+            SceneManager.LoadScene(_farmSize + "Farm");
         }
 
 
@@ -40,7 +89,9 @@ namespace GameUI
                 _characterNameText == null ||
                 _farmNameText == null ||
                 _totalPlayTimeText == null ||
-                _gameTimeText == null)
+                _gameTimeText == null ||
+                _loadButton == null ||
+                _farmSizeText == null)
             {
                 Debug.LogError("There is a component was not assigned to " + gameObject.name + ".");
             }

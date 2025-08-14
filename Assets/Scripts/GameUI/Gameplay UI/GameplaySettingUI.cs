@@ -5,23 +5,26 @@ using TMPro;
 using System.Collections.Generic;
 
 using Management;
+using Environment;
+using System.Linq;
 
 namespace GameUI
 {
     public class GameplaySettingUI : MonoBehaviour
     {
         [Header("Buttons")]
-        [SerializeField] protected Button _backBtn;
+        [SerializeField] private Button _backBtn;
         [SerializeField] private Button _saveGameButton;
-        [SerializeField] protected List<Button> _hotkeys;
+        [SerializeField] private List<Button> _hotkeys;
 
         [Header("Dropdowns & Sliders")]
-        [SerializeField] protected TMP_Dropdown _languageDropdown;
-        [SerializeField] protected Slider _bgmSlider;
-        [SerializeField] protected Slider _sfxSlider;
+        [SerializeField] private TMP_Dropdown _languageDropdown;
+        [SerializeField] private Slider _bgmSlider;
+        [SerializeField] private Slider _sfxSlider;
 
         [Header("Game Objects")]
-        [SerializeField] protected GameObject _modifyHotKeyUI;
+        [SerializeField] private GameObject _modifyHotKeyUI;
+        [SerializeField] private InventoryManager _inventoryManager;
 
 
         void Start()
@@ -123,8 +126,80 @@ namespace GameUI
             var farmConfig = FarmConfig.LoadFarmConfigByFileName(CharacterCustomizationStorage.farmName);
 
             farmConfig.gameTimeMinutes = TimeManager.GetGameTime();
-            farmConfig.characterPosition = Characters.CharacterController.CharacterWorldPosition;
+            farmConfig.characterPosition = Characters.CharacterController.characterWorldPosition;
             farmConfig.characterDirection = Characters.CharacterController.currentDirection;
+
+            // update grounds state
+            var grounds = new List<GroundConfig>();
+            foreach (var hoedGround in TilemapManager.hoedGrounds)
+            {
+                if (TilemapManager.wateredGrounds.Contains(hoedGround))
+                {
+                    grounds.Add(new GroundConfig
+                    {
+                        position = hoedGround,
+                        state = GroundState.Watered
+                    });
+                }
+                else
+                {
+                    grounds.Add(new GroundConfig
+                    {
+                        position = hoedGround,
+                        state = GroundState.Hoed
+                    });
+                }
+            }
+
+            farmConfig.groundStates = grounds;
+
+            // update inventory
+            var holdingItem = _inventoryManager.holdingItem.GetComponentInChildren<DragableItem>();
+            if (holdingItem != null)
+            {
+                farmConfig.holdingItem = new ItemConfig
+                {
+                    itemName = holdingItem.itemScriptableObj.itemName,
+                    quantity = holdingItem.count
+                };
+            }
+
+            var items = new List<ItemConfig>();
+            for (int i = 0; i < _inventoryManager.inventorySlots.Length; i++)
+            {
+                var slot = _inventoryManager.inventorySlots[i];
+
+                // check if slot have a item
+                if (slot.gameObject.transform.childCount != 0)
+                {
+                    var item = slot.GetComponentInChildren<DragableItem>();
+
+                    items.Add(new ItemConfig
+                    {
+                        itemName = item.itemScriptableObj.itemName,
+                        slotIndex = i,
+                        quantity = item.count
+                    });
+                }
+            }
+
+            farmConfig.inventory = items;
+            farmConfig.gold = InventoryManager.gold;
+
+            // update plants
+            var plants = new List<PlantConfig>();
+            foreach (var plant in PlantManager.plantList)
+            {
+                plants.Add(new PlantConfig
+                {
+                    plantName = plant.Value.plantScriptableObject.itemName,
+                    position = plant.Key,
+                    dayAge = plant.Value.dayAge,
+                    isWatered = plant.Value.isWatered
+                });
+            }
+
+            farmConfig.plants = plants;
 
             farmConfig.SaveFarmConfig();
         }
@@ -185,7 +260,8 @@ namespace GameUI
                 _bgmSlider == null ||
                 _sfxSlider == null ||
                 _modifyHotKeyUI == null ||
-                _saveGameButton == null)
+                _saveGameButton == null ||
+                _inventoryManager == null)
             {
                 Debug.LogError("There is a component was not assigned in " + gameObject.name + ".");
             }

@@ -7,9 +7,6 @@ namespace Environment
 {
     public class TilemapManager : MonoBehaviour
     {
-        private string _farmName;
-
-
         [Header("Tilemaps")]
         [SerializeField] private Tilemap _baseTilemap;
         [SerializeField] private Tilemap _groundTilemap;
@@ -24,7 +21,8 @@ namespace Environment
         // white tile used for marking the planted tiles
         public TileBase whiteTile { get; private set; }
 
-        private static List<Vector3Int> _hoedGround = new List<Vector3Int>();
+        public static List<Vector3Int> hoedGrounds = new List<Vector3Int>();
+        public static List<Vector3Int> wateredGrounds = new List<Vector3Int>();
 
         // public fields
         public Tilemap baseTilemap => _baseTilemap;
@@ -69,7 +67,7 @@ namespace Environment
         // get the position (in tile map) of the tile in front of the character
         public Vector3Int GetTileInFrontCharacter()
         {
-            var _characterPosition = _groundTilemap.WorldToCell(Characters.CharacterController.CharacterWorldPosition);
+            var _characterPosition = _groundTilemap.WorldToCell(Characters.CharacterController.characterWorldPosition);
 
             switch (Characters.CharacterController.currentDirection)
             {
@@ -88,18 +86,44 @@ namespace Environment
         }
 
 
+        public void SetGroundTile(Vector3Int position, GroundState state)
+        {
+            switch (state)
+            {
+                case GroundState.Hoed:
+                    _groundTilemap.SetTile(position, hoedGroundTile);
+                    AddHoedGround(position);
+                    break;
+
+                case GroundState.Watered:
+                    _groundTilemap.SetTile(position, wateredGroundTile);
+                    AddHoedGround(position);
+                    AddWateredGround(position);
+                    break;
+            }
+        }
+
+
         public void AddHoedGround(Vector3Int newHoedGround)
         {
-            _hoedGround.Add(newHoedGround);
+            hoedGrounds.Add(newHoedGround);
+        }
+
+
+        public void AddWateredGround(Vector3Int newWateredGround)
+        {
+            wateredGrounds.Add(newWateredGround);
         }
 
 
         private void ResetWateredGround()
         {
-            foreach (var hoedGround in _hoedGround)
+            foreach (var hoedGround in hoedGrounds)
             {
                 _groundTilemap.SetTile(hoedGround, hoedGroundTile);
             }
+
+            wateredGrounds.Clear();
         }
     }
 }

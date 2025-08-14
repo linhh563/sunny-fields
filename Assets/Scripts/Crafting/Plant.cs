@@ -14,10 +14,14 @@ namespace Crafting
 
         // represent for current growing phase of the plant
         private int _phase;
-
         private bool _isWatered;
         private bool _canHarvest;
 
+        // public fields
+        public PlantScriptableObject plantScriptableObject { get => _scriptableObject; set => _scriptableObject = value; }
+        public int dayAge { get => _dayAge; set => _dayAge = value; }
+        public bool isWatered { get => _isWatered; set => _isWatered = value; }
+        
 
         public void Initialize(PlantScriptableObject scriptableObject)
         {

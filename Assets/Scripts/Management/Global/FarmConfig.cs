@@ -8,27 +8,39 @@ namespace Management
     [System.Serializable]
     public class FarmConfig
     {
-        public string characterName;
         public string farmName;
-        public double gameTimeMinutes;
+        public FarmSize farmSize;
+
+        public string characterName;
         public Vector3 characterPosition;
         public CharacterDirection characterDirection;
+
+        public ItemConfig holdingItem;
+
+        public double gameTimeMinutes;
         // TODO: store character's clothes
+
+        public int gold;
 
         public List<GroundConfig> groundStates;
         public List<ItemConfig> inventory;
         public List<PlantConfig> plants;
 
 
-        public FarmConfig(string newCharacterName, string newFarmName)
+        public FarmConfig(string newCharacterName, string newFarmName, FarmSize newFarmSize)
         {
             characterName = newCharacterName;
             farmName = newFarmName;
 
+            farmSize = newFarmSize;
             gameTimeMinutes = 0f;
 
             characterPosition = Vector3.zero;
             characterDirection = CharacterDirection.Down;
+
+            holdingItem = new ItemConfig();
+
+            gold = 500;
 
             groundStates = new List<GroundConfig>();
             inventory = new List<ItemConfig>();
@@ -83,6 +95,7 @@ namespace Management
     public class ItemConfig
     {
         public string itemName;
+        public int slotIndex;
         public int quantity;
     }
 

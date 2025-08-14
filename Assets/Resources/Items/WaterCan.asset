@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86380d8a6e69d764f847f459e0a1d2bf, type: 3}
-  m_Name: Water Can
+  m_Name: WaterCan
   m_EditorClassIdentifier: 
-  itemName: Water Can
+  itemName: WaterCan
   description: 
   avatarSprite: {fileID: 7482667652216324306, guid: 7c21d452f8af0ca40a0478563761c89d, type: 3}
   stackable: 0
+  buyFromStorePrice: 0
+  sellToStorePrice: 0

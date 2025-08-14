@@ -25,6 +25,8 @@ namespace GameUI
         [SerializeField] private Button _nextShirtBtn;
         [SerializeField] private Button _previousPantBtn;
         [SerializeField] private Button _nextPantBtn;
+        [SerializeField] private Button _nextFarmSizeButton;
+        [SerializeField] private Button _previousFarmSizeButton;
         [SerializeField] private Button _startButton;
 
 
@@ -34,6 +36,7 @@ namespace GameUI
         [SerializeField] private TMP_Text _hatIndex;
         [SerializeField] private TMP_Text _shirtIndex;
         [SerializeField] private TMP_Text _pantIndex;
+        [SerializeField] private TMP_Text _farmSizeText;
 
 
         [Header("Images")]
@@ -50,10 +53,10 @@ namespace GameUI
 
 
         private MainMenuUIManager _mainMenuUIManager;
+        private FarmSize _farmSize;
 
         public delegate void CustomizeButtonClicked(ClotheType clotheType, bool isNextButton);
         public static CustomizeButtonClicked OnCustomizeButtonClicked;
-
 
 
         void Awake()
@@ -69,6 +72,9 @@ namespace GameUI
             AddButtonsListener();
             ResetClotheUI();
             UpdateClothesIndexUI();
+
+            _farmSize = FarmSize.Medium;
+            UpdateFarmSizeText();
         }
 
 
@@ -214,6 +220,44 @@ namespace GameUI
         }
 
 
+        private void ChangeNextFarmSize()
+        {
+            int newFarmSize = (int)_farmSize + 1;
+            if (newFarmSize > 3)
+            {
+                _farmSize = FarmSize.Small;
+            }
+            else
+            {
+                _farmSize = (FarmSize)newFarmSize;
+            }
+
+            UpdateFarmSizeText();
+        }
+
+
+        private void ChangePreviousFarmSize()
+        {
+            int newFarmSize = (int)_farmSize - 1;
+            if (newFarmSize == 0)
+            {
+                _farmSize = FarmSize.Large;
+            }
+            else
+            {
+                _farmSize = (FarmSize)newFarmSize;
+            }
+
+            UpdateFarmSizeText();
+        }
+
+
+        private void UpdateFarmSizeText()
+        {
+            _farmSizeText.SetText(_farmSize.ToString());
+        }
+
+
         private void UpdateClothesIndexUI()
         {
             _hairIndex.SetText((CharacterCustomization._currentHairIndex + 1).ToString());
@@ -242,13 +286,13 @@ namespace GameUI
                 }
 
                 // create new farm config file
-                FarmConfig newFarm = new FarmConfig(_characterNameTxtField.text, _farmNameTxtField.text);
+                FarmConfig newFarm = new FarmConfig(_characterNameTxtField.text, _farmNameTxtField.text, _farmSize);
                 newFarm.SaveFarmConfig();
 
-                SceneManager.LoadScene("Gameplay");
+                SceneManager.LoadScene(_farmSize.ToString() + "Farm");
             }
             // else
-                // TODO: show the message
+            // TODO: show the message
         }
 
 
@@ -285,6 +329,9 @@ namespace GameUI
             _nextPantBtn.onClick.AddListener(UpdateClothesIndexUI);
             _previousPantBtn.onClick.AddListener(UpdateClothesIndexUI);
 
+            _nextFarmSizeButton.onClick.AddListener(ChangeNextFarmSize);
+            _previousFarmSizeButton.onClick.AddListener(ChangePreviousFarmSize);
+
             // add listener to start button
             _startButton.onClick.AddListener(LoadGameplayScene);
         }
@@ -303,6 +350,9 @@ namespace GameUI
             _previousShirtBtn.onClick.RemoveAllListeners();
             _nextPantBtn.onClick.RemoveAllListeners();
             _previousPantBtn.onClick.RemoveAllListeners();
+
+            _nextFarmSizeButton.onClick.RemoveAllListeners();
+            _previousFarmSizeButton.onClick.RemoveAllListeners();
         }
 
 
@@ -337,9 +387,10 @@ namespace GameUI
 
             // check the serialize buttons' value
             if (_backBtn == null || _previousGenderBtn == null || _nextGenderBtn == null
-            || _previousHatBtn == null || _nextHatBtn == null || _previousHairBtn == null
-            || _nextHairBtn == null || _previousShirtBtn == null || _nextShirtBtn == null
-            || _previousPantBtn == null || _nextPantBtn == null || _startButton == null)
+                || _previousHatBtn == null || _nextHatBtn == null || _previousHairBtn == null
+                || _nextHairBtn == null || _previousShirtBtn == null || _nextShirtBtn == null
+                || _previousPantBtn == null || _nextPantBtn == null || _startButton == null ||
+                _nextFarmSizeButton == null || _previousFarmSizeButton == null)
             {
                 Debug.LogError("There is a button was not assigned in " + gameObject.name + ".");
                 return;

@@ -1,0 +1,21 @@
+{
+    "farmName": "ddd",
+    "farmSize": 1,
+    "characterName": "ddd",
+    "characterPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "characterDirection": 1,
+    "holdingItem": {
+        "itemName": "",
+        "slotIndex": 0,
+        "quantity": 0
+    },
+    "gameTimeMinutes": 0.0,
+    "gold": 500,
+    "groundStates": [],
+    "inventory": [],
+    "plants": []
+}

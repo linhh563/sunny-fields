@@ -74,4 +74,12 @@ namespace Management
         Buying,
         Selling
     }
+
+    [System.Serializable]
+    public enum FarmSize
+    {
+        Small = 1,
+        Medium = 2, 
+        Large = 3
+    }
 }

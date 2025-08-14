@@ -16,7 +16,7 @@ namespace Characters
 
         public void Enter()
         {
-            var currentGridPos = _controller.tilemapManager.groundTilemap.WorldToCell(CharacterController.CharacterWorldPosition);
+            var currentGridPos = _controller.tilemapManager.groundTilemap.WorldToCell(CharacterController.characterWorldPosition);
             var worrldPos = _controller.tilemapManager.groundTilemap.GetCellCenterWorld(currentGridPos);
 
             _controller.transform.position = worrldPos;

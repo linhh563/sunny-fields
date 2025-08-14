@@ -51,7 +51,7 @@ namespace GameUI
 
                     // create saved farm ui and set up it
                     var farm = ObjectPoolManager.SpawnObject(_savedFarmUI, _farmContainer);
-                    farm.GetComponent<SavedFarmUI>().InitializeSavedFarm(farmConfig.characterName, farmConfig.farmName, farmConfig.gameTimeMinutes);
+                    farm.GetComponent<SavedFarmUI>().InitializeSavedFarm(farmConfig.characterName, farmConfig.farmName, farmConfig.gameTimeMinutes, farmConfig.farmSize);
                 }
             }
         }

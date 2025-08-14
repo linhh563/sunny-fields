@@ -1,14 +1,52 @@
 {
-    "characterName": "asd",
     "farmName": "asd",
-    "gameTimeMinutes": 846.0,
+    "farmSize": 1,
+    "characterName": "asd",
     "characterPosition": {
-        "x": 0.0,
-        "y": 0.0,
+        "x": -3.5,
+        "y": 7.5,
         "z": 0.0
     },
     "characterDirection": 1,
-    "groundStates": [],
-    "inventory": [],
+    "gameTimeMinutes": 1292.0,
+    "gold": 500,
+    "groundStates": [
+        {
+            "position": {
+                "x": -2,
+                "y": -1,
+                "z": 0
+            },
+            "state": 2
+        },
+        {
+            "position": {
+                "x": -3,
+                "y": -1,
+                "z": 0
+            },
+            "state": 2
+        },
+        {
+            "position": {
+                "x": -4,
+                "y": -1,
+                "z": 0
+            },
+            "state": 2
+        }
+    ],
+    "inventory": [
+        {
+            "itemName": "WaterCan",
+            "slotIndex": 0,
+            "quantity": 1
+        },
+        {
+            "itemName": "Hoe",
+            "slotIndex": 14,
+            "quantity": 1
+        }
+    ],
     "plants": []
 }

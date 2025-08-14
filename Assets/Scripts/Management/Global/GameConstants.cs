@@ -25,7 +25,7 @@ namespace Management
         // the duration in real life (second) corresponding to a day in game
         public const float DAY_LENGTH = 20;
         public const int MINUTES_IN_DAY = 1440;
-
+        public const int MINUTES_IN_YEAR = 525600;
     }
 
 
@@ -39,5 +39,11 @@ namespace Management
     {
         public const string CONFIG_FILE_PATH = "Resources/Data/GameSetting.json";
         public const string FARMS_FOLDER_PATH = "Resources/Data/SavedGames";
+    }
+
+
+    public static class CharacterCustomizeConstant
+    {
+        public const int TOTAL_FARM_SIZE = 3;
     }
 }

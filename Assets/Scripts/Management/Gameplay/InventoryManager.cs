@@ -13,6 +13,9 @@ namespace Management
         public static int gold;
         private GameObject inventoryItemPrefab;
 
+        public InventorySlot[] inventorySlots { get => _inventorySlots; set => _inventorySlots = value; }
+        public InventorySlot holdingItem { get => _holdingItem; set => _holdingItem = value; }
+
         void Start()
         {
             inventoryItemPrefab = Resources.Load<GameObject>("Prefabs/InventoryItem");
@@ -23,8 +26,9 @@ namespace Management
             CheckPropertiesValue();
 
             // TEST
-            gold = 2000;
             ItemInStoreUI.OnItemBought += BuyItems;
+
+            BagUIController.OnBagOpened += RefreshAllItems;
         }
 
 
@@ -35,6 +39,8 @@ namespace Management
 
             // TEST
             ItemInStoreUI.OnItemBought -= BuyItems;
+
+            BagUIController.OnBagOpened -= RefreshAllItems;
         }
 
 
@@ -107,6 +113,15 @@ namespace Management
         }
 
 
+        public void AddItemToSlot(ItemScriptableObject item, int slotIndex, int quantity)
+        {
+            SpawnNewItem(item, inventorySlots[slotIndex]);
+
+            var newItem = inventorySlots[slotIndex].GetComponentInChildren<DragableItem>();
+            newItem.SetCount(quantity);
+        }
+
+
         private void SpawnNewItem(ItemScriptableObject item, InventorySlot slot)
         {
             var newItemGameObj = ObjectPoolManager.SpawnObject(inventoryItemPrefab, slot.transform);
@@ -139,12 +154,12 @@ namespace Management
             if (holdingItem == null) return;
 
             holdingItem.count--;
-            holdingItem.RefreshCount();
-
             if (holdingItem.count == 0)
             {
                 Destroy(holdingItem.gameObject);
             }
+
+            holdingItem.RefreshCount();
         }
 
 
@@ -153,6 +168,19 @@ namespace Management
             for (int i = 0; i < quantity; i++)
             {
                 AddItem(item);
+            }
+        }
+
+
+        public void RefreshAllItems()
+        {
+            foreach (var itemSlot in _inventorySlots)
+            {
+                var item = itemSlot.GetComponentInChildren<DragableItem>();
+                if (item != null)
+                {
+                    item.RefreshCount();
+                }
             }
         }
 

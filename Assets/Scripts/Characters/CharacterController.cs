@@ -12,7 +12,7 @@ namespace Characters
         public static CharacterDirection currentDirection { get; private set; }
 
         // character position in world position (use to convert to tile map position)
-        public static Vector3 CharacterWorldPosition { get; private set; }
+        public static Vector3 characterWorldPosition { get; private set; }
 
         // CONTROLLERS 
         public CharacterAnimation animController { get; private set; }
@@ -22,6 +22,7 @@ namespace Characters
         public TilemapManager tilemapManager { get; private set; }
 
         private StateManager _stateManager;
+
 
         private void Awake()
         {
@@ -37,18 +38,21 @@ namespace Characters
             currentDirection = CharacterDirection.Down;
         }
 
+
         void Start()
         {
             tilemapManager = FindObjectOfType<TilemapManager>();
             _stateManager.ChangeState(new CharacterIdleState(this));
         }
 
+
         private void OnDisable()
         {
             // Reset values
-            CharacterWorldPosition = Vector3.zero;
+            characterWorldPosition = Vector3.zero;
             currentDirection = CharacterDirection.Down;
         }
+
 
         private void Update()
         {
@@ -57,6 +61,7 @@ namespace Characters
             HandleFarmingState();
             HandleMovementState();
         }
+
 
         private void UpdateCurrentDirection()
         {
@@ -67,7 +72,7 @@ namespace Characters
                 case CharacterCommand.MoveDown:
                     currentDirection = CharacterDirection.Down;
                     break;
-                    
+
                 case CharacterCommand.MoveUp:
                     currentDirection = CharacterDirection.Up;
                     break;
@@ -83,6 +88,7 @@ namespace Characters
                     break;
             }
         }
+
 
         private void HandleMovementState()
         {
@@ -102,6 +108,7 @@ namespace Characters
                     break;
             }
         }
+
 
         private void HandleFarmingState()
         {
@@ -132,10 +139,12 @@ namespace Characters
             }
         }
 
+
         private void UpdateCharacterWorldPosition()
         {
-            CharacterWorldPosition = transform.position;
+            characterWorldPosition = transform.position;
         }
+
 
         public void Moving()
         {
@@ -145,6 +154,15 @@ namespace Characters
 
             // call character move toward method
             movementController.MoveToward(direction.normalized);
+        }
+
+
+        public void Initialize(Vector3 position, CharacterDirection direction)
+        {
+            characterWorldPosition = position;
+            currentDirection = direction;
+
+            transform.position = position;
         }
     }    
 }
