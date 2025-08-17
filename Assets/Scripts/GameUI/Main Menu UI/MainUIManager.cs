@@ -13,6 +13,7 @@ namespace Management
 
         private MainMenuUIManager _mainMenuUIManager;
 
+
         void Awake()
         {
             _mainMenuUIManager = GetComponentInParent<MainMenuUIManager>();
@@ -20,13 +21,12 @@ namespace Management
             CheckPropertiesValue();
         }
 
+
         void OnEnable()
         {
-            _newGameBtn.onClick.AddListener(_mainMenuUIManager.EnableCustomizeCharacterUI);
-            _loadFarmBtn.onClick.AddListener(_mainMenuUIManager.EnableFarmListUI);
-            _settingBtn.onClick.AddListener(_mainMenuUIManager.EnableSettingUI);
-            _exitButton.onClick.AddListener(MainMenuManager.ExitGame);
+            AddButtonsListener();
         }
+
 
         void OnDisable()
         {
@@ -34,6 +34,27 @@ namespace Management
             _loadFarmBtn.onClick.RemoveAllListeners();
             _settingBtn.onClick.RemoveAllListeners();
         }
+
+
+        private void PlayButtonPressSfx()
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.pressButtonSfx);
+        }
+
+
+        private void AddButtonsListener()
+        {
+            _newGameBtn.onClick.AddListener(_mainMenuUIManager.EnableCustomizeCharacterUI);
+            _loadFarmBtn.onClick.AddListener(_mainMenuUIManager.EnableFarmListUI);
+            _settingBtn.onClick.AddListener(_mainMenuUIManager.EnableSettingUI);
+            _exitButton.onClick.AddListener(MainMenuManager.ExitGame);
+
+            _newGameBtn.onClick.AddListener(PlayButtonPressSfx);
+            _loadFarmBtn.onClick.AddListener(PlayButtonPressSfx);
+            _settingBtn.onClick.AddListener(PlayButtonPressSfx);
+            _exitButton.onClick.AddListener(PlayButtonPressSfx);
+        }
+
 
         private void CheckPropertiesValue()
         {

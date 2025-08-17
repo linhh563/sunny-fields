@@ -1,27 +1,21 @@
 {
     "farmName": "aaa",
-    "farmSize": 2,
+    "farmSize": 1,
     "characterName": "aaa",
     "characterPosition": {
-        "x": -4.5,
-        "y": 4.5,
+        "x": 0.0,
+        "y": 0.0,
         "z": 0.0
     },
-    "characterDirection": 3,
+    "characterDirection": 1,
     "holdingItem": {
-        "itemName": "Corn",
+        "itemName": "",
         "slotIndex": 0,
-        "quantity": 2
+        "quantity": 0
     },
-    "gameTimeMinutes": 569.0,
+    "gameTimeMinutes": 0.0,
     "gold": 500,
     "groundStates": [],
-    "inventory": [
-        {
-            "itemName": "Hoe",
-            "slotIndex": 1,
-            "quantity": 1
-        }
-    ],
+    "inventory": [],
     "plants": []
 }

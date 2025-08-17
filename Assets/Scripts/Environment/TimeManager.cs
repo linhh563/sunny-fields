@@ -14,15 +14,41 @@ namespace Management
         public static event EventHandler<TimeSpan> OnTimeChanged;
         public static Action OnDayChanged;
 
+
         void Awake()
         {
             _dayLength = EnvironmentConstants.DAY_LENGTH;
         }
 
+
         void Start()
         {
             StartCoroutine(AddMinute());
         }
+
+
+        public static void ChangeNextDay()
+        {
+            // check total time from current to 6 a.m tomorrow
+            var remainTime = EnvironmentConstants.MINUTES_IN_DAY - (_currentTime.Hours * 60 + _currentTime.Minutes);
+            // new day start at 6 am
+            Debug.Log(remainTime);
+
+            remainTime += 360;
+
+            // set time
+            _currentTime += TimeSpan.FromMinutes(remainTime);
+
+
+            OnDayChanged?.Invoke();
+        }
+
+
+        public static void SetupTime(double minuteTime)
+        {
+            _currentTime += TimeSpan.FromMinutes(minuteTime);
+        }
+
 
         // increase time in game by 1 minute
         private IEnumerator AddMinute()

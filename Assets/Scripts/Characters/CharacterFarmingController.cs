@@ -160,7 +160,7 @@ namespace Characters
                 case "Hoe":
                     farmingState = CharacterFarmingState.Hoeing;
                     break;
-                case "Water Can":
+                case "WaterCan":
                     farmingState = CharacterFarmingState.Watering;
                     break;
                 case "Scythe":

@@ -4,6 +4,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 using Management;
+using System;
+using System.IO;
 
 
 namespace GameUI
@@ -22,8 +24,11 @@ namespace GameUI
 
         [Header("Buttons")]
         [SerializeField] private Button _loadButton;
+        [SerializeField] private Button _deleteFarmButton;
 
         private FarmSize _farmSize;
+
+        public static event Action OnFarmDeleted;
 
 
         void Start()
@@ -35,12 +40,17 @@ namespace GameUI
         void OnEnable()
         {
             _loadButton.onClick.AddListener(LoadGame);
+            _deleteFarmButton.onClick.AddListener(DeleteSavedFarm);
+
+            _loadButton.onClick.AddListener(PlayButtonPressSfx);
+            _deleteFarmButton.onClick.AddListener(PlayButtonPressSfx);
         }
 
 
         void OnDisable()
         {
             _loadButton.onClick.RemoveAllListeners();
+            _deleteFarmButton.onClick.RemoveAllListeners();
         }
 
 
@@ -83,6 +93,31 @@ namespace GameUI
         }
 
 
+        private void DeleteSavedFarm()
+        {
+            // get file path
+            string fileName = FilePath.FARMS_FOLDER_PATH + "/" + _farmNameText.text + ".json";
+            string filePath = Path.Combine(Application.dataPath, fileName);
+
+            Debug.Log(filePath);
+
+            // delete file
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+
+            // update farm list ui
+            OnFarmDeleted?.Invoke();
+        }
+
+
+        private void PlayButtonPressSfx()
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.pressButtonSfx);
+        }
+
+
         private void CheckPropertiesValue()
         {
             if (_characterAvatarImage == null ||
@@ -91,7 +126,8 @@ namespace GameUI
                 _totalPlayTimeText == null ||
                 _gameTimeText == null ||
                 _loadButton == null ||
-                _farmSizeText == null)
+                _farmSizeText == null ||
+                _deleteFarmButton == null)
             {
                 Debug.LogError("There is a component was not assigned to " + gameObject.name + ".");
             }

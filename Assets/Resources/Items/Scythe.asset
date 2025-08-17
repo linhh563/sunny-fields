@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Scythe
   description: 
-  avatarSprite: {fileID: 7482667652216324306, guid: 6e495d894cc36574fbba8f4ba3013ce7, type: 3}
+  avatarSprite: {fileID: 21300000, guid: 421702ff8a866324190e4e8277615db0, type: 3}
   stackable: 0
+  buyFromStorePrice: 0
+  sellToStorePrice: 0

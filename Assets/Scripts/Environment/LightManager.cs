@@ -1,4 +1,5 @@
 using System;
+using Crafting;
 using Management;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -11,6 +12,7 @@ namespace Environment
         private Light2D _light2D;
 
         [SerializeField] private Gradient _gradient;
+        [SerializeField] private Gradient _changeDayGradient;
 
         private void Awake()
         {
@@ -20,16 +22,19 @@ namespace Environment
             TimeManager.OnTimeChanged += UpdateLightColor;
         }
 
+
         void OnDisable()
         {
             // unsubscribe events
             TimeManager.OnTimeChanged -= UpdateLightColor;
         }
 
+
         private void UpdateLightColor(object sender, TimeSpan newTime)
         {
             _light2D.color = _gradient.Evaluate(PercentOfDay(newTime));
         }
+
 
         private float PercentOfDay(TimeSpan time)
         {

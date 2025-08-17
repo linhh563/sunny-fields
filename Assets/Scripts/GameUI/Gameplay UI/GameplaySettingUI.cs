@@ -6,7 +6,6 @@ using System.Collections.Generic;
 
 using Management;
 using Environment;
-using System.Linq;
 
 namespace GameUI
 {
@@ -38,6 +37,8 @@ namespace GameUI
             ModifyHotKeyUI.OnKeyChanged += UpdateHotKey;
 
             AddListeners();
+
+            GameplayManager.PauseGame();
         }
 
         void OnDisable()
@@ -46,6 +47,8 @@ namespace GameUI
             ModifyHotKeyUI.OnKeyChanged -= UpdateHotKey;
 
             _modifyHotKeyUI.gameObject.SetActive(false);
+
+            GameplayManager.ResumeGame();
         }
 
 

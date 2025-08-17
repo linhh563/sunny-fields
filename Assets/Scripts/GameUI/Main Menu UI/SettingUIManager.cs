@@ -37,6 +37,7 @@ namespace GameUI
             InitializeSettingUI();
 
             _backBtn.onClick.AddListener(_mainMenuUIManager.DisableSettingUI);
+            _backBtn.onClick.AddListener(PlayButtonPressSfx);
             ModifyHotKeyUI.OnKeyChanged += UpdateHotKey;
 
             AddListeners();
@@ -115,13 +116,21 @@ namespace GameUI
 
         private void OnBgmVolumeChanged(float value)
         {
+            AudioManager.Instance.ModifyMusicVolume(value);
             GameSetting.Instance.ModifyBackgroundVolume(value);
         }
 
 
         private void OnSfxVolumeChanged(float value)
         {
+            AudioManager.Instance.ModifySfxVolume(value);
             GameSetting.Instance.ModifySoundVolume(value);
+        }
+
+
+        private void PlayButtonPressSfx()
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.pressButtonSfx);
         }
 
 
@@ -131,6 +140,8 @@ namespace GameUI
             {
                 // use lambda expression to add listener has arguments
                 hotkey.onClick.AddListener(() => OnModifyKeyPress(hotkey.gameObject.name));
+
+                hotkey.onClick.AddListener(PlayButtonPressSfx);
             }
 
             // add listener for language dropdown

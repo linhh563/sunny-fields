@@ -51,6 +51,10 @@ namespace GameUI
         [SerializeField] private TMP_InputField _characterNameTxtField;
         [SerializeField] private TMP_InputField _farmNameTxtField;
 
+        [Header("UIs")]
+        [SerializeField] private GameObject _discardMessageUI;
+        [SerializeField] private GameObject _messageUI;
+
 
         private MainMenuUIManager _mainMenuUIManager;
         private FarmSize _farmSize;
@@ -70,16 +74,19 @@ namespace GameUI
         private void OnEnable()
         {
             AddButtonsListener();
-            ResetClotheUI();
-            UpdateClothesIndexUI();
+            ResetCustomizeUI();
 
             _farmSize = FarmSize.Medium;
             UpdateFarmSizeText();
+
+            _discardMessageUI.SetActive(false);
+            _messageUI.SetActive(false);
         }
 
 
         void OnDisable()
         {
+            CharacterCustomization.ResetClothesIndex();
             RemoveListenerFromAllButtons();
         }
 
@@ -281,6 +288,8 @@ namespace GameUI
                 if (File.Exists(path))
                 {
                     // display message, farm was existed
+                    _messageUI.SetActive(true);
+                    _messageUI.GetComponent<MessageUI>().SetMessageText("The farm name was already existed.\nPlease enter other name.");
 
                     return;
                 }
@@ -291,8 +300,18 @@ namespace GameUI
 
                 SceneManager.LoadScene(_farmSize.ToString() + "Farm");
             }
-            // else
-            // TODO: show the message
+            else
+            {
+                // show the message
+                _messageUI.SetActive(true);
+                _messageUI.GetComponent<MessageUI>().SetMessageText("There is a value was empty.\nPlease recheck and enter to that.");
+            }
+        }
+
+
+        private void EnableDiscardMessageUI()
+        {
+            _discardMessageUI.SetActive(true);
         }
 
 
@@ -305,10 +324,16 @@ namespace GameUI
         }
 
 
+        private void PlayButtonPressSfx()
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.pressButtonSfx);
+        }
+
+
         private void AddButtonsListener()
         {
-            _backBtn.onClick.AddListener(_mainMenuUIManager.DisableCustomizeCharacterUI);
-            _backBtn.onClick.AddListener(CharacterCustomization.ResetClothesIndex);
+            _backBtn.onClick.AddListener(EnableDiscardMessageUI);
+            _backBtn.onClick.AddListener(PlayButtonPressSfx);
 
             // add listener to character customization buttons
             _nextHatBtn.onClick.AddListener(ChangeNextHat);
@@ -329,11 +354,24 @@ namespace GameUI
             _nextPantBtn.onClick.AddListener(UpdateClothesIndexUI);
             _previousPantBtn.onClick.AddListener(UpdateClothesIndexUI);
 
+            _nextHatBtn.onClick.AddListener(PlayButtonPressSfx);
+            _previousHatBtn.onClick.AddListener(PlayButtonPressSfx);
+            _nextHairBtn.onClick.AddListener(PlayButtonPressSfx);
+            _previousHairBtn.onClick.AddListener(PlayButtonPressSfx);
+            _nextShirtBtn.onClick.AddListener(PlayButtonPressSfx);
+            _previousShirtBtn.onClick.AddListener(PlayButtonPressSfx);
+            _nextPantBtn.onClick.AddListener(PlayButtonPressSfx);
+            _previousPantBtn.onClick.AddListener(PlayButtonPressSfx);
+
             _nextFarmSizeButton.onClick.AddListener(ChangeNextFarmSize);
             _previousFarmSizeButton.onClick.AddListener(ChangePreviousFarmSize);
 
+            _nextFarmSizeButton.onClick.AddListener(PlayButtonPressSfx);
+            _previousFarmSizeButton.onClick.AddListener(PlayButtonPressSfx);
+
             // add listener to start button
             _startButton.onClick.AddListener(LoadGameplayScene);
+            _startButton.onClick.AddListener(PlayButtonPressSfx);
         }
 
 
@@ -376,6 +414,22 @@ namespace GameUI
         }
 
 
+        private void ResetCustomizeUI()
+        {
+            // reset character name and farm name
+            _farmNameTxtField.text = "";
+            _characterNameTxtField.text = "";
+
+            // reset farm size
+            _farmSize = FarmSize.Medium;
+            UpdateFarmSizeText();
+
+            // reset character clothes
+            ResetClotheUI();
+            UpdateClothesIndexUI();
+        }
+
+
         private void CheckPropertiesValue()
         {
             // check value of _mainMenuUIManager
@@ -399,7 +453,7 @@ namespace GameUI
             // check the serialize text's value
             if (_hairIndex == null || _hatIndex == null || _shirtIndex == null || _pantIndex == null)
             {
-                Debug.LogError("There is a text mesh pro was not assigned in " + gameObject.name + ".");
+                Debug.LogError("There is a text was not assigned in " + gameObject.name + ".");
                 return;
             }
 
@@ -414,6 +468,12 @@ namespace GameUI
                 _farmNameTxtField == null)
             {
                 Debug.LogError("There is a text fields was not assigned in " + gameObject.name + ".");
+            }
+
+            if (_discardMessageUI == null ||
+                _messageUI == null)
+            {
+                Debug.LogError("There is a component was not assigned in" + gameObject.name + ".");
             }
         }
     }

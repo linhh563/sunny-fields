@@ -54,7 +54,7 @@ namespace GameUI
         }
 
 
-        public void EnableCharacterOptionsUI(bool enable, bool isLeft)
+        public void EnableCharacterOptionsUI(bool enable, bool isLeft, string objName, CharacterInteractType type)
         {
             if (!enable)
             {
@@ -63,6 +63,7 @@ namespace GameUI
             }
 
             _characterOptionsUI.EnableOptionsUI(isLeft);
+            _characterOptionsUI.SetOptionText(objName, type);
         }
 
 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: WaterCan
   description: 
-  avatarSprite: {fileID: 7482667652216324306, guid: 7c21d452f8af0ca40a0478563761c89d, type: 3}
+  avatarSprite: {fileID: 21300000, guid: 1860bbff47a769a4aac96fd2ea9f0620, type: 3}
   stackable: 0
   buyFromStorePrice: 0
   sellToStorePrice: 0

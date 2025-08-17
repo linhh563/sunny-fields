@@ -28,7 +28,7 @@ namespace Management
             // TEST
             ItemInStoreUI.OnItemBought += BuyItems;
 
-            BagUIController.OnBagOpened += RefreshAllItems;
+            // BagUIController.OnBagOpened += RefreshAllItems;
         }
 
 
@@ -40,7 +40,7 @@ namespace Management
             // TEST
             ItemInStoreUI.OnItemBought -= BuyItems;
 
-            BagUIController.OnBagOpened -= RefreshAllItems;
+            // BagUIController.OnBagOpened -= RefreshAllItems;
         }
 
 
@@ -143,6 +143,17 @@ namespace Management
             }
 
             return _holdingItem.GetComponentInChildren<DragableItem>().itemScriptableObj;
+        }
+
+
+        public void SetHoldingItem(ItemScriptableObject item)
+        {
+            var newItemGameObj = ObjectPoolManager.SpawnObject(inventoryItemPrefab, holdingItem.transform);
+
+            // set item scriptable object
+            var inventoryItem = newItemGameObj.GetComponent<DragableItem>();
+
+            inventoryItem.InitializeItem(item);
         }
 
 

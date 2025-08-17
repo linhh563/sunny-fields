@@ -6,6 +6,8 @@ namespace Crafting
     [RequireComponent(typeof(SpriteRenderer))]
     public class Plant : MonoBehaviour
     {
+        [SerializeField] private InventoryManager _inventoryManager;
+        
         private PlantScriptableObject _scriptableObject;
         // age is calculated by days
         private int _dayAge;
@@ -21,7 +23,18 @@ namespace Crafting
         public PlantScriptableObject plantScriptableObject { get => _scriptableObject; set => _scriptableObject = value; }
         public int dayAge { get => _dayAge; set => _dayAge = value; }
         public bool isWatered { get => _isWatered; set => _isWatered = value; }
-        
+
+
+        void Start()
+        {
+            _inventoryManager = GameObject.FindGameObjectWithTag("InventoryManager").GetComponent<InventoryManager>();
+
+            if (_inventoryManager == null)
+            {
+                Debug.LogError("load inventory manager fail");
+            }
+        }
+
 
         public void Initialize(PlantScriptableObject scriptableObject)
         {
@@ -100,7 +113,8 @@ namespace Crafting
         {
             if (!_canHarvest) return;
 
-            Debug.Log("Harvesting...");
+            _inventoryManager.AddItem(_scriptableObject);
+            ObjectPoolManager.ReturnObjectToPool(gameObject);
         }
 
 

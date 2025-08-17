@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Hoe
   description: None
-  avatarSprite: {fileID: 21300000, guid: 4c61d476bc78e5b4497c7cc538e4a23c, type: 3}
+  avatarSprite: {fileID: 21300000, guid: 91bdfc0d796478641a862a401e99b997, type: 3}
+  stackable: 0
+  buyFromStorePrice: 0
+  sellToStorePrice: 0

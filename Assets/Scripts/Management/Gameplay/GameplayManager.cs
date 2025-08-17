@@ -14,7 +14,7 @@ namespace Management
         void Start()
         {
             CheckPropertiesValue();
-            
+
             SetUpGameData();
         }
 
@@ -26,6 +26,9 @@ namespace Management
             // set up character direction and position
             _characterController.Initialize(farmConfig.characterPosition, farmConfig.characterDirection);
 
+            // set up game time
+            TimeManager.SetupTime(farmConfig.gameTimeMinutes);
+
             // set up ground state
             foreach (var tile in farmConfig.groundStates)
             {
@@ -34,12 +37,22 @@ namespace Management
 
             // set up inventory
             InventoryManager.gold = farmConfig.gold;
+
+            if (farmConfig.holdingItem != null)
+            {
+                var itemObj = Resources.Load<ItemScriptableObject>("Items/" + farmConfig.holdingItem.itemName);
+
+                _inventoryManager.SetHoldingItem(itemObj);
+            }
+            
             foreach (var item in farmConfig.inventory)
             {
                 var itemObj = Resources.Load<ItemScriptableObject>("Items/" + item.itemName);
 
                 _inventoryManager.AddItemToSlot(itemObj, item.slotIndex, item.quantity);
             }
+
+            // TODO: set up plant
         }
 
 

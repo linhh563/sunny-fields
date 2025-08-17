@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef867c5b9c0a4444eb6af15347840ec0, type: 3}
+  m_Name: Cabbage Seed
+  m_EditorClassIdentifier: 
+  itemName: Cabbage seed
+  description: 
+  avatarSprite: {fileID: -600396169, guid: f20485a75458c604a9672d72a0df48ad, type: 3}
+  stackable: 1
+  buyFromStorePrice: 100
+  sellToStorePrice: 250
+  totalPhase: 4
+  sprites:
+  - {fileID: -600396169, guid: f20485a75458c604a9672d72a0df48ad, type: 3}
+  - {fileID: 148214872, guid: f20485a75458c604a9672d72a0df48ad, type: 3}
+  - {fileID: -1492142553, guid: f20485a75458c604a9672d72a0df48ad, type: 3}
+  - {fileID: 221378662, guid: f20485a75458c604a9672d72a0df48ad, type: 3}
+  grownTime: 01000000020000000300000004000000
+  noWateredLimit: 2
+  productItemAvatar: {fileID: 0}
+  product: {fileID: 11400000, guid: eb181d194a3b7054a92e6a05ddeb4f84, type: 2}

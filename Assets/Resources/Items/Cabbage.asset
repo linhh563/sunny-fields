@@ -9,21 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef867c5b9c0a4444eb6af15347840ec0, type: 3}
+  m_Script: {fileID: 11500000, guid: 86380d8a6e69d764f847f459e0a1d2bf, type: 3}
   m_Name: Cabbage
   m_EditorClassIdentifier: 
   itemName: Cabbage
   description: 
   avatarSprite: {fileID: 221378662, guid: f20485a75458c604a9672d72a0df48ad, type: 3}
-  stackable: 1
-  buyFromStorePrice: 100
-  sellToStorePrice: 250
-  totalPhase: 4
-  sprites:
-  - {fileID: -600396169, guid: f20485a75458c604a9672d72a0df48ad, type: 3}
-  - {fileID: 148214872, guid: f20485a75458c604a9672d72a0df48ad, type: 3}
-  - {fileID: -1492142553, guid: f20485a75458c604a9672d72a0df48ad, type: 3}
-  - {fileID: 221378662, guid: f20485a75458c604a9672d72a0df48ad, type: 3}
-  grownTime: 01000000020000000300000004000000
-  noWateredLimit: 2
-  productItemAvatar: {fileID: 0}
+  stackable: 0
+  buyFromStorePrice: 0
+  sellToStorePrice: 0

@@ -1,5 +1,6 @@
 using System.IO;
 using Management;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ namespace GameUI
     {
         [SerializeField] private Button _backBtn;
         [SerializeField] private Transform _farmContainer;
+        [SerializeField] private TMP_Text _messageText;
 
         private MainMenuUIManager _mainMenuUIManager;
         private GameObject _savedFarmUI;
@@ -24,6 +26,9 @@ namespace GameUI
         void OnEnable()
         {
             _backBtn.onClick.AddListener(_mainMenuUIManager.DisableFarmListUI);
+            _backBtn.onClick.AddListener(PlayButtonPressSfx);
+
+            SavedFarmUI.OnFarmDeleted += RefreshFarmList;
 
             LoadFarmList();
         }
@@ -31,6 +36,7 @@ namespace GameUI
         void OnDisable()
         {
             _backBtn.onClick.RemoveAllListeners();
+            SavedFarmUI.OnFarmDeleted -= RefreshFarmList;
 
             HideAllSavedFarm();
         }
@@ -41,6 +47,15 @@ namespace GameUI
             string folderPath = Path.Combine(Application.dataPath, FilePath.FARMS_FOLDER_PATH);
             var files = Directory.GetFiles(folderPath);
 
+            // if there is no saved farm, display a message
+            if (files.Length == 0)
+            {
+                _messageText.gameObject.SetActive(true);
+                _messageText.SetText("There is no Saved farm in list!!!");
+                return;
+            }
+
+            _messageText.gameObject.SetActive(false);
             foreach (var file in files)
             {
                 // only get json file, ignore .meta file
@@ -57,6 +72,13 @@ namespace GameUI
         }
 
 
+        private void RefreshFarmList()
+        {
+            HideAllSavedFarm();
+            LoadFarmList();
+        }
+
+
         private void HideAllSavedFarm()
         {
             foreach (Transform obj in _farmContainer)
@@ -64,6 +86,13 @@ namespace GameUI
                 ObjectPoolManager.ReturnObjectToPool(obj.gameObject);
             }
         }
+
+
+        private void PlayButtonPressSfx()
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.pressButtonSfx);
+        }
+
 
 
         private void CheckPropertiesValue()
@@ -79,7 +108,8 @@ namespace GameUI
             }
 
             if (_backBtn == null ||
-                    _farmContainer == null)
+                _farmContainer == null ||
+                _messageText == null)
             {
                 Debug.LogError("There is a component was not assigned in " + gameObject.name + ".");
             }

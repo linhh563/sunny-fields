@@ -13,7 +13,7 @@ namespace Characters
 
         void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.gameObject.tag == "Collectable")
+            if (collision.gameObject.CompareTag("Collectable"))
             {
                 // add new item to character inventory
                 var itemScriptableObj = collision.gameObject.GetComponent<CollectableItem>().itemScriptableObject;
@@ -28,21 +28,32 @@ namespace Characters
 
         void OnTriggerStay2D(Collider2D collision)
         {
-            if (collision.gameObject.tag == "NPC")
+            if (collision.gameObject.CompareTag("NPC"))
             {
                 // compare the x position of main character and npc to enable respective options ui
                 var isLeft = (transform.position.x < collision.transform.position.x) ? true : false;
-                GameplayUIManager.Instance.EnableCharacterOptionsUI(true, isLeft);
+                GameplayUIManager.Instance.EnableCharacterOptionsUI(true, isLeft, collision.gameObject.name, CharacterInteractType.NPC);
+            }
 
+            if (collision.gameObject.CompareTag("Bed"))
+            {
+                // compare the x position of main character and the bed to enable respective options ui
+                var isLeft = (transform.position.x < collision.transform.position.x) ? true : false;
+                GameplayUIManager.Instance.EnableCharacterOptionsUI(true, isLeft, collision.gameObject.name, CharacterInteractType.Item);
             }
         }
-        
+
 
         void OnTriggerExit2D(Collider2D collision)
         {
-            if (collision.gameObject.tag == "NPC")
+            if (collision.gameObject.CompareTag("NPC"))
             {
-                GameplayUIManager.Instance.EnableCharacterOptionsUI(false, isLeft: true);
+                GameplayUIManager.Instance.EnableCharacterOptionsUI(false, isLeft: true, collision.gameObject.name, CharacterInteractType.NPC);
+            }
+
+            if (collision.gameObject.CompareTag("Bed"))
+            {
+                GameplayUIManager.Instance.EnableCharacterOptionsUI(false, isLeft: true, collision.gameObject.name, CharacterInteractType.Item);
             }
         }
     }

@@ -33,6 +33,8 @@ namespace GameUI
             UpdateGoldText();
             OnBagOpened?.Invoke();
             // UpdateCharacterClothesUI();
+
+            GameplayManager.PauseGame();
         }
 
 
@@ -40,6 +42,8 @@ namespace GameUI
         {
             _backButton.onClick.RemoveAllListeners();
             GameplayInputManager.OnExitUIKeyPress -= DisableBagUI;
+
+            GameplayManager.ResumeGame();
         }
 
 

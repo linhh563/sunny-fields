@@ -28,7 +28,7 @@ namespace Characters
         void Awake()
         {
             // subscribe input events
-            GameplayInputManager.OnInteractKeyPress += Interact;
+            GameplayInputManager.OnInteractNPCKeyPress += Interact;
 
             _dialogueIndex = 0;
             _canInteract = false;
@@ -38,7 +38,7 @@ namespace Characters
         void OnDisable()
         {
             // unsubscribe event
-            GameplayInputManager.OnInteractKeyPress -= Interact;
+            GameplayInputManager.OnInteractNPCKeyPress -= Interact;
         }
 
 

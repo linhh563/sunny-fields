@@ -28,6 +28,7 @@ namespace GameUI
         }
 
 
+
         // create and set up decision buttons
         public void CreateDecisionButtons(string decisionText, UnityEngine.Events.UnityAction buttonEvent)
         {
@@ -35,7 +36,7 @@ namespace GameUI
             var decisionPanel = GameplayUIManager.Instance.conversationUI.decisionPanel;
 
             GameObject decisionButton = ObjectPoolManager.SpawnObject(decisionButtonPrefab, decisionPanel);
-            
+
             decisionButton.GetComponentInChildren<TMP_Text>().SetText(decisionText);
             decisionButton.GetComponent<Button>().onClick.AddListener(buttonEvent);
         }

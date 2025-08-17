@@ -75,11 +75,20 @@ namespace Management
         Selling
     }
 
+
     [System.Serializable]
     public enum FarmSize
     {
         Small = 1,
-        Medium = 2, 
+        Medium = 2,
         Large = 3
+    }
+
+
+    [System.Serializable]
+    public enum CharacterInteractType
+    {
+        NPC,
+        Item
     }
 }

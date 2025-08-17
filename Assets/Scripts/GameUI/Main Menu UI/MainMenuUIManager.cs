@@ -7,6 +7,7 @@ namespace GameUI
         [SerializeField] private GameObject _customizeCharacterUI;
         [SerializeField] private GameObject _farmListUI;
         [SerializeField] private GameObject _settingUI;
+        
 
         void Awake()
         {
@@ -20,30 +21,30 @@ namespace GameUI
             }
         }
 
+
         public void EnableCustomizeCharacterUI()
         {
             _customizeCharacterUI.SetActive(true);
         }
 
-        public void DisableCustomizeCharacterUI()
-        {
-            _customizeCharacterUI.SetActive(false);
-        }
 
         public void EnableFarmListUI()
         {
             _farmListUI.SetActive(true);
         }
 
+
         public void DisableFarmListUI()
         {
             _farmListUI.SetActive(false);
         }
 
+
         public void EnableSettingUI()
         {
             _settingUI.SetActive(true);
         }
+
 
         public void DisableSettingUI()
         {
