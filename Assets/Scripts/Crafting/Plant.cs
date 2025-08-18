@@ -1,5 +1,6 @@
 using UnityEngine;
 using Management;
+using Unity.VisualScripting.Dependencies.Sqlite;
 
 namespace Crafting
 {
@@ -7,7 +8,7 @@ namespace Crafting
     public class Plant : MonoBehaviour
     {
         [SerializeField] private InventoryManager _inventoryManager;
-        
+
         private PlantScriptableObject _scriptableObject;
         // age is calculated by days
         private int _dayAge;
@@ -36,7 +37,14 @@ namespace Crafting
         }
 
 
-        public void Initialize(PlantScriptableObject scriptableObject)
+        private void OnDisable()
+        {
+            TimeManager.OnDayChanged -= UpdateNotWateredDay;
+            TimeManager.OnDayChanged -= UpdateAge;
+        }
+
+
+        public void Initialize(PlantScriptableObject plantObj)
         {
             // set up default values
             _phase = 0;
@@ -52,23 +60,31 @@ namespace Crafting
             TimeManager.OnDayChanged += UpdateAge;
 
             // check if scriptable object is null
-            if (scriptableObject == null)
+            if (plantObj == null)
             {
                 Debug.LogError("Plant scriptable object is null");
                 return;
             }
-            _scriptableObject = scriptableObject;
+            _scriptableObject = plantObj;
 
             // set seed sprite for plant
             _spriteRenderer.sprite = _scriptableObject.sprites[_phase];
         }
 
 
-        void OnDisable()
+        public void SetupPlant(PlantScriptableObject plant, Vector3Int pos, int dayAge, bool isWatered)
         {
-            // unsubscribe events
-            TimeManager.OnDayChanged -= UpdateNotWateredDay;
-            TimeManager.OnDayChanged -= UpdateAge;
+            Initialize(plant);
+
+            _dayAge = dayAge;
+            _isWatered = isWatered;
+
+            // update plant phase
+            _phase = GetPlantPhase();
+            _spriteRenderer.sprite = _scriptableObject.sprites[_phase];
+
+            // add plant to plant list
+            PlantManager.AddPlant(pos, this);
         }
 
 
@@ -113,7 +129,7 @@ namespace Crafting
         {
             if (!_canHarvest) return;
 
-            _inventoryManager.AddItem(_scriptableObject);
+            _inventoryManager.AddItem(_scriptableObject.product);
             ObjectPoolManager.ReturnObjectToPool(gameObject);
         }
 
@@ -136,6 +152,19 @@ namespace Crafting
                     _canHarvest = true;
                 }
             }
+        }
+
+
+        private int GetPlantPhase()
+        {
+            int phase = 0;
+
+            while (_dayAge < _scriptableObject.grownTime[phase])
+            {
+                phase++;
+            }
+
+            return phase;
         }
     }
 }

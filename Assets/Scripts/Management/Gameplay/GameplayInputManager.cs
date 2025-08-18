@@ -28,6 +28,7 @@ namespace Management
         public static event Action OnInteractNPCKeyPress;
 
         public static event Action OnBagKeyPress;
+        public static event Action OnPauseGamePress;
         public static event Action OnExitUIKeyPress;
 
 
@@ -49,6 +50,7 @@ namespace Management
             HandleCharacterInteractNPCInput();
             HandleBagInput();
             HandleExitUIInput();
+            HandlePauseGameInput();
         }
 
 
@@ -79,7 +81,7 @@ namespace Management
 
         private void HandleFarmingInput()
         {
-            if (Input.GetKey(GameSetting.Instance.keyBindings["Farming"]))
+            if (Input.GetKeyDown(GameSetting.Instance.keyBindings["Farming"]))
             {
                 OnFarmingKeyPress?.Invoke();
             }
@@ -142,6 +144,15 @@ namespace Management
             if (Input.GetKeyDown(GameSetting.Instance.keyBindings["ExitUI"]))
             {
                 OnExitUIKeyPress?.Invoke();
+            }
+        }
+
+
+        private void HandlePauseGameInput()
+        {
+            if (Input.GetKeyDown(GameSetting.Instance.keyBindings["PauseGame"]))
+            {
+                OnPauseGamePress?.Invoke();
             }
         }
 

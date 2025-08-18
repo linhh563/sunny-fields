@@ -14,5 +14,14 @@ namespace Management
         {
             plantList.Add(position, plant);
         }
+
+
+        public static void RemovePlant(Vector3Int pos)
+        {
+            if (plantList.ContainsKey(pos))
+            {
+                plantList.Remove(pos);
+            }
+        }
     }
 }

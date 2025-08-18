@@ -79,8 +79,8 @@ namespace GameUI
 
             _gameTimeText.SetText(gameTime);
 
-            int playTime = (int)inGameMinutes * (int)(EnvironmentConstants.DAY_LENGTH / EnvironmentConstants.MINUTES_IN_DAY);
-            _totalPlayTimeText.SetText((playTime / 60).ToString() + " minutes");
+            var playTime = inGameMinutes * (EnvironmentConstants.DAY_LENGTH / EnvironmentConstants.MINUTES_IN_DAY);
+            _totalPlayTimeText.SetText("Play time: " + (((int)playTime / 60) + 1).ToString() + " minutes");
         }
 
 

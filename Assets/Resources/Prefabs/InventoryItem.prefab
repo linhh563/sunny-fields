@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _image: {fileID: 5685955316684101501}
+  _countText: {fileID: 7724622482440641214}
 --- !u!1 &6514281223896422425
 GameObject:
   m_ObjectHideFlags: 0

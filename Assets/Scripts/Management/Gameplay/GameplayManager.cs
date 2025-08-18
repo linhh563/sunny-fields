@@ -38,13 +38,15 @@ namespace Management
             // set up inventory
             InventoryManager.gold = farmConfig.gold;
 
-            if (farmConfig.holdingItem != null)
+            // set up holding item
+            if (farmConfig.holdingItem.itemName != "")
             {
                 var itemObj = Resources.Load<ItemScriptableObject>("Items/" + farmConfig.holdingItem.itemName);
 
                 _inventoryManager.SetHoldingItem(itemObj);
             }
-            
+
+            // set up all items in inventory
             foreach (var item in farmConfig.inventory)
             {
                 var itemObj = Resources.Load<ItemScriptableObject>("Items/" + item.itemName);
@@ -52,7 +54,21 @@ namespace Management
                 _inventoryManager.AddItemToSlot(itemObj, item.slotIndex, item.quantity);
             }
 
-            // TODO: set up plant
+            // set up plant
+            var plants = farmConfig.plants;
+
+            // get plant prefab
+            GameObject plantPrefab = Resources.Load<GameObject>("Prefabs/Plant");
+
+            foreach (var plant in plants)
+            {
+                var worldPos = _tileMapManager.groundTilemap.GetCellCenterWorld(plant.position);
+                var plantScriptableObj = Resources.Load<PlantScriptableObject>("Items/" + plant.plantName);
+
+                // create new plant and set up it
+                var newPlant = ObjectPoolManager.SpawnObject(plantPrefab, worldPos, Quaternion.identity, ObjectPoolType.Plant);
+                newPlant.GetComponent<Plant>().SetupPlant(plantScriptableObj, plant.position, plant.dayAge, plant.isWatered);
+            }
         }
 
 

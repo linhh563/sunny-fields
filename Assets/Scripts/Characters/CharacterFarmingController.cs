@@ -82,7 +82,7 @@ namespace Characters
                 GameObject plant = ObjectPoolManager.SpawnObject(plantPrefab, worldFrontPos, Quaternion.identity, ObjectPoolType.Plant);
                 plant.GetComponent<Plant>().Initialize(_inventory.GetHoldingItem() as PlantScriptableObject);
 
-                // TODO: if the plant was planted in the watered ground, increase its age immediately
+                // if the plant was planted in the watered ground, increase its age immediately
                 if (frontTileGroundMap.name == _tilemapManager.wateredGroundTile.name)
                 {
                     plant.GetComponent<Plant>().UpdateWateredState();
@@ -138,6 +138,9 @@ namespace Characters
             {
                 var plant = PlantManager.plantList[frontTilePos];
                 plant.Harvest();
+
+                PlantManager.RemovePlant(frontTilePos);
+                _tilemapManager.plantingTilemap.SetTile(frontTilePos, null);
             }
         }
 
@@ -160,7 +163,7 @@ namespace Characters
                 case "Hoe":
                     farmingState = CharacterFarmingState.Hoeing;
                     break;
-                case "WaterCan":
+                case "Water Can":
                     farmingState = CharacterFarmingState.Watering;
                     break;
                 case "Scythe":

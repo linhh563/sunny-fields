@@ -15,6 +15,6 @@ MonoBehaviour:
   itemName: Cabbage
   description: 
   avatarSprite: {fileID: 221378662, guid: f20485a75458c604a9672d72a0df48ad, type: 3}
-  stackable: 0
+  stackable: 1
   buyFromStorePrice: 0
   sellToStorePrice: 0

@@ -41,7 +41,7 @@
         },
         {
             "action": "PauseGame",
-            "key": "Escape"
+            "key": "Tab"
         },
         {
             "action": "OpenQuestList",

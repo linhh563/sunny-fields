@@ -17,5 +17,6 @@ namespace Crafting
 
         [Header("Product Item")]
         public Sprite productItemAvatar;
+        public ItemScriptableObject product;
     }
 }

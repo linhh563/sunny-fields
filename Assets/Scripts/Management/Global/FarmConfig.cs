@@ -40,7 +40,7 @@ namespace Management
 
             holdingItem = new ItemConfig();
 
-            gold = 500;
+            gold = 1000;
 
             groundStates = new List<GroundConfig>();
             inventory = new List<ItemConfig>();

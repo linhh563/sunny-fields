@@ -1,0 +1,132 @@
+{
+    "farmName": "asd",
+    "farmSize": 1,
+    "characterName": "asd",
+    "characterPosition": {
+        "x": -3.5,
+        "y": 0.5,
+        "z": 0.0
+    },
+    "characterDirection": 2,
+    "holdingItem": {
+        "itemName": "Water Can",
+        "slotIndex": 0,
+        "quantity": 1
+    },
+    "gameTimeMinutes": 3534.0,
+    "gold": 1000,
+    "groundStates": [
+        {
+            "position": {
+                "x": -4,
+                "y": -2,
+                "z": 0
+            },
+            "state": 2
+        },
+        {
+            "position": {
+                "x": -3,
+                "y": -2,
+                "z": 0
+            },
+            "state": 2
+        },
+        {
+            "position": {
+                "x": -2,
+                "y": -2,
+                "z": 0
+            },
+            "state": 2
+        },
+        {
+            "position": {
+                "x": -1,
+                "y": -2,
+                "z": 0
+            },
+            "state": 2
+        },
+        {
+            "position": {
+                "x": 0,
+                "y": -2,
+                "z": 0
+            },
+            "state": 2
+        },
+        {
+            "position": {
+                "x": 1,
+                "y": -2,
+                "z": 0
+            },
+            "state": 2
+        }
+    ],
+    "inventory": [
+        {
+            "itemName": "Hoe",
+            "slotIndex": 1,
+            "quantity": 1
+        },
+        {
+            "itemName": "Scythe",
+            "slotIndex": 2,
+            "quantity": 1
+        }
+    ],
+    "plants": [
+        {
+            "plantName": "Corn Seed",
+            "position": {
+                "x": 1,
+                "y": -2,
+                "z": 0
+            },
+            "dayAge": 2,
+            "isWatered": false
+        },
+        {
+            "plantName": "Corn Seed",
+            "position": {
+                "x": 0,
+                "y": -2,
+                "z": 0
+            },
+            "dayAge": 2,
+            "isWatered": false
+        },
+        {
+            "plantName": "Corn Seed",
+            "position": {
+                "x": -1,
+                "y": -2,
+                "z": 0
+            },
+            "dayAge": 2,
+            "isWatered": false
+        },
+        {
+            "plantName": "Corn Seed",
+            "position": {
+                "x": -2,
+                "y": -2,
+                "z": 0
+            },
+            "dayAge": 2,
+            "isWatered": false
+        },
+        {
+            "plantName": "Corn Seed",
+            "position": {
+                "x": -3,
+                "y": -2,
+                "z": 0
+            },
+            "dayAge": 2,
+            "isWatered": false
+        }
+    ]
+}

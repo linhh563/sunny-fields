@@ -32,8 +32,6 @@ namespace Management
             // check total time from current to 6 a.m tomorrow
             var remainTime = EnvironmentConstants.MINUTES_IN_DAY - (_currentTime.Hours * 60 + _currentTime.Minutes);
             // new day start at 6 am
-            Debug.Log(remainTime);
-
             remainTime += 360;
 
             // set time

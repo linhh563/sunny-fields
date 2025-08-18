@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using Management;
 using Management.ScriptableObjects;
 using System.IO;
+using System.Collections.Generic;
 
 namespace GameUI
 {
@@ -296,6 +297,43 @@ namespace GameUI
 
                 // create new farm config file
                 FarmConfig newFarm = new FarmConfig(_characterNameTxtField.text, _farmNameTxtField.text, _farmSize);
+
+                // first day start at 6 am
+                newFarm.gameTimeMinutes = 360;
+
+                // set up default farm config
+                var inventory = new List<ItemConfig>();
+
+                inventory.Add(new ItemConfig()
+                {
+                    itemName = "Hoe",
+                    slotIndex = 0,
+                    quantity = 1
+                });
+
+                inventory.Add(new ItemConfig()
+                {
+                    itemName = "Water Can",
+                    slotIndex = 1,
+                    quantity = 1
+                });
+
+                inventory.Add(new ItemConfig()
+                {
+                    itemName = "Scythe",
+                    slotIndex = 2,
+                    quantity = 1
+                });
+
+                inventory.Add(new ItemConfig()
+                {
+                    itemName = "Corn Seed",
+                    slotIndex = 3,
+                    quantity = 5
+                });
+
+                newFarm.inventory = inventory;
+
                 newFarm.SaveFarmConfig();
 
                 SceneManager.LoadScene(_farmSize.ToString() + "Farm");

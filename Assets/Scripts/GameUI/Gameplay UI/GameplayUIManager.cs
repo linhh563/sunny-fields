@@ -43,13 +43,17 @@ namespace GameUI
             CheckPropertiesValue();
 
             GameplayInputManager.OnBagKeyPress += EnableBagUI;
-            _settingButton.onClick.AddListener(() => EnableSettingUI(true));
+            GameplayInputManager.OnPauseGamePress += EnableSettingUI;
+
+            _settingButton.onClick.AddListener(EnableSettingUI);
         }
 
 
         void OnDisable()
         {
             GameplayInputManager.OnBagKeyPress -= EnableBagUI;
+            GameplayInputManager.OnPauseGamePress -= EnableSettingUI;
+
             _settingButton.onClick.RemoveAllListeners();
         }
 
@@ -85,9 +89,9 @@ namespace GameUI
         }
 
 
-        public void EnableSettingUI(bool enable)
+        public void EnableSettingUI()
         {
-            _settingUI.gameObject.SetActive(enable);
+            _settingUI.gameObject.SetActive(true);
         }
 
 

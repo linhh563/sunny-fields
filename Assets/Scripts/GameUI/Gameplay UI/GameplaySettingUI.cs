@@ -37,12 +37,14 @@ namespace GameUI
             ModifyHotKeyUI.OnKeyChanged += UpdateHotKey;
 
             AddListeners();
+            GameplayInputManager.OnExitUIKeyPress += DisableUI;
 
             GameplayManager.PauseGame();
         }
 
         void OnDisable()
         {
+            GameplayInputManager.OnExitUIKeyPress -= DisableUI;
             RemoveAllListeners();
             ModifyHotKeyUI.OnKeyChanged -= UpdateHotKey;
 
@@ -216,6 +218,12 @@ namespace GameUI
         }
 
 
+        private void DisableUI()
+        {
+            gameObject.SetActive(false);
+        }
+
+
         private void AddListeners()
         {
             foreach (var hotkey in _hotkeys)
@@ -231,7 +239,7 @@ namespace GameUI
             _bgmSlider.onValueChanged.AddListener(OnBgmVolumeChanged);
             _sfxSlider.onValueChanged.AddListener(OnSfxVolumeChanged);
 
-            _backBtn.onClick.AddListener(() => gameObject.SetActive(false));
+            _backBtn.onClick.AddListener(DisableUI);
 
             _saveGameButton.onClick.AddListener(BackToMainMenu);
         }

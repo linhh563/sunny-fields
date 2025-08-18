@@ -12,16 +12,16 @@ namespace GameUI
         // private properties
         private ItemScriptableObject _itemScriptableObj;
         private Transform _parent;
-        private TMP_Text _countText;
         private int _count;
 
         [SerializeField] private Image _image;
+        [SerializeField] private TMP_Text _countText;
 
         // public fields
         public Transform parent { get => _parent; set => _parent = value; }
         public ItemScriptableObject itemScriptableObj { get => _itemScriptableObj; set => _itemScriptableObj = value; }
         public int count { get => _count; set => _count = value; }
-        
+
 
         void Start()
         {
@@ -32,7 +32,6 @@ namespace GameUI
         void OnEnable()
         {
             _count = 1;
-            _countText = GetComponentInChildren<TMP_Text>();
         }
 
 
@@ -46,10 +45,10 @@ namespace GameUI
 
         public void RefreshCount()
         {
-            _countText.SetText(_count.ToString());
-
             // if item's count is 1, hide the count text
             _countText.gameObject.SetActive(!(count == 1));
+
+            _countText.SetText(_count.ToString());
         }
 
 
@@ -83,7 +82,8 @@ namespace GameUI
 
         private void CheckPropertiesValue()
         {
-            if (_image == null)
+            if (_image == null ||
+                _countText == null)
             {
                 Debug.LogError("There is a component was not assigned in " + gameObject.name + ".");
             }

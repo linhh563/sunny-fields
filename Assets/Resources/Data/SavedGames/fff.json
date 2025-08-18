@@ -1,0 +1,42 @@
+{
+    "farmName": "fff",
+    "farmSize": 1,
+    "characterName": "fff",
+    "characterPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "characterDirection": 1,
+    "holdingItem": {
+        "itemName": "",
+        "slotIndex": 0,
+        "quantity": 0
+    },
+    "gameTimeMinutes": 0.0,
+    "gold": 1000,
+    "groundStates": [],
+    "inventory": [
+        {
+            "itemName": "Hoe",
+            "slotIndex": 0,
+            "quantity": 1
+        },
+        {
+            "itemName": "Water Can",
+            "slotIndex": 1,
+            "quantity": 1
+        },
+        {
+            "itemName": "Scythe",
+            "slotIndex": 2,
+            "quantity": 1
+        },
+        {
+            "itemName": "Corn Seed",
+            "slotIndex": 3,
+            "quantity": 5
+        }
+    ],
+    "plants": []
+}

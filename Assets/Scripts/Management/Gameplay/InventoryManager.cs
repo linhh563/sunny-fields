@@ -118,7 +118,9 @@ namespace Management
             SpawnNewItem(item, inventorySlots[slotIndex]);
 
             var newItem = inventorySlots[slotIndex].GetComponentInChildren<DragableItem>();
+
             newItem.SetCount(quantity);
+            newItem.RefreshCount();
         }
 
 
@@ -148,12 +150,13 @@ namespace Management
 
         public void SetHoldingItem(ItemScriptableObject item)
         {
-            var newItemGameObj = ObjectPoolManager.SpawnObject(inventoryItemPrefab, holdingItem.transform);
+            var newItemGameObj = ObjectPoolManager.SpawnObject(inventoryItemPrefab, this.holdingItem.transform);
 
             // set item scriptable object
-            var inventoryItem = newItemGameObj.GetComponent<DragableItem>();
+            var holdingItem = newItemGameObj.GetComponent<DragableItem>();
 
-            inventoryItem.InitializeItem(item);
+            holdingItem.InitializeItem(item);
+            holdingItem.RefreshCount();
         }
 
 
@@ -168,6 +171,7 @@ namespace Management
             if (holdingItem.count == 0)
             {
                 Destroy(holdingItem.gameObject);
+                return;
             }
 
             holdingItem.RefreshCount();
