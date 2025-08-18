@@ -48,12 +48,12 @@ namespace Characters
         {
             if (collision.gameObject.CompareTag("NPC"))
             {
-                GameplayUIManager.Instance.EnableCharacterOptionsUI(false, isLeft: true, collision.gameObject.name, CharacterInteractType.NPC);
+                GameplayUIManager.Instance.DisableCharacterOptionUI();
             }
 
             if (collision.gameObject.CompareTag("Bed"))
             {
-                GameplayUIManager.Instance.EnableCharacterOptionsUI(false, isLeft: true, collision.gameObject.name, CharacterInteractType.Item);
+                GameplayUIManager.Instance.DisableCharacterOptionUI();
             }
         }
     }

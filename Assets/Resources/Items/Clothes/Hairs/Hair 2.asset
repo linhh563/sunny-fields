@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5191835d98fe54d4e84ac6d4f6ef8a83, type: 3}
   m_Name: Hair 2
   m_EditorClassIdentifier: 
-  name: Hair 2
+  clotheName: Hair 2
   type: 1
-  forwardSprite: {fileID: 7482667652216324306, guid: 6e495d894cc36574fbba8f4ba3013ce7, type: 3}
-  behindSprite: {fileID: 7482667652216324306, guid: 6e495d894cc36574fbba8f4ba3013ce7, type: 3}
-  leftSprite: {fileID: 7482667652216324306, guid: 6e495d894cc36574fbba8f4ba3013ce7, type: 3}
-  rightSprite: {fileID: 7482667652216324306, guid: 6e495d894cc36574fbba8f4ba3013ce7, type: 3}
+  forwardSprite: {fileID: -1410914091, guid: 07913927725aad04cb0aa99575a91610, type: 3}
+  behindSprite: {fileID: 575088652, guid: 07913927725aad04cb0aa99575a91610, type: 3}
+  leftSprite: {fileID: -65665239, guid: 07913927725aad04cb0aa99575a91610, type: 3}
+  rightSprite: {fileID: -65665239, guid: 07913927725aad04cb0aa99575a91610, type: 3}

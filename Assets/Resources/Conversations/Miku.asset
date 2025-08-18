@@ -13,6 +13,19 @@ MonoBehaviour:
   m_Name: Miku
   m_EditorClassIdentifier: 
   NPCName: Miku
-  NPCAvatar: {fileID: 7482667652216324306, guid: 7c21d452f8af0ca40a0478563761c89d, type: 3}
-  NPCParagraphs: []
-  dialogueDecisions: []
+  NPCAvatar: {fileID: 21300000, guid: 8ba292ed072c9884ab8e5901aa6431c3, type: 3}
+  dialogueLines:
+  - Hello.
+  - How are you today? Want to buy some seed?
+  - Yeah, there are items for today.
+  - Yeah, good bye! Have a nice day.
+  endConversationIndex: 0200000003000000
+  allDecisions:
+  - dialogueIndex: 1
+    decisions:
+    - decisionText: Yes, let me check someting.
+      decisionType: 1
+      nextDialogueIndex: 2
+    - decisionText: No, I will go back later.
+      decisionType: 0
+      nextDialogueIndex: 3

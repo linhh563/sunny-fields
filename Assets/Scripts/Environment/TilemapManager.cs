@@ -61,6 +61,9 @@ namespace Environment
         void OnDisable()
         {
             TimeManager.OnDayChanged -= ResetWateredGround;
+
+            hoedGrounds.Clear();
+            wateredGrounds.Clear();
         }
 
 

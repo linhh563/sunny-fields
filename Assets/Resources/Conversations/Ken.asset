@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 452df9f754fc937449c5434a970ae824, type: 3}
+  m_Name: Ken
+  m_EditorClassIdentifier: 
+  NPCName: Ken
+  NPCAvatar: {fileID: 21300000, guid: d5b0a78aae4451f4e893c56de701713e, type: 3}
+  dialogueLines:
+  - Hello.
+  - Long time no see.
+  - Do you have anything to sell me?
+  - Where, let's me see it.
+  - See you later.
+  endConversationIndex: 0300000004000000
+  allDecisions:
+  - dialogueIndex: 2
+    decisions:
+    - decisionText: Yes. I have some valuable things.
+      decisionType: 2
+      nextDialogueIndex: 3
+    - decisionText: No. I just want to say hi.
+      decisionType: 0
+      nextDialogueIndex: 4

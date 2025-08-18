@@ -20,6 +20,11 @@ namespace Management
         public double gameTimeMinutes;
         // TODO: store character's clothes
 
+        public string hat;
+        public string hair;
+        public string shirt;
+        public string pant;
+
         public int gold;
 
         public List<GroundConfig> groundStates;

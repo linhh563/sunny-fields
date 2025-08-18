@@ -16,8 +16,6 @@ namespace GameUI
         // [SerializeField] private Image _characterShirt;
         // [SerializeField] private Image _characterPant;
 
-        public static event Action OnBagOpened;
-
 
         void Start()
         {
@@ -31,7 +29,6 @@ namespace GameUI
             GameplayInputManager.OnExitUIKeyPress += DisableBagUI;
 
             UpdateGoldText();
-            OnBagOpened?.Invoke();
             // UpdateCharacterClothesUI();
 
             GameplayManager.PauseGame();

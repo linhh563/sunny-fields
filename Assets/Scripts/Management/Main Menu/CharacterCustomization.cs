@@ -30,7 +30,7 @@ namespace Management
 
         private void LoadItemsFromResources()
         {
-            _hairCollection = Resources.LoadAll("Items/Clothes/Hair", typeof(ClotheScriptableObject));
+            _hairCollection = Resources.LoadAll("Items/Clothes/Hairs", typeof(ClotheScriptableObject));
             _hatCollection = Resources.LoadAll("Items/Clothes/Hats", typeof(ClotheScriptableObject));
             _shirtCollection = Resources.LoadAll("Items/Clothes/Shirts", typeof(ClotheScriptableObject));
             _pantCollection = Resources.LoadAll("Items/Clothes/Pants", typeof(ClotheScriptableObject));

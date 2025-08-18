@@ -27,6 +27,12 @@ namespace Management
         }
 
 
+        void OnDisable()
+        {
+            _currentTime = TimeSpan.Zero;
+        }
+
+
         public static void ChangeNextDay()
         {
             // check total time from current to 6 a.m tomorrow

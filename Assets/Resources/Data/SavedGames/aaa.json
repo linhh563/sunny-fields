@@ -1,10 +1,10 @@
 {
-    "farmName": "fff",
-    "farmSize": 1,
-    "characterName": "fff",
+    "farmName": "aaa",
+    "farmSize": 2,
+    "characterName": "aaa",
     "characterPosition": {
-        "x": 0.0,
-        "y": 0.0,
+        "x": -0.5,
+        "y": -1.5,
         "z": 0.0
     },
     "characterDirection": 1,
@@ -13,7 +13,11 @@
         "slotIndex": 0,
         "quantity": 0
     },
-    "gameTimeMinutes": 0.0,
+    "gameTimeMinutes": 1681.0,
+    "hat": "Hat 2",
+    "hair": "Hair 2",
+    "shirt": "Shirt 3",
+    "pant": "Pant 2",
     "gold": 1000,
     "groundStates": [],
     "inventory": [

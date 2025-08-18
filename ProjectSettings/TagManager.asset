@@ -52,12 +52,6 @@ TagManager:
   - name: Plant
     uniqueID: 3320834185
     locked: 0
-  - name: House
-    uniqueID: 907179729
-    locked: 0
-  - name: Collectable Item
-    uniqueID: 1528152875
-    locked: 0
-  - name: Player
+  - name: Foreground
     uniqueID: 1543162535
     locked: 0

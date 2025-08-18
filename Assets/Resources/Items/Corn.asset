@@ -16,5 +16,6 @@ MonoBehaviour:
   description: 
   avatarSprite: {fileID: 21300000, guid: 4fa5e469878bd2b44aa1a9055a4f7cb2, type: 3}
   stackable: 1
-  buyFromStorePrice: 0
-  sellToStorePrice: 0
+  canSell: 1
+  buyFromStorePrice: 120
+  sellToStorePrice: 400

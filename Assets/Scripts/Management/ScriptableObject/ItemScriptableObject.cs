@@ -9,6 +9,7 @@ namespace Crafting
         public string description;
         public Sprite avatarSprite;
         public bool stackable;
+        public bool canSell;
 
         [Header("Trading")]
         public int buyFromStorePrice = 0;

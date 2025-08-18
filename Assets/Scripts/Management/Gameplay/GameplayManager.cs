@@ -29,6 +29,9 @@ namespace Management
             // set up game time
             TimeManager.SetupTime(farmConfig.gameTimeMinutes);
 
+            // set up clothes
+            CharacterCustomizationStorage.SetupClothes(farmConfig.hat, farmConfig.hair, farmConfig.shirt, farmConfig.pant);
+
             // set up ground state
             foreach (var tile in farmConfig.groundStates)
             {
@@ -43,7 +46,7 @@ namespace Management
             {
                 var itemObj = Resources.Load<ItemScriptableObject>("Items/" + farmConfig.holdingItem.itemName);
 
-                _inventoryManager.SetHoldingItem(itemObj);
+                _inventoryManager.SetHoldingItem(itemObj, farmConfig.holdingItem.quantity);
             }
 
             // set up all items in inventory

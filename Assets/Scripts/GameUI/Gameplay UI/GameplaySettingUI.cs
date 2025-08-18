@@ -165,7 +165,7 @@ namespace GameUI
                 farmConfig.holdingItem = new ItemConfig
                 {
                     itemName = holdingItem.itemScriptableObj.itemName,
-                    quantity = holdingItem.count
+                    quantity = holdingItem.quantity
                 };
             }
 
@@ -183,13 +183,19 @@ namespace GameUI
                     {
                         itemName = item.itemScriptableObj.itemName,
                         slotIndex = i,
-                        quantity = item.count
+                        quantity = item.quantity
                     });
                 }
             }
 
             farmConfig.inventory = items;
             farmConfig.gold = InventoryManager.gold;
+
+            // update clothes
+            farmConfig.hat = CharacterCustomizationStorage.hat.clotheName;
+            farmConfig.hair = CharacterCustomizationStorage.hair.clotheName;
+            farmConfig.shirt = CharacterCustomizationStorage.shirt.clotheName;
+            farmConfig.pant = CharacterCustomizationStorage.pant.clotheName;
 
             // update plants
             var plants = new List<PlantConfig>();

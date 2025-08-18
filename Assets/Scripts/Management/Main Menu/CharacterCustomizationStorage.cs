@@ -27,7 +27,7 @@ namespace Management
 
         private void ResetCustomization()
         {
-            hair = Resources.Load<ClotheScriptableObject>("Items/Clothes/Hair/Hair 1");
+            hair = Resources.Load<ClotheScriptableObject>("Items/Clothes/Hairs/Hair 1");
             hat = Resources.Load<ClotheScriptableObject>("Items/Clothes/Hats/Hat 1");
             shirt = Resources.Load<ClotheScriptableObject>("Items/Clothes/Shirts/Shirt 1");
             pant = Resources.Load<ClotheScriptableObject>("Items/Clothes/Pants/Pant 1");
@@ -38,6 +38,26 @@ namespace Management
         {
             CharacterCustomizationStorage.characterName = characterName;
             CharacterCustomizationStorage.farmName = farmName;
+        }
+
+
+        public static void SetupClothes(string hatName, string hairName, string shirtName, string pantName)
+        {
+            var newHat = Resources.Load<ClotheScriptableObject>("Items/Clothes/Hats/" + hatName);
+            if (newHat != null)
+                hat = newHat;
+
+            var newHair = Resources.Load<ClotheScriptableObject>("Items/Clothes/Hairs/" + hairName);
+            if (newHair != null)
+                hair = newHair;
+
+            var newShirt = Resources.Load<ClotheScriptableObject>("Items/Clothes/Shirts/" + shirtName);
+            if (newShirt != null)
+                shirt = newShirt;
+
+            var newPant = Resources.Load<ClotheScriptableObject>("Items/Clothes/Pants/" + pantName);
+            if (newPant != null)
+                pant = newPant;
         }
 
 

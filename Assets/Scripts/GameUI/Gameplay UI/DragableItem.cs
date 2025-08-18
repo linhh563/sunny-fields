@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Crafting;
 using TMPro;
+using System;
 
 namespace GameUI
 {
@@ -12,7 +13,7 @@ namespace GameUI
         // private properties
         private ItemScriptableObject _itemScriptableObj;
         private Transform _parent;
-        private int _count;
+        private int _quantity;
 
         [SerializeField] private Image _image;
         [SerializeField] private TMP_Text _countText;
@@ -20,7 +21,7 @@ namespace GameUI
         // public fields
         public Transform parent { get => _parent; set => _parent = value; }
         public ItemScriptableObject itemScriptableObj { get => _itemScriptableObj; set => _itemScriptableObj = value; }
-        public int count { get => _count; set => _count = value; }
+        public int quantity { get => _quantity; set => _quantity = value; }
 
 
         void Start()
@@ -29,16 +30,10 @@ namespace GameUI
         }
 
 
-        void OnEnable()
-        {
-            _count = 1;
-        }
-
-
-        public void InitializeItem(ItemScriptableObject newItem)
+        public void InitializeItem(ItemScriptableObject newItem, int quantity)
         {
             _itemScriptableObj = newItem;
-
+            _quantity = quantity;
             _image.sprite = _itemScriptableObj.avatarSprite;
         }
 
@@ -46,9 +41,9 @@ namespace GameUI
         public void RefreshCount()
         {
             // if item's count is 1, hide the count text
-            _countText.gameObject.SetActive(!(count == 1));
+            _countText.gameObject.SetActive(!(quantity == 1));
 
-            _countText.SetText(_count.ToString());
+            _countText.SetText(_quantity.ToString());
         }
 
 
@@ -76,7 +71,7 @@ namespace GameUI
 
         public void SetCount(int count)
         {
-            _count = count;
+            _quantity = count;
         }
 
 

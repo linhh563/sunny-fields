@@ -1,6 +1,7 @@
 using UnityEngine;
 using Management;
 using Unity.VisualScripting.Dependencies.Sqlite;
+using Unity.VisualScripting;
 
 namespace Crafting
 {
@@ -80,7 +81,15 @@ namespace Crafting
             _isWatered = isWatered;
 
             // update plant phase
+            // if (_dayAge == 0)
+            // {
+            //     _phase = 0;
+            // }
+            // else
+            // {
             _phase = GetPlantPhase();
+            // }
+
             _spriteRenderer.sprite = _scriptableObject.sprites[_phase];
 
             // add plant to plant list
@@ -119,8 +128,10 @@ namespace Crafting
             // if the days plant was not watered greater than the limit, plant will die
             if (_notWateredDay > _scriptableObject.noWateredLimit)
             {
-                Debug.Log("Plant died");
-                // TODO: CHANGE PLANT SPRITE
+                ObjectPoolManager.ReturnObjectToPool(this.gameObject);
+
+                Vector3Int pos = new Vector3Int((int)transform.position.x, (int)transform.position.y, (int)transform.position.z);
+                PlantManager.RemovePlant(pos);
             }
         }
 
@@ -142,7 +153,7 @@ namespace Crafting
             }
 
             // plant move to new phase
-            if (_dayAge == _scriptableObject.grownTime[_phase])
+            if (_dayAge >= _scriptableObject.grownTime[_phase])
             {
                 _phase++;
                 _spriteRenderer.sprite = _scriptableObject.sprites[_phase];
@@ -159,10 +170,13 @@ namespace Crafting
         {
             int phase = 0;
 
-            while (_dayAge < _scriptableObject.grownTime[phase])
-            {
-                phase++;
-            }
+            if (_dayAge > _scriptableObject.grownTime[_scriptableObject.totalPhase - 1])
+                return _scriptableObject.totalPhase - 1;
+
+            while (_dayAge > _scriptableObject.grownTime[phase])
+                {
+                    phase++;
+                }
 
             return phase;
         }

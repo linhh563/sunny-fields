@@ -1,14 +1,10 @@
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
 using System.Collections;
 
 using Management;
 using Management.Interface;
 using Management.ScriptableObjects;
 using GameUI;
-using System;
-using Unity.VisualScripting;
 
 
 namespace Characters
@@ -55,6 +51,7 @@ namespace Characters
             {
                 // start conversation
                 StartConversation();
+                GameplayUIManager.Instance.DisableCharacterOptionUI();
             }
         }
 
@@ -189,7 +186,7 @@ namespace Characters
 
                 case DecisionType.Selling:
                     // display sell ui
-
+                    GameplayUIManager.Instance.EnableSellUI(true);
                     GameplayUIManager.Instance.EnableConversationUI(false);
                     break;
             }

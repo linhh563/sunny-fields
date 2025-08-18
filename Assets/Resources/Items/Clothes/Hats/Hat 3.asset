@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5191835d98fe54d4e84ac6d4f6ef8a83, type: 3}
   m_Name: Hat 3
   m_EditorClassIdentifier: 
-  name: Hat 3
+  clotheName: Hat 3
   type: 0
-  forwardSprite: {fileID: 7482667652216324306, guid: 054f365b46ca2544daa3de5ba5675bc7, type: 3}
-  behindSprite: {fileID: 7482667652216324306, guid: 054f365b46ca2544daa3de5ba5675bc7, type: 3}
-  leftSprite: {fileID: 7482667652216324306, guid: 054f365b46ca2544daa3de5ba5675bc7, type: 3}
-  rightSprite: {fileID: 7482667652216324306, guid: 054f365b46ca2544daa3de5ba5675bc7, type: 3}
+  forwardSprite: {fileID: 1274968024, guid: 2f3aed846f4e1ef45bc40f39df716fd5, type: 3}
+  behindSprite: {fileID: 1479917458, guid: 2f3aed846f4e1ef45bc40f39df716fd5, type: 3}
+  leftSprite: {fileID: -2124524114, guid: 2f3aed846f4e1ef45bc40f39df716fd5, type: 3}
+  rightSprite: {fileID: -2124524114, guid: 2f3aed846f4e1ef45bc40f39df716fd5, type: 3}

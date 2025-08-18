@@ -17,12 +17,14 @@ namespace GameUI
         [SerializeField] private DialogueUIController _conversationUI;
         [SerializeField] private GameObject _bagUI;
         [SerializeField] private StoreUIController _storeUI;
+        [SerializeField] private SellingUIController _sellUI;
         [SerializeField] private GameplaySettingUI _settingUI;
 
 
         public ItemBar _itemBar { get; private set; }
         public DialogueUIController conversationUI { get => _conversationUI; set => _conversationUI = value; }
-        public StoreUIController storeUI { get => _storeUI; set => _storeUI = value; }
+        public StoreUIController storeUI { get => _storeUI; }
+        public SellingUIController sellUI { get => _sellUI; }
 
         void Awake()
         {
@@ -60,12 +62,6 @@ namespace GameUI
 
         public void EnableCharacterOptionsUI(bool enable, bool isLeft, string objName, CharacterInteractType type)
         {
-            if (!enable)
-            {
-                _characterOptionsUI.DisableOptionsUI();
-                return;
-            }
-
             _characterOptionsUI.EnableOptionsUI(isLeft);
             _characterOptionsUI.SetOptionText(objName, type);
         }
@@ -74,6 +70,12 @@ namespace GameUI
         public void EnableConversationUI(bool enable)
         {
             _conversationUI.gameObject.SetActive(enable);
+        }
+
+
+        public void DisableCharacterOptionUI()
+        {
+            _characterOptionsUI.DisableOptionsUI();
         }
 
 
@@ -89,6 +91,12 @@ namespace GameUI
         }
 
 
+        public void EnableSellUI(bool enable)
+        {
+            _sellUI.gameObject.SetActive(enable);
+        }
+
+
         public void EnableSettingUI()
         {
             _settingUI.gameObject.SetActive(true);
@@ -101,6 +109,7 @@ namespace GameUI
                 _bagUI == null ||
                 _conversationUI == null ||
                 _storeUI == null ||
+                _sellUI == null ||
                 _settingUI == null ||
                 _settingButton == null)
             {

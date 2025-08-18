@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5191835d98fe54d4e84ac6d4f6ef8a83, type: 3}
   m_Name: Pant 1
   m_EditorClassIdentifier: 
-  name: Pant 1
+  clotheName: Pant 1
   type: 3
-  forwardSprite: {fileID: 7482667652216324306, guid: d3d337e75b1baab46b5984f00cf057f1, type: 3}
-  behindSprite: {fileID: 7482667652216324306, guid: d3d337e75b1baab46b5984f00cf057f1, type: 3}
-  leftSprite: {fileID: 7482667652216324306, guid: d3d337e75b1baab46b5984f00cf057f1, type: 3}
-  rightSprite: {fileID: 7482667652216324306, guid: d3d337e75b1baab46b5984f00cf057f1, type: 3}
+  forwardSprite: {fileID: -620883307, guid: abda730fd5ea2dc40a3d0215278d73e3, type: 3}
+  behindSprite: {fileID: -819110734, guid: abda730fd5ea2dc40a3d0215278d73e3, type: 3}
+  leftSprite: {fileID: -1549816231, guid: abda730fd5ea2dc40a3d0215278d73e3, type: 3}
+  rightSprite: {fileID: -1549816231, guid: abda730fd5ea2dc40a3d0215278d73e3, type: 3}

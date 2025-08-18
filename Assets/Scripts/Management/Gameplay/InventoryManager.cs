@@ -26,9 +26,8 @@ namespace Management
             CheckPropertiesValue();
 
             // TEST
-            ItemInStoreUI.OnItemBought += BuyItems;
-
-            // BagUIController.OnBagOpened += RefreshAllItems;
+            ItemInStoreUI.OnItemBought += AddItems;
+            SellingUIController.OnItemsSold += RemoveItems;
         }
 
 
@@ -38,9 +37,8 @@ namespace Management
             CharacterInteractionDetect.OnCollectItem -= AddItem;
 
             // TEST
-            ItemInStoreUI.OnItemBought -= BuyItems;
-
-            // BagUIController.OnBagOpened -= RefreshAllItems;
+            ItemInStoreUI.OnItemBought -= AddItems;
+            SellingUIController.OnItemsSold -= RemoveItems;
         }
 
 
@@ -88,10 +86,10 @@ namespace Management
 
                 if (itemInSlot != null &&
                     itemInSlot.itemScriptableObj == item &&
-                    itemInSlot.count < InventoryConstant.MAX_ITEM_STACK_COUNT &&
+                    itemInSlot.quantity < InventoryConstant.MAX_ITEM_STACK_COUNT &&
                     itemInSlot.itemScriptableObj.stackable)
                 {
-                    itemInSlot.count++;
+                    itemInSlot.quantity++;
                     itemInSlot.RefreshCount();
                     return true;
                 }
@@ -131,7 +129,7 @@ namespace Management
             // set item scriptable object
             var inventoryItem = newItemGameObj.GetComponent<DragableItem>();
 
-            inventoryItem.InitializeItem(item);
+            inventoryItem.InitializeItem(item, 1);
         }
 
 
@@ -148,14 +146,14 @@ namespace Management
         }
 
 
-        public void SetHoldingItem(ItemScriptableObject item)
+        public void SetHoldingItem(ItemScriptableObject item, int quantity)
         {
             var newItemGameObj = ObjectPoolManager.SpawnObject(inventoryItemPrefab, this.holdingItem.transform);
 
             // set item scriptable object
             var holdingItem = newItemGameObj.GetComponent<DragableItem>();
 
-            holdingItem.InitializeItem(item);
+            holdingItem.InitializeItem(item, quantity);
             holdingItem.RefreshCount();
         }
 
@@ -167,8 +165,8 @@ namespace Management
             var holdingItem = _holdingItem.GetComponentInChildren<DragableItem>();
             if (holdingItem == null) return;
 
-            holdingItem.count--;
-            if (holdingItem.count == 0)
+            holdingItem.quantity--;
+            if (holdingItem.quantity == 0)
             {
                 Destroy(holdingItem.gameObject);
                 return;
@@ -178,11 +176,54 @@ namespace Management
         }
 
 
-        private void BuyItems(ItemScriptableObject item, int quantity)
+        private void AddItems(ItemScriptableObject item, int quantity)
         {
             for (int i = 0; i < quantity; i++)
             {
                 AddItem(item);
+            }
+        }
+
+
+        private void RemoveItems(ItemScriptableObject removedItem, int removedQuantity)
+        {
+            // check item in holding item
+            if (holdingItem.transform.childCount != 0)
+            {
+                var item = holdingItem.GetComponentInChildren<DragableItem>();
+                if (item.itemScriptableObj.itemName == removedItem.itemName)
+                {
+                    item.quantity -= removedQuantity;
+                    if (item.quantity == 0)
+                    {
+                        Destroy(item.gameObject);
+                        return;
+                    }
+
+                    item.RefreshCount();
+                    return;
+                }
+            }
+
+            // check item in inventory
+            foreach (var itemSlot in inventorySlots)
+            {
+                if (itemSlot.transform.childCount != 0)
+                {
+                    var item = itemSlot.GetComponentInChildren<DragableItem>();
+                    if (item.itemScriptableObj.itemName == removedItem.itemName)
+                    {
+                        item.quantity -= removedQuantity;
+                        if (item.quantity == 0)
+                        {
+                            Destroy(item.gameObject);
+                            return;
+                        }
+
+                        item.RefreshCount();
+                        return;
+                    }
+                }
             }
         }
 
