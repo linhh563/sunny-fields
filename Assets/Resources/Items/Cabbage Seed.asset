@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Cabbage Seed
   description: 
-  avatarSprite: {fileID: -600396169, guid: f20485a75458c604a9672d72a0df48ad, type: 3}
+  avatarSprite: {fileID: 21300000, guid: 8535d45de14d68848a08da7b69b27ad8, type: 3}
   stackable: 1
+  canSell: 0
   buyFromStorePrice: 100
   sellToStorePrice: 250
   totalPhase: 4

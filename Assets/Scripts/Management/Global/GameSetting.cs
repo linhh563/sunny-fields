@@ -21,9 +21,13 @@ namespace Management
                 Instance = this;
             }
 
-            InitializeGameSetting();
-
             DontDestroyOnLoad(this);
+        }
+
+
+        void Start()
+        {
+            InitializeGameSetting();            
         }
 
 
@@ -55,6 +59,10 @@ namespace Management
             // load volume from config file
             bgmVolume = GameConfig.LoadGameConfig().bgmVolume;
             sfxVolume = GameConfig.LoadGameConfig().sfxVolume;
+
+            // set up volume
+            AudioManager.Instance.ModifyMusicVolume(bgmVolume);
+            AudioManager.Instance.ModifySfxVolume(sfxVolume);
         }
 
 

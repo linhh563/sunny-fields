@@ -1,7 +1,6 @@
 using UnityEngine;
 using Management;
-using Unity.VisualScripting.Dependencies.Sqlite;
-using Unity.VisualScripting;
+
 
 namespace Crafting
 {
@@ -174,9 +173,9 @@ namespace Crafting
                 return _scriptableObject.totalPhase - 1;
 
             while (_dayAge > _scriptableObject.grownTime[phase])
-                {
-                    phase++;
-                }
+            {
+                phase++;
+            }
 
             return phase;
         }

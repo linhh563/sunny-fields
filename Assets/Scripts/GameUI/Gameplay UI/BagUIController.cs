@@ -1,4 +1,3 @@
-using System;
 using Management;
 using TMPro;
 using UnityEngine;
@@ -26,6 +25,7 @@ namespace GameUI
         void OnEnable()
         {
             _backButton.onClick.AddListener(DisableBagUI);
+            _backButton.onClick.AddListener(PlayButtonPressSfx);
             GameplayInputManager.OnExitUIKeyPress += DisableBagUI;
 
             UpdateGoldText();
@@ -57,6 +57,12 @@ namespace GameUI
         // _characterShirt.sprite = CharacterCustomizationStorage.shirt.forwardSprite;
         // _characterPant.sprite = CharacterCustomizationStorage.pant.forwardSprite;
         // }
+
+
+        private void PlayButtonPressSfx()
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.pressButtonSfx);
+        }
 
 
         private void UpdateGoldText()

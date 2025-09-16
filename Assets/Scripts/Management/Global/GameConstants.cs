@@ -23,7 +23,7 @@ namespace Management
     public static class EnvironmentConstants
     {
         // the duration in real life (second) corresponding to a day in game
-        public const float DAY_LENGTH = 20;
+        public const float DAY_LENGTH = 90;
         public const int MINUTES_IN_DAY = 1440;
         public const int MINUTES_IN_YEAR = 525600;
     }

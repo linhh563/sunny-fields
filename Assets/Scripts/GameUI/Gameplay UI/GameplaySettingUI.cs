@@ -115,12 +115,14 @@ namespace GameUI
 
         private void OnBgmVolumeChanged(float value)
         {
+            AudioManager.Instance.ModifyMusicVolume(value);
             GameSetting.Instance.ModifyBackgroundVolume(value);
         }
 
 
         private void OnSfxVolumeChanged(float value)
         {
+            AudioManager.Instance.ModifySfxVolume(value);
             GameSetting.Instance.ModifySoundVolume(value);
         }
 
@@ -216,6 +218,12 @@ namespace GameUI
         }
 
 
+        private void PlayButtonPressSfx()
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.pressButtonSfx);
+        }
+
+
         private void BackToMainMenu()
         {
             SaveGame();
@@ -236,6 +244,8 @@ namespace GameUI
             {
                 // use lambda expression to add listener has arguments
                 hotkey.onClick.AddListener(() => OnModifyKeyPress(hotkey.gameObject.name));
+
+                hotkey.onClick.AddListener(PlayButtonPressSfx);
             }
 
             // add listener for language dropdown
@@ -246,6 +256,7 @@ namespace GameUI
             _sfxSlider.onValueChanged.AddListener(OnSfxVolumeChanged);
 
             _backBtn.onClick.AddListener(DisableUI);
+            _backBtn.onClick.AddListener(PlayButtonPressSfx);
 
             _saveGameButton.onClick.AddListener(BackToMainMenu);
         }

@@ -1,0 +1,55 @@
+{
+    "language": 1,
+    "bgmVolume": 0.2,
+    "sfxVolume": 0.8300618529319763,
+    "hotkeysWrapper": [
+        {
+            "action": "MoveUp",
+            "key": "UpArrow"
+        },
+        {
+            "action": "MoveDown",
+            "key": "DownArrow"
+        },
+        {
+            "action": "MoveLeft",
+            "key": "LeftArrow"
+        },
+        {
+            "action": "MoveRight",
+            "key": "RightArrow"
+        },
+        {
+            "action": "Run",
+            "key": "LeftShift"
+        },
+        {
+            "action": "OpenBag",
+            "key": "B"
+        },
+        {
+            "action": "Interact",
+            "key": "E"
+        },
+        {
+            "action": "InteractNPC",
+            "key": "T"
+        },
+        {
+            "action": "Farming",
+            "key": "F"
+        },
+        {
+            "action": "PauseGame",
+            "key": "Tab"
+        },
+        {
+            "action": "OpenQuestList",
+            "key": "Q"
+        },
+        {
+            "action": "ExitUI",
+            "key": "Escape"
+        }
+    ]
+}

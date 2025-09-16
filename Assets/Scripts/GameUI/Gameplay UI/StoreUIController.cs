@@ -29,6 +29,7 @@ namespace GameUI
             // subscribe events
             GameplayInputManager.OnExitUIKeyPress += DisableUI;
             _backButton.onClick.AddListener(DisableUI);
+            _backButton.onClick.AddListener(PlayButtonPressSfx);
 
             // pause game
         }
@@ -58,6 +59,12 @@ namespace GameUI
         public void SetStoreName(string name)
         {
             _storeName.SetText(name);
+        }
+
+
+        private void PlayButtonPressSfx()
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.pressButtonSfx);
         }
 
 

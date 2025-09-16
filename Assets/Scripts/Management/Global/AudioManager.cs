@@ -25,11 +25,17 @@ namespace Management
         public AudioClip waterSfx { get => _waterSfx; }
         public AudioClip pressButtonSfx { get => _pressButtonSfx; }
 
+
+        void Awake()
+        {
+            CreateInstance();            
+        }
+
+
         void Start()
         {
             CheckPropertiesValue();
 
-            CreateInstance();
             PlayBgm();
         }
 

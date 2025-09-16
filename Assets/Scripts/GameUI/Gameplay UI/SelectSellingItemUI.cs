@@ -27,6 +27,7 @@ namespace GameUI
         void OnEnable()
         {
             _backButton.onClick.AddListener(DisableUI);
+            _backButton.onClick.AddListener(PlayButtonPressSfx);
             GameplayInputManager.OnExitUIKeyPress += DisableUI;
         }
 
@@ -84,6 +85,12 @@ namespace GameUI
             {
                 item.gameObject.SetActive(false);
             }
+        }
+
+
+        private void PlayButtonPressSfx()
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.pressButtonSfx);
         }
 
 

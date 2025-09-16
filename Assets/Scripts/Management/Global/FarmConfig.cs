@@ -56,9 +56,9 @@ namespace Management
         public static FarmConfig LoadFarmConfigByFileName(string fileName)
         {
             // load farm config file from resources & check if it existed
-            string filePath = Path.Combine(Application.dataPath, FilePath.FARMS_FOLDER_PATH + "/" + fileName + ".json");
+            string path = Path.Combine(Application.streamingAssetsPath, "GameData/" + fileName + ".json");
 
-            return LoadFarmConfigByPath(filePath);
+            return LoadFarmConfigByPath(path);
         }
 
 
@@ -82,7 +82,14 @@ namespace Management
         {
             string content = JsonUtility.ToJson(this, true);
 
-            string path = Path.Combine(Application.dataPath, FilePath.FARMS_FOLDER_PATH + "/" + farmName + ".json");
+            // if the game data folder not existed, create it
+            string folderPath = Path.Combine(Application.streamingAssetsPath, "GameData");
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
+            string path = Path.Combine(Application.streamingAssetsPath, "GameData/" + farmName + ".json");
             File.WriteAllText(path, content);
         }
     }

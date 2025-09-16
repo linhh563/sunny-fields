@@ -283,7 +283,8 @@ namespace GameUI
                 CharacterCustomizationStorage.SetFarmAttribute(_characterNameTxtField.text, _farmNameTxtField.text);
 
                 // check if there is no saved farm has the same name with new farm
-                string file = FilePath.FARMS_FOLDER_PATH + "/" + _characterNameTxtField.text + ".json";
+                string gameData = Path.Combine(Application.streamingAssetsPath, "GameData");
+                string file = gameData + "/" + _characterNameTxtField.text + ".json";
                 string path = Path.Combine(Application.dataPath, file);
 
                 if (File.Exists(path))

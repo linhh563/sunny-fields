@@ -40,7 +40,7 @@ namespace GameUI
 
 
         void Start()
-        {            
+        {
             CheckPropertiesValue();
         }
 
@@ -196,17 +196,29 @@ namespace GameUI
         }
 
 
+        private void PlayButtonPressSfx()
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.pressButtonSfx);
+        }
+
+
         private void AddListeners()
         {
             _backButton.onClick.AddListener(DisableUI);
+            _backButton.onClick.AddListener(PlayButtonPressSfx);
             GameplayInputManager.OnExitUIKeyPress += DisableUI;
 
             _selectItemButton.onClick.AddListener(EnableSelectItemPanel);
+            _selectItemButton.onClick.AddListener(PlayButtonPressSfx);
 
             _addItemButton.onClick.AddListener(() => UpdateItemQuantity(1));
             _removeItemButton.onClick.AddListener(() => UpdateItemQuantity(-1));
 
+            _addItemButton.onClick.AddListener(PlayButtonPressSfx);
+            _removeItemButton.onClick.AddListener(PlayButtonPressSfx);
+
             _sellButton.onClick.AddListener(SellItems);
+            _sellButton.onClick.AddListener(PlayButtonPressSfx);
         }
 
 

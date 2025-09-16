@@ -44,7 +44,8 @@ namespace GameUI
 
         private void LoadFarmList()
         {
-            string folderPath = Path.Combine(Application.dataPath, FilePath.FARMS_FOLDER_PATH);
+            // string folderPath = Path.Combine(Application.dataPath, FilePath.FARMS_FOLDER_PATH);
+            string folderPath = Path.Combine(Application.streamingAssetsPath, "GameData");
             var files = Directory.GetFiles(folderPath);
 
             // if there is no saved farm, display a message

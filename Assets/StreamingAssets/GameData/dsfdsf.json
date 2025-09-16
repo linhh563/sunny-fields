@@ -1,10 +1,10 @@
 {
-    "farmName": "aaa",
-    "farmSize": 2,
-    "characterName": "aaa",
+    "farmName": "dsfdsf",
+    "farmSize": 1,
+    "characterName": "sdds",
     "characterPosition": {
-        "x": -0.5,
-        "y": -1.5,
+        "x": 0.0,
+        "y": 0.0,
         "z": 0.0
     },
     "characterDirection": 1,
@@ -13,11 +13,11 @@
         "slotIndex": 0,
         "quantity": 0
     },
-    "gameTimeMinutes": 1681.0,
-    "hat": "Hat 2",
-    "hair": "Hair 2",
-    "shirt": "Shirt 3",
-    "pant": "Pant 2",
+    "gameTimeMinutes": 396.0,
+    "hat": "Hat 1",
+    "hair": "Hair 1",
+    "shirt": "Shirt 1",
+    "pant": "Pant 1",
     "gold": 1000,
     "groundStates": [],
     "inventory": [

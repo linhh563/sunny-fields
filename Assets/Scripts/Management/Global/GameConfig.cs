@@ -16,8 +16,12 @@ namespace Management
         // load game config from file and return it as object
         public static GameConfig LoadGameConfig()
         {
+            string path = Path.Combine(Application.streamingAssetsPath, "GameSetting.json");
+
             // get the game config file and check it's exist
-            string path = Path.Combine(Application.dataPath, FilePath.CONFIG_FILE_PATH);
+
+            // string path = Path.Combine(Application.dataPath, FilePath.CONFIG_FILE_PATH);
+
             if (!File.Exists(path))
             {
                 Debug.LogError("Not found file");
@@ -36,7 +40,8 @@ namespace Management
         public void SaveConfig()
         {
             string content = JsonUtility.ToJson(this, true);
-            string path = Path.Combine(Application.dataPath, FilePath.CONFIG_FILE_PATH);
+            string path = Path.Combine(Application.streamingAssetsPath, "GameSetting.json");
+            // string path = Path.Combine(Application.dataPath, FilePath.CONFIG_FILE_PATH);
             
             File.WriteAllText(path, content);
         }

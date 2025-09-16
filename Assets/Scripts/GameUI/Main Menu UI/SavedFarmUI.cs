@@ -96,8 +96,10 @@ namespace GameUI
         private void DeleteSavedFarm()
         {
             // get file path
-            string fileName = FilePath.FARMS_FOLDER_PATH + "/" + _farmNameText.text + ".json";
-            string filePath = Path.Combine(Application.dataPath, fileName);
+            string fileName = "GameData/" + _farmNameText.text + ".json";
+            // string filePath = Path.Combine(Application.dataPath, fileName);
+
+            string filePath = Path.Combine(Application.streamingAssetsPath, fileName);
 
             Debug.Log(filePath);
 

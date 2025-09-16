@@ -142,6 +142,12 @@ namespace GameUI
         }
 
 
+        private void PlayButtonPressSfx()
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.pressButtonSfx);
+        }
+
+
         private void UpdateButtonsInteract(bool buyBtnState, bool addItemBtnState, bool removeItemBtnState)
         {
             _buyButton.interactable = buyBtnState;
@@ -153,9 +159,13 @@ namespace GameUI
         private void AddButtonListeners()
         {
             _buyButton.onClick.AddListener(BuyItem);
+            _buyButton.onClick.AddListener(PlayButtonPressSfx);
 
             _removeItemButton.onClick.AddListener(() => UpdateBuyQuantity(-1));
             _addItemButton.onClick.AddListener(() => UpdateBuyQuantity(1));
+
+            _removeItemButton.onClick.AddListener(PlayButtonPressSfx);
+            _addItemButton.onClick.AddListener(PlayButtonPressSfx);
         }
 
 
